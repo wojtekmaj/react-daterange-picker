@@ -155,6 +155,7 @@ export default class DateRangePicker extends PureComponent {
       calendarClassName,
       className: datePickerClassName, // Unused, here to exclude it from calendarProps
       onChange,
+      value,
       ...calendarProps
     } = this.props;
 
@@ -184,6 +185,7 @@ export default class DateRangePicker extends PureComponent {
           className={calendarClassName}
           onChange={this.onChange}
           selectRange
+          value={value || null}
           {...calendarProps}
         />
       </div>
