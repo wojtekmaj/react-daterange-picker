@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import mergeClassNames from 'merge-class-names';
 import detectElementOverflow from 'detect-element-overflow';
@@ -10,7 +10,7 @@ import { isCalendarType, isMaxDate, isMinDate, isValue } from './shared/propType
 
 const allViews = ['century', 'decade', 'year', 'month'];
 
-export default class DateRangePicker extends Component {
+export default class DateRangePicker extends PureComponent {
   state = {
     isOpen: this.props.isOpen,
   }
