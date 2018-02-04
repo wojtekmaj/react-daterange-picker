@@ -99,28 +99,28 @@ export default class DateRangePicker extends Component {
     return (
       <div className="react-daterange-picker__button">
         <DateInput
-          locale={locale}
           isCalendarOpen={isOpen}
+          locale={locale}
           maxDate={maxDate}
           maxDetail={maxDetail}
           minDate={minDate}
           name={`${name}_from`}
           onChange={this.onChangeFrom}
-          returnValue="start"
           required={required}
+          returnValue="start"
           value={valueFrom}
         />
         –
         <DateInput
-          locale={locale}
           isCalendarOpen={isOpen}
+          locale={locale}
           maxDate={maxDate}
           maxDetail={maxDetail}
           minDate={minDate}
           name={`${name}_to`}
           onChange={this.onChangeTo}
-          returnValue="end"
           required={required}
+          returnValue="end"
           value={valueTo}
         />
         <button
