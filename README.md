@@ -29,18 +29,9 @@ React-DateRange-Picker will play nicely with [React-Date-Picker](https://github.
 
 ### Compatibility
 
-[React-Calendar](https://github.com/wojtekmaj/react-calendar), on which React-DateRange-Picker relies heavily, uses modern web technologies. That's why it's so fast, lightweight and easy to style. This, however, comes at a cost of supporting only modern browsers.
+Your project needs to use React 16 or later.
 
-|Browser|Minimum supported version|
-|----|----|
-|Google Chrome|24|
-|Mozilla Firefox|29|
-|Microsoft Edge|12|
-|Apple Safari|10|
-|Apple Safari (iOS)|10.2|
-|Opera|15|
-|Internet Explorer|11|
-|Samsung Internet|4|
+[React-Calendar](https://github.com/wojtekmaj/react-calendar), on which React-DateRange-Picker relies heavily, uses modern web technologies. That's why it's so fast, lightweight and easy to style. This, however, comes at a cost of [supporting only modern browsers](https://caniuse.com/#feat=internationalization).
 
 #### Legacy browsers
 
