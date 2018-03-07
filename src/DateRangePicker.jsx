@@ -6,10 +6,6 @@ import detectElementOverflow from 'detect-element-overflow';
 import Calendar from 'react-calendar/dist/entry.nostyle';
 import DateInput from 'react-date-picker/dist/DateInput';
 
-import { isCalendarType, isMaxDate, isMinDate, isValue } from './shared/propTypes';
-
-const allViews = ['century', 'decade', 'year', 'month'];
-
 export default class DateRangePicker extends PureComponent {
   state = {
     isOpen: this.props.isOpen,
@@ -235,42 +231,22 @@ DateRangePicker.defaultProps = {
   calendarIcon: CalendarIcon,
   clearIcon: ClearIcon,
   isOpen: null,
-  maxDetail: 'month',
 };
 
 DateRangePicker.propTypes = {
+  ...Calendar.propTypes,
   calendarClassName: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
   ]),
   calendarIcon: PropTypes.node,
-  calendarType: isCalendarType,
   className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
   ]),
   clearIcon: PropTypes.node,
+  disabled: PropTypes.bool,
   isOpen: PropTypes.bool,
-  locale: PropTypes.string,
-  maxDate: isMaxDate,
-  maxDetail: PropTypes.oneOf(allViews),
-  minDate: isMinDate,
-  minDetail: PropTypes.oneOf(allViews),
   name: PropTypes.string,
-  next2Label: PropTypes.node,
-  nextLabel: PropTypes.node,
-  onChange: PropTypes.func,
-  onClickDay: PropTypes.func,
-  onClickDecade: PropTypes.func,
-  onClickMonth: PropTypes.func,
-  onClickYear: PropTypes.func,
-  prev2Label: PropTypes.node,
-  prevLabel: PropTypes.node,
   required: PropTypes.bool,
-  showNeighboringMonth: PropTypes.bool,
-  showWeekNumbers: PropTypes.bool,
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    isValue,
-  ]),
 };
