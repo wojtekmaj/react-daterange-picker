@@ -46,7 +46,7 @@
     "prop-types": "^15.6.0",
     "react": ">=15.5",
     "react-calendar": "^2.13.0",
-    "react-date-picker": "^6.8.0",
+    "react-date-picker": "^6.9.0",
     "react-dom": ">=15.5"
   },
   "devDependencies": {

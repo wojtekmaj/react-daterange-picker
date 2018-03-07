@@ -10,44 +10,28 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+.react-daterange-picker--disabled {
+  background-color: #f0f0f0;
+  color: #6d6d6d;
+}
 .react-daterange-picker__button {
   display: flex;
   border: thin solid gray;
-}
-.react-daterange-picker__button__input {
-  min-width: calc(4px + (4px * 3) +  4.32em  +  0.434em);
-  flex-grow: 1;
-  display: flex;
-  padding: 0 2px;
-  align-items: baseline;
-}
-.react-daterange-picker__button__input__divider {
-  padding: 1px 0;
-}
-.react-daterange-picker__button__input input {
-  min-width: calc(4px +  0.54em);
-  height: 100%;
-  padding: 1px;
-  border: 0;
-  -moz-appearance: textfield;
-}
-.react-daterange-picker__button__input input::-webkit-outer-spin-button,
-.react-daterange-picker__button__input input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-.react-daterange-picker__button__input input:invalid {
-  background: rgba(255, 0, 0, 0.1);
 }
 .react-daterange-picker__button__icon {
   border: 0;
   background: transparent;
   padding: 4px 6px;
+}
+.react-daterange-picker__button__icon:enabled {
   cursor: pointer;
 }
-.react-daterange-picker__button__icon:hover svg g,
-.react-daterange-picker__button__icon:focus svg g {
+.react-daterange-picker__button__icon:enabled:hover svg g,
+.react-daterange-picker__button__icon:enabled:focus svg g {
   stroke: #0078d7;
+}
+.react-daterange-picker__button__icon:disabled svg g {
+  stroke: #6d6d6d;
 }
 .react-daterange-picker__button__icon svg {
   display: inherit;

@@ -54,7 +54,7 @@ export default class ViewOptions extends Component {
             checked={showNeighboringMonth}
             onChange={this.onshowNeighboringMonthChange}
           />
-          <label htmlFor="renderTextLayer">{'Show neighboring month\'s days'}</label>
+          <label htmlFor="showNeighboringMonth">{'Show neighboring month\'s days'}</label>
         </div>
       </fieldset>
     );

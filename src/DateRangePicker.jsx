@@ -78,6 +78,7 @@ export default class DateRangePicker extends PureComponent {
 
   renderInputs() {
     const {
+      disabled,
       locale,
       maxDate,
       maxDetail,
@@ -93,6 +94,7 @@ export default class DateRangePicker extends PureComponent {
     return (
       <div className="react-daterange-picker__button">
         <DateInput
+          disabled={disabled}
           isCalendarOpen={isOpen}
           locale={locale}
           maxDate={maxDate}
@@ -107,6 +109,7 @@ export default class DateRangePicker extends PureComponent {
         />
         –
         <DateInput
+          disabled={disabled}
           isCalendarOpen={isOpen}
           locale={locale}
           maxDate={maxDate}
@@ -121,6 +124,7 @@ export default class DateRangePicker extends PureComponent {
         />
         <button
           className="react-daterange-picker__clear-button react-daterange-picker__button__icon"
+          disabled={disabled}
           onClick={this.clear}
           onFocus={this.stopPropagation}
           type="button"
@@ -129,6 +133,7 @@ export default class DateRangePicker extends PureComponent {
         </button>
         <button
           className="react-daterange-picker__calendar-button react-daterange-picker__button__icon"
+          disabled={disabled}
           onClick={this.toggleCalendar}
           onFocus={this.stopPropagation}
           onBlur={this.resetValue}
@@ -196,6 +201,7 @@ export default class DateRangePicker extends PureComponent {
         className={mergeClassNames(
           className,
           `${className}--${this.state.isOpen ? 'open' : 'closed'}`,
+          `${className}--${this.props.disabled ? 'disabled' : 'enabled'}`,
           this.props.className,
         )}
         onFocus={this.onFocus}
