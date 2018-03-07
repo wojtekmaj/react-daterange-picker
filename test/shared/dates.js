@@ -1,6 +1,9 @@
 export {
   getISOLocalDate,
   getMonth,
+} from '../../src/shared/dates';
+
+export {
   getBeginOfDay,
   getEndOfDay,
-} from '../../src/shared/dates';
+} from 'react-calendar/dist/shared/dates';

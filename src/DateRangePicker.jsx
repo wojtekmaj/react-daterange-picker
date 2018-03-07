@@ -78,8 +78,6 @@ export default class DateRangePicker extends PureComponent {
 
   renderInputs() {
     const {
-      calendarIcon,
-      clearIcon,
       locale,
       maxDate,
       maxDetail,
@@ -104,6 +102,7 @@ export default class DateRangePicker extends PureComponent {
           onChange={this.onChangeFrom}
           required={required}
           returnValue="start"
+          showLeadingZeros={this.props.showLeadingZeros}
           value={valueFrom}
         />
         –
@@ -117,6 +116,7 @@ export default class DateRangePicker extends PureComponent {
           onChange={this.onChangeTo}
           required={required}
           returnValue="end"
+          showLeadingZeros={this.props.showLeadingZeros}
           value={valueTo}
         />
         <button
@@ -125,7 +125,7 @@ export default class DateRangePicker extends PureComponent {
           onFocus={this.stopPropagation}
           type="button"
         >
-          {clearIcon}
+          {this.props.clearIcon}
         </button>
         <button
           className="react-daterange-picker__calendar-button react-daterange-picker__button__icon"
@@ -134,7 +134,7 @@ export default class DateRangePicker extends PureComponent {
           onBlur={this.resetValue}
           type="button"
         >
-          {calendarIcon}
+          {this.props.calendarIcon}
         </button>
       </div>
     );
@@ -249,4 +249,5 @@ DateRangePicker.propTypes = {
   isOpen: PropTypes.bool,
   name: PropTypes.string,
   required: PropTypes.bool,
+  showLeadingZeros: PropTypes.bool,
 };

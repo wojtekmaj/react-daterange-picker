@@ -20,6 +20,7 @@ export default class Test extends Component {
     minDate: new Date(1995, now.getUTCMonth() + 1, 15, 12),
     minDetail: 'century',
     required: true,
+    showLeadingZeros: true,
     showNeighboringMonth: false,
     showWeekNumbers: false,
     value: now,
@@ -35,6 +36,7 @@ export default class Test extends Component {
       minDate,
       minDetail,
       required,
+      showLeadingZeros,
       showNeighboringMonth,
       showWeekNumbers,
       value,
@@ -75,6 +77,7 @@ export default class Test extends Component {
             />
             <ViewOptions
               setState={setState}
+              showLeadingZeros={showLeadingZeros}
               showNeighboringMonth={showNeighboringMonth}
               showWeekNumbers={showWeekNumbers}
             />
@@ -92,6 +95,7 @@ export default class Test extends Component {
               <DateRangePicker
                 className="myCustomDateRangePickerClassName"
                 calendarClassName="myCustomCalendarClassName"
+                disabled={false}
                 locale={locale}
                 maxDate={maxDate}
                 maxDetail={maxDetail}
@@ -100,6 +104,7 @@ export default class Test extends Component {
                 name="myCustomName"
                 onChange={this.onChange}
                 required={required}
+                showLeadingZeros={showLeadingZeros}
                 showNeighboringMonth={showNeighboringMonth}
                 showWeekNumbers={showWeekNumbers}
                 value={value}
