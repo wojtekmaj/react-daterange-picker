@@ -44,8 +44,8 @@
     "lodash.once": "^4.1.1",
     "merge-class-names": "^1.1.1",
     "prop-types": "^15.6.0",
-    "react-calendar": "^2.13.0",
-    "react-date-picker": "^6.9.0"
+    "react-calendar": "^2.13.4",
+    "react-date-picker": "^6.9.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
