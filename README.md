@@ -39,7 +39,7 @@ If you need to support legacy browsers like Internet Explorer 10, you will need 
 
 ### Installation
 
-Add React-DateRange-Picker to your project by executing `npm install react-daterange-picker` or `yarn add react-daterange-picker`.
+Add React-DateRange-Picker to your project by executing `npm install wojtekmaj/react-daterange-picker` or `yarn add wojtekmaj/react-daterange-picker`.
 
 ### Usage
 
