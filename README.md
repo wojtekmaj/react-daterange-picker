@@ -11,7 +11,7 @@ A date range picker for your React app.
 * No moment.js needed
 
 ## tl;dr
-* Install by executing `npm install react-daterange-picker` or `yarn add react-daterange-picker`.
+* Install by executing `npm install wojtekmaj/react-daterange-picker` or `yarn add wojtekmaj/react-daterange-picker`.
 * Import by adding `import DateRangePicker from 'react-daterange-picker'`.
 * Use by adding `<DateRangePicker />`. Use `onChange` prop for getting new values.
 
