@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import { isValue } from '../src/shared/propTypes';
 import {
   getISOLocalDate,
   getBeginOfDay,
@@ -98,6 +97,7 @@ ValueOptions.propTypes = {
   setState: PropTypes.func.isRequired,
   value: PropTypes.oneOfType([
     PropTypes.string,
-    isValue,
+    PropTypes.instanceOf(Date),
+    PropTypes.arrayOf(PropTypes.instanceOf(Date)),
   ]),
 };
