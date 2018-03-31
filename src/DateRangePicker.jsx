@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import polyfill from 'react-lifecycles-compat';
 import mergeClassNames from 'merge-class-names';
 import detectElementOverflow from 'detect-element-overflow';
 
@@ -7,9 +8,18 @@ import Calendar from 'react-calendar/dist/entry.nostyle';
 import DateInput from 'react-date-picker/dist/DateInput';
 
 export default class DateRangePicker extends PureComponent {
-  state = {
-    isOpen: this.props.isOpen,
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.isOpen !== prevState.propsIsOpen) {
+      return {
+        isOpen: nextProps.isOpen,
+        propsIsOpen: nextProps.isOpen,
+      };
+    }
+
+    return null;
   }
+
+  state = {};
 
   componentDidMount() {
     document.addEventListener('mousedown', this.onClick);
@@ -17,14 +27,6 @@ export default class DateRangePicker extends PureComponent {
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.onClick);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { props } = this;
-
-    if (nextProps.isOpen !== props.isOpen) {
-      this.setState({ isOpen: nextProps.isOpen });
-    }
   }
 
   onClick = (event) => {
@@ -72,7 +74,7 @@ export default class DateRangePicker extends PureComponent {
     this.openCalendar();
   }
 
-  stopPropagation = event => event.stopPropagation()
+  stopPropagation = event => event.stopPropagation();
 
   clear = () => this.onChange(null);
 
@@ -257,3 +259,5 @@ DateRangePicker.propTypes = {
   required: PropTypes.bool,
   showLeadingZeros: PropTypes.bool,
 };
+
+polyfill(DateRangePicker);
