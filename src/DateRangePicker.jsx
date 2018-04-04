@@ -71,6 +71,10 @@ export default class DateRangePicker extends PureComponent {
   }
 
   onFocus = () => {
+    // Internet Explorer still fires onFocus on disabled elements
+    if (this.props.disabled) {
+      return;
+    }
     this.openCalendar();
   }
 
