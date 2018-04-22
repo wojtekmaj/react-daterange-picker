@@ -116,15 +116,17 @@ export default class DateRangePicker extends PureComponent {
           returnValue="end"
           value={valueTo}
         />
-        <button
-          className="react-daterange-picker__clear-button react-daterange-picker__button__icon"
-          disabled={this.props.disabled}
-          onClick={this.clear}
-          onFocus={this.stopPropagation}
-          type="button"
-        >
-          {this.props.clearIcon}
-        </button>
+        {this.props.clearIcon !== null && (
+          <button
+            className="react-daterange-picker__clear-button react-daterange-picker__button__icon"
+            disabled={this.props.disabled}
+            onClick={this.clear}
+            onFocus={this.stopPropagation}
+            type="button"
+          >
+            {this.props.clearIcon}
+          </button>
+        )}
         <button
           className="react-daterange-picker__calendar-button react-daterange-picker__button__icon"
           disabled={this.props.disabled}
