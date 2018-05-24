@@ -96,6 +96,7 @@ Displays an input field complete with custom inputs, native input, and a calenda
 |name|Defines input name prefix. Date from/Date to fields will be named "yourprefix_from" and "yourprefix_to" respectively. Defaults to "daterange".|`"myCustomName"`|
 |onChange|Function called when the user clicks an item on the most detailed view available.|`(value) => alert('New date is: ', value)`|
 |required|Defines whether date input should be required. Defaults to false.|`true`|
+|showLeadingZeros|Defines whether leading zeros should be rendered in date inputs. Defaults to false.|`true`|
 |value|Defines the value of the input.|<ul><li>Date: `new Date()`</li><li>An array of dates: `[new Date(2017, 0, 1), new Date(2017, 7, 1)]`</li></ul>|
 
 ### Calendar
