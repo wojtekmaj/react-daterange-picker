@@ -9,10 +9,10 @@ import DateInput from 'react-date-picker/dist/DateInput';
 
 export default class DateRangePicker extends PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.isOpen !== prevState.propsIsOpen) {
+    if (nextProps.isOpen !== prevState.isOpenProps) {
       return {
         isOpen: nextProps.isOpen,
-        propsIsOpen: nextProps.isOpen,
+        isOpenProps: nextProps.isOpen,
       };
     }
 
