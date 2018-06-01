@@ -3698,6 +3698,15 @@ react-calendar@^2.14.0:
     prop-types "^15.6.0"
     react-lifecycles-compat "^1.1.0"
 
+react-calendar@^2.15.1:
+  version "2.15.1"
+  resolved "https://registry.yarnpkg.com/react-calendar/-/react-calendar-2.15.1.tgz#b390d22941a645e512035dbbe5201739ec5e8ed9"
+  dependencies:
+    lodash.once "^4.1.1"
+    merge-class-names "^1.1.1"
+    prop-types "^15.6.0"
+    react-lifecycles-compat "^1.1.0"
+
 react-date-picker@^6.10.0:
   version "6.10.0"
   resolved "https://registry.yarnpkg.com/react-date-picker/-/react-date-picker-6.10.0.tgz#2108e34a11f0b1f6b641fe7772d07de12039fcc2"
