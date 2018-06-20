@@ -12,6 +12,7 @@ A date range picker for your React app.
 
 ## tl;dr
 * Install by executing `npm install wojtekmaj/react-daterange-picker` or `yarn add wojtekmaj/react-daterange-picker`.
+* Build the project by `npm install` and `npm run build` or `yarn install` and `yarn run build`. This step is temporary as the package is not yet published.
 * Import by adding `import DateRangePicker from 'react-daterange-picker'`.
 * Use by adding `<DateRangePicker />`. Use `onChange` prop for getting new values.
 
@@ -40,6 +41,8 @@ If you need to support legacy browsers like Internet Explorer 10, you will need 
 ### Installation
 
 Add React-DateRange-Picker to your project by executing `npm install wojtekmaj/react-daterange-picker` or `yarn add wojtekmaj/react-daterange-picker`.
+
+Build the project by `npm install` and `npm run build` or `yarn install` and `yarn run build`. This step is temporary as the package is not yet published.
 
 ### Usage
 
