@@ -3698,9 +3698,9 @@ react-calendar@2.15.2, react-calendar@^2.15.2:
     prop-types "^15.6.0"
     react-lifecycles-compat "^3.0.4"
 
-react-date-picker@^6.10.3:
-  version "6.10.3"
-  resolved "https://registry.yarnpkg.com/react-date-picker/-/react-date-picker-6.10.3.tgz#4cc529e23cb933c644e47da4cab84c35266edf5a"
+react-date-picker@^6.10.4:
+  version "6.10.4"
+  resolved "https://registry.yarnpkg.com/react-date-picker/-/react-date-picker-6.10.4.tgz#254ebbe953f08459dcb9641d864bbef7e135c4f0"
   dependencies:
     detect-element-overflow "^1.1.1"
     lodash.once "^4.1.1"
