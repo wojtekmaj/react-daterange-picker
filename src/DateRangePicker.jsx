@@ -71,8 +71,10 @@ export default class DateRangePicker extends PureComponent {
   }
 
   onFocus = () => {
+    const { disabled } = this.props;
+
     // Internet Explorer still fires onFocus on disabled elements
-    if (this.props.disabled) {
+    if (disabled) {
       return;
     }
     this.openCalendar();
@@ -83,20 +85,32 @@ export default class DateRangePicker extends PureComponent {
   clear = () => this.onChange(null);
 
   renderInputs() {
-    const { name, value } = this.props;
+    const {
+      calendarIcon,
+      clearIcon,
+      disabled,
+      locale,
+      maxDetail,
+      maxDate,
+      minDate,
+      name,
+      required,
+      showLeadingZeros,
+      value,
+    } = this.props;
     const { isOpen } = this.state;
 
     const [valueFrom, valueTo] = [].concat(value);
 
     const commonProps = {
-      disabled: this.props.disabled,
+      disabled,
       isCalendarOpen: isOpen,
-      locale: this.props.locale,
-      maxDate: this.props.maxDate,
-      maxDetail: this.props.maxDetail,
-      minDate: this.props.minDate,
-      required: this.props.required,
-      showLeadingZeros: this.props.showLeadingZeros,
+      locale,
+      maxDate,
+      maxDetail,
+      minDate,
+      required,
+      showLeadingZeros,
     };
 
     return (
@@ -116,27 +130,27 @@ export default class DateRangePicker extends PureComponent {
           returnValue="end"
           value={valueTo}
         />
-        {this.props.clearIcon !== null && (
+        {clearIcon !== null && (
           <button
             className="react-daterange-picker__clear-button react-daterange-picker__button__icon"
-            disabled={this.props.disabled}
+            disabled={disabled}
             onClick={this.clear}
             onFocus={this.stopPropagation}
             type="button"
           >
-            {this.props.clearIcon}
+            {clearIcon}
           </button>
         )}
-        {this.props.calendarIcon !== null && (
+        {calendarIcon !== null && (
           <button
             className="react-daterange-picker__calendar-button react-daterange-picker__button__icon"
-            disabled={this.props.disabled}
+            disabled={disabled}
             onClick={this.toggleCalendar}
             onFocus={this.stopPropagation}
             onBlur={this.resetValue}
             type="button"
           >
-            {this.props.calendarIcon}
+            {calendarIcon}
           </button>
         )}
       </div>
@@ -192,15 +206,18 @@ export default class DateRangePicker extends PureComponent {
   }
 
   render() {
-    const className = 'react-daterange-picker';
+    const { className, disabled } = this.props;
+    const { isOpen } = this.state;
+
+    const baseClassName = 'react-daterange-picker';
 
     return (
       <div
         className={mergeClassNames(
+          baseClassName,
+          `${baseClassName}--${isOpen ? 'open' : 'closed'}`,
+          `${baseClassName}--${disabled ? 'disabled' : 'enabled'}`,
           className,
-          `${className}--${this.state.isOpen ? 'open' : 'closed'}`,
-          `${className}--${this.props.disabled ? 'disabled' : 'enabled'}`,
-          this.props.className,
         )}
         onFocus={this.onFocus}
         ref={(ref) => { this.wrapper = ref; }}
