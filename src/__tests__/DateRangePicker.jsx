@@ -22,6 +22,19 @@ const mockDocumentListeners = () => {
 };
 
 describe('DateRangePicker', () => {
+  it('passes name to DateInput', () => {
+    const name = 'testName';
+
+    const component = mount(
+      <DateRangePicker name={name} />
+    );
+
+    const dateInput = component.find('DateInput');
+
+    expect(dateInput.at(0).prop('name')).toBe(`${name}_from`);
+    expect(dateInput.at(1).prop('name')).toBe(`${name}_to`);
+  });
+
   it('applies className to its wrapper when given a string', () => {
     const className = 'testClassName';
 
