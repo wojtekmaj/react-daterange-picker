@@ -10,15 +10,21 @@ import {
 export default class ValueOptions extends PureComponent {
   get startDate() {
     const { value } = this.props;
+
     return [].concat(value)[0];
   }
 
   get endDate() {
     const { value } = this.props;
+
     return [].concat(value)[1];
   }
 
-  setValue = value => this.props.setState({ value });
+  setValue = (value) => {
+    const { setState } = this.props;
+
+    setState({ value });
+  }
 
   setStartValue = (startValue) => {
     const { value } = this.props;
@@ -63,30 +69,58 @@ export default class ValueOptions extends PureComponent {
   render() {
     return (
       <fieldset id="valueOptions">
-        <legend htmlFor="valueOptions">Value options</legend>
+        <legend htmlFor="valueOptions">
+          Value options
+        </legend>
 
         <div>
-          <label htmlFor="startDate">Start date</label>
+          <label htmlFor="startDate">
+            Start date
+          </label>
           <input
             id="startDate"
             onChange={this.onStartChange}
             type="date"
             value={this.startDate ? getISOLocalDate(this.startDate) : ''}
-          />&nbsp;
-          <button onClick={() => this.setStartValue(null)}>Clear to null</button>
-          <button onClick={() => this.setStartValue('')}>Clear to empty string</button>
+          />
+          &nbsp;
+          <button
+            type="button"
+            onClick={() => this.setStartValue(null)}
+          >
+            Clear to null
+          </button>
+          <button
+            type="button"
+            onClick={() => this.setStartValue('')}
+          >
+            Clear to empty string
+          </button>
         </div>
 
         <div>
-          <label htmlFor="endDate">End date</label>
+          <label htmlFor="endDate">
+            End date
+          </label>
           <input
             id="endDate"
             onChange={this.onEndChange}
             type="date"
             value={this.endDate ? getISOLocalDate(this.endDate) : ''}
-          />&nbsp;
-          <button onClick={() => this.setEndValue(null)}>Clear to null</button>
-          <button onClick={() => this.setEndValue('')}>Clear to empty string</button>
+          />
+          &nbsp;
+          <button
+            type="button"
+            onClick={() => this.setEndValue(null)}
+          >
+            Clear to null
+          </button>
+          <button
+            type="button"
+            onClick={() => this.setEndValue('')}
+          >
+            Clear to empty string
+          </button>
         </div>
       </fieldset>
     );
