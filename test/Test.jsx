@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 // eslint-disable-next-line import/no-unresolved
-import DateRangePicker from 'react-daterange-picker/src/entry.nostyle';
+import DateRangePicker from '@wojtekmaj/react-daterange-picker/src/entry.nostyle';
 // eslint-disable-next-line import/no-unresolved
-import 'react-daterange-picker/src/DateRangePicker.less';
+import '@wojtekmaj/react-daterange-picker/src/DateRangePicker.less';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'react-calendar/src/Calendar.less';
 // eslint-disable-next-line import/no-extraneous-dependencies

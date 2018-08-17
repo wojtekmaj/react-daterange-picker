@@ -71,7 +71,7 @@ class MyApp extends Component {
 
 ### Custom styling
 
-If you don't want to use default React-DateRange-Picker styling to build upon it, you can import React-DateRange-Picker by using `import DateRangePicker from 'react-daterange-picker/dist/entry.nostyle';` instead.
+If you don't want to use default React-DateRange-Picker styling to build upon it, you can import React-DateRange-Picker by using `import DateRangePicker from '@wojtekmaj/react-daterange-picker/dist/entry.nostyle';` instead.
 
 ## User guide
 
