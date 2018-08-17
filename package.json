@@ -1,5 +1,5 @@
 {
-  "name": "react-daterange-picker",
+  "name": "@wojtekmaj/react-daterange-picker",
   "version": "1.0.0",
   "description": "A date range picker for your React app.",
   "main": "dist/entry.js",
