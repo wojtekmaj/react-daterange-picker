@@ -22,7 +22,18 @@ const mockDocumentListeners = () => {
 };
 
 describe('DateRangePicker', () => {
-  it('passes name to DateInput', () => {
+  it('passes default name to DateInput', () => {
+    const component = mount(
+      <DateRangePicker />
+    );
+
+    const dateInput = component.find('DateInput');
+
+    expect(dateInput.at(0).prop('name')).toBe('daterange_from');
+    expect(dateInput.at(1).prop('name')).toBe('daterange_to');
+  });
+
+  it('passes custom name to DateInput', () => {
     const name = 'testName';
 
     const component = mount(
