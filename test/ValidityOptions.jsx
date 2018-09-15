@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import { getISOLocalDate } from '../src/shared/dates';
+import { getISOLocalDate } from './shared/dates';
 
 export default class ValidityOptions extends PureComponent {
   onMinChange = (event) => {
