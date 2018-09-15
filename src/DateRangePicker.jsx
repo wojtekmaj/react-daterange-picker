@@ -252,6 +252,7 @@ DateRangePicker.defaultProps = {
   calendarIcon: CalendarIcon,
   clearIcon: ClearIcon,
   isOpen: null,
+  name: 'daterange',
 };
 
 DateRangePicker.propTypes = {
