@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
+import makeEventProps from 'make-event-props';
 import mergeClassNames from 'merge-class-names';
 import detectElementOverflow from 'detect-element-overflow';
 
@@ -20,6 +21,10 @@ export default class DateRangePicker extends PureComponent {
   }
 
   state = {};
+
+  get eventProps() {
+    return makeEventProps(this.props);
+  }
 
   componentDidMount() {
     document.addEventListener('mousedown', this.onClick);
@@ -76,13 +81,18 @@ export default class DateRangePicker extends PureComponent {
     this.onChange([valueFrom, valueTo], closeCalendar);
   }
 
-  onFocus = () => {
-    const { disabled } = this.props;
+  onFocus = (event) => {
+    const { disabled, onFocus } = this.props;
+
+    if (onFocus) {
+      onFocus(event);
+    }
 
     // Internet Explorer still fires onFocus on disabled elements
     if (disabled) {
       return;
     }
+
     this.openCalendar();
   }
 
@@ -225,6 +235,7 @@ export default class DateRangePicker extends PureComponent {
           `${baseClassName}--${disabled ? 'disabled' : 'enabled'}`,
           className,
         )}
+        {...this.eventProps}
         onFocus={this.onFocus}
         ref={(ref) => { this.wrapper = ref; }}
       >
