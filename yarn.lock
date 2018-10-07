@@ -3666,6 +3666,11 @@ lru-cache@^4.0.1:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
+make-event-props@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/make-event-props/-/make-event-props-1.1.0.tgz#900a4818aeda72ec0ab6b5dc2c3407291592da76"
+  integrity sha512-BqMN1ToP0Fi7sHPBt6gvIPbDWSULFBmMZPmf+73cohr6LQZtcEWZcDX/mCysky2DL7x1d+E35NVaBorj/eVZSg==
+
 makeerror@1.0.x:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/makeerror/-/makeerror-1.0.11.tgz#e01a5c9109f2af79660e4e8b9587790184f5a96c"
@@ -4458,26 +4463,27 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-calendar@^2.17.3:
-  version "2.17.3"
-  resolved "https://registry.yarnpkg.com/react-calendar/-/react-calendar-2.17.3.tgz#515bccb7cb52b8d699d3498cf3e30ca31a3ba540"
-  integrity sha512-qqatCCfTQ9qwR47Tyt33gi678sUPnFsyiF342bE+Gs7yPI7qXnH8vyag4g/OVApULIhpK+ryo5Fd8h411sDb1Q==
+react-calendar@^2.17.4:
+  version "2.17.4"
+  resolved "https://registry.yarnpkg.com/react-calendar/-/react-calendar-2.17.4.tgz#95aeb1545159b97727f152f091ef563624dfd70c"
+  integrity sha512-rNpq5R6awa3Krb8rcgBsD6/KkGKvAUGL/jcBvO9f3ikzrRAsBPwQrsu7stiahup0khFfAPRNT5DKaMMNS2bAgQ==
   dependencies:
     get-user-locale "^1.1.1"
     merge-class-names "^1.1.1"
     prop-types "^15.6.0"
     react-lifecycles-compat "^3.0.4"
 
-react-date-picker@^6.12.1:
-  version "6.12.1"
-  resolved "https://registry.yarnpkg.com/react-date-picker/-/react-date-picker-6.12.1.tgz#6fbae39b14ae2a0b204f4be78de8fd8a946230a1"
-  integrity sha512-QAA+genPqrcx8SP4Dzw8FuwNXbxWmzKVuujM5oSuaAbja6ZE3FGUkWrq5+2uI0mlaKeUCDa5gqicekMmZP28yw==
+react-date-picker@^6.13.0:
+  version "6.13.0"
+  resolved "https://registry.yarnpkg.com/react-date-picker/-/react-date-picker-6.13.0.tgz#3ee21262619ed225e270deeff47c594f7fadd226"
+  integrity sha512-bsqPk10hUytNf0vUZoltVI+0Lx0YsfcpMjhb8FlKUux15UGQx6MnG8Om2OxoFoMyb0gosDH6pAu38wHe6Pf/YQ==
   dependencies:
     detect-element-overflow "^1.1.1"
     get-user-locale "^1.1.1"
+    make-event-props "^1.1.0"
     merge-class-names "^1.1.1"
     prop-types "^15.6.0"
-    react-calendar "^2.17.3"
+    react-calendar "^2.17.4"
     react-lifecycles-compat "^3.0.4"
 
 react-dom@^16.5.0:
