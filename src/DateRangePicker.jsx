@@ -8,6 +8,8 @@ import detectElementOverflow from 'detect-element-overflow';
 import Calendar from 'react-calendar/dist/entry.nostyle';
 import DateInput from 'react-date-picker/dist/DateInput';
 
+const baseClassName = 'react-daterange-picker';
+
 export default class DateRangePicker extends PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.isOpen !== prevState.isOpenProps) {
@@ -119,6 +121,7 @@ export default class DateRangePicker extends PureComponent {
     const [valueFrom, valueTo] = [].concat(value);
 
     const commonProps = {
+      className: `${baseClassName}__inputGroup`,
       disabled,
       isCalendarOpen: isOpen,
       locale,
@@ -130,7 +133,7 @@ export default class DateRangePicker extends PureComponent {
     };
 
     return (
-      <div className="react-daterange-picker__button">
+      <div className={`${baseClassName}__wrapper`}>
         <DateInput
           {...commonProps}
           name={`${name}_from`}
@@ -148,7 +151,7 @@ export default class DateRangePicker extends PureComponent {
         />
         {clearIcon !== null && (
           <button
-            className="react-daterange-picker__clear-button react-daterange-picker__button__icon"
+            className={`${baseClassName}__clear-button ${baseClassName}__button`}
             disabled={disabled}
             onClick={this.clear}
             onFocus={this.stopPropagation}
@@ -159,7 +162,7 @@ export default class DateRangePicker extends PureComponent {
         )}
         {calendarIcon !== null && (
           <button
-            className="react-daterange-picker__calendar-button react-daterange-picker__button__icon"
+            className={`${baseClassName}__calendar-button ${baseClassName}__button`}
             disabled={disabled}
             onClick={this.toggleCalendar}
             onFocus={this.stopPropagation}
@@ -188,7 +191,7 @@ export default class DateRangePicker extends PureComponent {
       ...calendarProps
     } = this.props;
 
-    const className = 'react-daterange-picker__calendar';
+    const className = `${baseClassName}__calendar`;
 
     return (
       <div
@@ -224,8 +227,6 @@ export default class DateRangePicker extends PureComponent {
   render() {
     const { className, disabled } = this.props;
     const { isOpen } = this.state;
-
-    const baseClassName = 'react-daterange-picker';
 
     return (
       <div

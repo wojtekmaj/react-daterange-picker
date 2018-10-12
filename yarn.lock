@@ -4473,10 +4473,10 @@ react-calendar@^2.17.4:
     prop-types "^15.6.0"
     react-lifecycles-compat "^3.0.4"
 
-react-date-picker@^6.13.0:
-  version "6.13.0"
-  resolved "https://registry.yarnpkg.com/react-date-picker/-/react-date-picker-6.13.0.tgz#3ee21262619ed225e270deeff47c594f7fadd226"
-  integrity sha512-bsqPk10hUytNf0vUZoltVI+0Lx0YsfcpMjhb8FlKUux15UGQx6MnG8Om2OxoFoMyb0gosDH6pAu38wHe6Pf/YQ==
+react-date-picker@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/react-date-picker/-/react-date-picker-7.0.0.tgz#eec50d6cf7c8a495b14964a563d799afde165c7b"
+  integrity sha512-HfnzxXe6aPFv14RfDe77TSpONk+MEDwjzBkU6eh2zhDyIgcj7j8BPZ+6WsCg2MYBjQVq/nx8F07yRn9vSsgoSA==
   dependencies:
     detect-element-overflow "^1.1.1"
     get-user-locale "^1.1.1"
