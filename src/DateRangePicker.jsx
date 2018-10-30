@@ -200,7 +200,7 @@ export default class DateRangePicker extends PureComponent {
           `${className}--${isOpen ? 'open' : 'closed'}`,
         )}
         ref={(ref) => {
-          if (!ref) {
+          if (!ref || !isOpen) {
             return;
           }
 
@@ -209,7 +209,14 @@ export default class DateRangePicker extends PureComponent {
           const collisions = detectElementOverflow(ref, document.body);
 
           if (collisions.collidedBottom) {
-            ref.classList.add(`${className}--above-label`);
+            const overflowTopAfterChange = (
+              collisions.overflowTop + ref.clientHeight + this.wrapper.clientHeight
+            );
+
+            // If it's going to make situation any better, display the calendar above the input
+            if (overflowTopAfterChange < collisions.overflowBottom) {
+              ref.classList.add(`${className}--above-label`);
+            }
           }
         }}
       >
