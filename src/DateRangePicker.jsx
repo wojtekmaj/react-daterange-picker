@@ -28,20 +28,6 @@ export default class DateRangePicker extends PureComponent {
     return makeEventProps(this.props);
   }
 
-  componentDidMount() {
-    document.addEventListener('mousedown', this.onClick);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('mousedown', this.onClick);
-  }
-
-  onClick = (event) => {
-    if (this.wrapper && !this.wrapper.contains(event.target)) {
-      this.closeCalendar();
-    }
-  }
-
   openCalendar = () => {
     this.setState({ isOpen: true });
   }
@@ -96,6 +82,16 @@ export default class DateRangePicker extends PureComponent {
     }
 
     this.openCalendar();
+  }
+
+  onBlur = () => {
+    const { onBlur } = this.props;
+
+    if (onBlur) {
+      onBlur(event);
+    }
+
+    this.closeCalendar();
   }
 
   stopPropagation = event => event.stopPropagation();
@@ -245,6 +241,7 @@ export default class DateRangePicker extends PureComponent {
         )}
         {...this.eventProps}
         onFocus={this.onFocus}
+        onBlur={this.onBlur}
         ref={(ref) => { this.wrapper = ref; }}
       >
         {this.renderInputs()}
