@@ -91,7 +91,13 @@ export default class DateRangePicker extends PureComponent {
       onBlur(event);
     }
 
-    this.closeCalendar();
+    requestAnimationFrame(() => {
+      const stillHasFocus = this.wrapper.querySelector(':focus');
+
+      if (!stillHasFocus) {
+        this.closeCalendar();
+      }
+    });
   }
 
   stopPropagation = event => event.stopPropagation();
