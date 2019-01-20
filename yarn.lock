@@ -4411,6 +4411,16 @@ react-calendar@^2.17.4:
     prop-types "^15.6.0"
     react-lifecycles-compat "^3.0.4"
 
+react-calendar@^2.18.0:
+  version "2.18.0"
+  resolved "https://registry.yarnpkg.com/react-calendar/-/react-calendar-2.18.0.tgz#a5681745300b5fe1ef31ea5912885629f90cf3d8"
+  integrity sha512-7SQEeFRAIxu6tgpmkwJS+iWywai9WuoBDoJcxyPYnZ02OscT6jGVhcyFN3pQzgLYyghGUBn3ATdtOsbpRPR8GA==
+  dependencies:
+    get-user-locale "^1.1.1"
+    merge-class-names "^1.1.1"
+    prop-types "^15.6.0"
+    react-lifecycles-compat "^3.0.4"
+
 react-date-picker@^7.0.0:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/react-date-picker/-/react-date-picker-7.1.1.tgz#d8548e2be09bdfcc2fa75e2c3be947aabad79d90"
