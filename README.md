@@ -69,6 +69,13 @@ class MyApp extends Component {
 }
 ```
 
+In some cases you might need to additionally import styles separately:
+
+```
+import 'react-calendar/dist/Calendar.css'
+import '@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css'
+```
+
 ### Custom styling
 
 If you don't want to use default React-DateRange-Picker styling to build upon it, you can import React-DateRange-Picker by using `import DateRangePicker from '@wojtekmaj/react-daterange-picker/dist/entry.nostyle';` instead.
