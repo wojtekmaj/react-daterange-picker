@@ -291,6 +291,8 @@ DateRangePicker.propTypes = {
   disabled: PropTypes.bool,
   isOpen: PropTypes.bool,
   name: PropTypes.string,
+  onCalendarClose: PropTypes.func,
+  onCalendarOpen: PropTypes.func,
   required: PropTypes.bool,
   showLeadingZeros: PropTypes.bool,
 };
