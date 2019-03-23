@@ -95,6 +95,8 @@ Displays an input field complete with custom inputs, native input, and a calenda
 |minDate|Defines minimum date that the user can select. Periods partially overlapped by minDate will also be selectable, although React-DateRange-Picker will ensure that no earlier date is selected.|Date: `new Date()`|
 |minDetail|Defines the least detailed calendar view that the user shall see. Can be "month", "year", "decade" or "century". Defaults to "century".|`"century"`|
 |name|Defines input name prefix. Date from/Date to fields will be named "yourprefix_from" and "yourprefix_to" respectively. Defaults to "daterange".|`"myCustomName"`|
+|onCalendarClose|Function called when the calendar closes.|`() => alert('Calendar closed')`|
+|onCalendarOpen|Function called when the calendar opens.|`() => alert('Calendar opened')`|
 |onChange|Function called when the user clicks an item on the most detailed view available.|`(value) => alert('New date is: ', value)`|
 |required|Defines whether date input should be required. Defaults to false.|`true`|
 |showLeadingZeros|Defines whether leading zeros should be rendered in date inputs. Defaults to false.|`true`|

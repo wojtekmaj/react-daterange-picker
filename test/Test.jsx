@@ -15,6 +15,8 @@ import './Test.less';
 
 const now = new Date();
 
+/* eslint-disable no-console */
+
 export default class Test extends Component {
   state = {
     disabled: false,
@@ -95,10 +97,8 @@ export default class Test extends Component {
               onSubmit={(event) => {
                 event.preventDefault();
 
-                /* eslint-disable no-console */
                 console.warn('Calendar triggered submitting the form.');
                 console.log(event);
-                /* eslint-enable no-console */
               }}
             >
               <DateRangePicker
@@ -112,6 +112,8 @@ export default class Test extends Component {
                 minDetail={minDetail}
                 name="myCustomName"
                 onChange={this.onChange}
+                onCalendarOpen={() => console.log('Calendar opened')}
+                onCalendarClose={() => console.log('Calendar closed')}
                 required={required}
                 showLeadingZeros={showLeadingZeros}
                 showNeighboringMonth={showNeighboringMonth}
