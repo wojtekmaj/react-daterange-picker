@@ -291,6 +291,7 @@ DateRangePicker.propTypes = {
   ]),
   clearIcon: PropTypes.node,
   disabled: PropTypes.bool,
+  format: PropTypes.string,
   isOpen: PropTypes.bool,
   name: PropTypes.string,
   onCalendarClose: PropTypes.func,
