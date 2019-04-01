@@ -120,6 +120,7 @@ export default class DateRangePicker extends PureComponent {
       calendarIcon,
       clearIcon,
       disabled,
+      format,
       locale,
       maxDetail,
       maxDate,
@@ -136,6 +137,7 @@ export default class DateRangePicker extends PureComponent {
     const commonProps = {
       className: `${baseClassName}__inputGroup`,
       disabled,
+      format,
       isCalendarOpen: isOpen,
       locale,
       maxDate,

@@ -30,6 +30,19 @@ describe('DateRangePicker', () => {
     expect(dateInput.at(1).prop('name')).toBe(`${name}_to`);
   });
 
+  it('passes format to DateInput', () => {
+    const format = 'y-MM-dd';
+
+    const component = mount(
+      <DateRangePicker format={format} />
+    );
+
+    const dateInput = component.find('DateInput');
+
+    expect(dateInput.at(0).prop('format')).toBe(format);
+    expect(dateInput.at(1).prop('format')).toBe(format);
+  });
+
   it('applies className to its wrapper when given a string', () => {
     const className = 'testClassName';
 
