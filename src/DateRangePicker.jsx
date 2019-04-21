@@ -127,6 +127,7 @@ export default class DateRangePicker extends PureComponent {
       minDate,
       name,
       required,
+      format,
       showLeadingZeros,
       value,
     } = this.props;
@@ -144,6 +145,7 @@ export default class DateRangePicker extends PureComponent {
       maxDetail,
       minDate,
       required,
+      format,
       showLeadingZeros,
     };
 
