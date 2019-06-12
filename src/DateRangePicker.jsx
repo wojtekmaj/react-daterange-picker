@@ -156,7 +156,9 @@ export default class DateRangePicker extends PureComponent {
           returnValue="start"
           value={valueFrom}
         />
-        <span>–</span>
+        <span className={`${baseClassName}__range-divider`}>
+          –
+        </span>
         <DateInput
           {...commonProps}
           name={`${name}_to`}
