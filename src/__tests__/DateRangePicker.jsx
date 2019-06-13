@@ -81,6 +81,16 @@ describe('DateRangePicker', () => {
     expect(dateInput).toHaveLength(2);
   });
 
+  it('renders range divider', () => {
+    const component = mount(
+      <DateRangePicker />
+    );
+
+    const rangeDivider = component.find('.react-daterange-picker__range-divider');
+
+    expect(rangeDivider).toHaveLength(1);
+  });
+
   it('renders clear button', () => {
     const component = mount(
       <DateRangePicker />
