@@ -285,7 +285,7 @@ DateRangePicker.defaultProps = {
   clearIcon: ClearIcon,
   isOpen: null,
   name: 'daterange',
-  calendarIconPosition: 'left'
+  calendarIconPosition: 'left',
 };
 
 DateRangePicker.propTypes = {
@@ -295,12 +295,12 @@ DateRangePicker.propTypes = {
     PropTypes.arrayOf(PropTypes.string),
   ]),
   calendarIcon: PropTypes.node,
+  calendarIconPosition: PropTypes.string,
   className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
   ]),
   clearIcon: PropTypes.node,
-  calendarIconPosition: PropTypes.string,
   disabled: PropTypes.bool,
   format: PropTypes.string,
   isOpen: PropTypes.bool,
@@ -308,7 +308,8 @@ DateRangePicker.propTypes = {
   onCalendarClose: PropTypes.func,
   onCalendarOpen: PropTypes.func,
   required: PropTypes.bool,
-  showLeadingZeros: PropTypes.bool,
+  showLeadingZeros: PropTypes.bool
+  ,
 };
 
 polyfill(DateRangePicker);
