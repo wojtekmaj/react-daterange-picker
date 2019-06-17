@@ -118,6 +118,7 @@ export default class DateRangePicker extends PureComponent {
   renderInputs() {
     const {
       calendarIcon,
+      calendarIconPosition,
       clearIcon,
       disabled,
       format,
@@ -131,6 +132,19 @@ export default class DateRangePicker extends PureComponent {
       value,
     } = this.props;
     const { isOpen } = this.state;
+
+    const calendarButton = calendarIcon !== null && (
+      <button
+        className={`${baseClassName}__calendar-button ${baseClassName}__button`}
+        disabled={disabled}
+        onClick={this.toggleCalendar}
+        onFocus={this.stopPropagation}
+        onBlur={this.resetValue}
+        type="button"
+      >
+        {calendarIcon}
+      </button>
+    );
 
     const [valueFrom, valueTo] = [].concat(value);
 
@@ -146,9 +160,11 @@ export default class DateRangePicker extends PureComponent {
       required,
       showLeadingZeros,
     };
-
     return (
       <div className={`${baseClassName}__wrapper`}>
+        {
+          calendarIconPosition === 'left' ? calendarButton : null
+        }
         <DateInput
           {...commonProps}
           name={`${name}_from`}
@@ -177,18 +193,9 @@ export default class DateRangePicker extends PureComponent {
             {clearIcon}
           </button>
         )}
-        {calendarIcon !== null && (
-          <button
-            className={`${baseClassName}__calendar-button ${baseClassName}__button`}
-            disabled={disabled}
-            onClick={this.toggleCalendar}
-            onFocus={this.stopPropagation}
-            onBlur={this.resetValue}
-            type="button"
-          >
-            {calendarIcon}
-          </button>
-        )}
+        {
+          calendarIconPosition === 'right' ? calendarButton : null
+        }
       </div>
     );
   }
@@ -278,6 +285,7 @@ DateRangePicker.defaultProps = {
   clearIcon: ClearIcon,
   isOpen: null,
   name: 'daterange',
+  calendarIconPosition: 'left'
 };
 
 DateRangePicker.propTypes = {
@@ -292,6 +300,7 @@ DateRangePicker.propTypes = {
     PropTypes.arrayOf(PropTypes.string),
   ]),
   clearIcon: PropTypes.node,
+  calendarIconPosition: PropTypes.string,
   disabled: PropTypes.bool,
   format: PropTypes.string,
   isOpen: PropTypes.bool,
