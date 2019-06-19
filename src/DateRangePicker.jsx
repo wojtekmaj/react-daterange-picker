@@ -12,6 +12,8 @@ import { callIfDefined } from './shared/utils';
 
 const baseClassName = 'react-daterange-picker';
 
+const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'];
+
 export default class DateRangePicker extends PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.isOpen !== prevState.isOpenProps) {
@@ -31,9 +33,9 @@ export default class DateRangePicker extends PureComponent {
   }
 
   componentDidMount() {
-    document.addEventListener('mousedown', this.onOutsideAction);
-    document.addEventListener('focusin', this.onOutsideAction);
-    document.addEventListener('touchstart', this.onOutsideAction);
+    outsideActionEvents.forEach(
+      eventName => document.addEventListener(eventName, this.onOutsideAction),
+    );
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -46,9 +48,9 @@ export default class DateRangePicker extends PureComponent {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('mousedown', this.onOutsideAction);
-    document.removeEventListener('focusin', this.onOutsideAction);
-    document.removeEventListener('touchstart', this.onOutsideAction);
+    outsideActionEvents.forEach(
+      eventName => document.removeEventListener(eventName, this.onOutsideAction),
+    );
   }
 
   onOutsideAction = (event) => {
