@@ -33,6 +33,7 @@ export default class DateRangePicker extends PureComponent {
   componentDidMount() {
     document.addEventListener('mousedown', this.onOutsideAction);
     document.addEventListener('focusin', this.onOutsideAction);
+    document.addEventListener('touchstart', this.onOutsideAction);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -47,6 +48,7 @@ export default class DateRangePicker extends PureComponent {
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.onOutsideAction);
     document.removeEventListener('focusin', this.onOutsideAction);
+    document.removeEventListener('touchstart', this.onOutsideAction);
   }
 
   onOutsideAction = (event) => {
