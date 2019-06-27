@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -7,124 +7,110 @@ import {
   getEndOfDay,
 } from './shared/dates';
 
-export default class ValueOptions extends PureComponent {
-  get startDate() {
-    const { value } = this.props;
+export default function ValueOptions({
+  setState,
+  value,
+}) {
+  const startDate = [].concat(value)[0];
+  const endDate = [].concat(value)[1];
 
-    return [].concat(value)[0];
+  function setValue(nextValue) {
+    setState({ value: nextValue });
   }
 
-  get endDate() {
-    const { value } = this.props;
-
-    return [].concat(value)[1];
-  }
-
-  setValue = (value) => {
-    const { setState } = this.props;
-
-    setState({ value });
-  }
-
-  setStartValue = (startValue) => {
-    const { value } = this.props;
-
+  function setStartValue(startValue) {
     if (!startValue) {
-      this.setValue(value[1] || startValue);
+      setValue(value[1] || startValue);
       return;
     }
 
     if (Array.isArray(value)) {
-      this.setValue([startValue, value[1]]);
+      setValue([startValue, value[1]]);
     } else {
-      this.setValue(startValue);
+      setValue(startValue);
     }
   }
 
-  setEndValue = (endValue) => {
-    const { value } = this.props;
-
+  function setEndValue(endValue) {
     if (!endValue) {
-      this.setValue(value[0]);
+      setValue(value[0]);
       return;
     }
 
     if (Array.isArray(value)) {
-      this.setValue([value[0], endValue]);
+      setValue([value[0], endValue]);
     } else {
-      this.setValue([value, endValue]);
+      setValue([value, endValue]);
     }
   }
 
-  onStartChange = (event) => {
-    const { value } = event.target;
-    this.setStartValue(getBeginOfDay(new Date(value)));
+  function onStartChange(event) {
+    const { value: nextValue } = event.target;
+    setStartValue(getBeginOfDay(new Date(nextValue)));
   }
 
-  onEndChange = (event) => {
-    const { value } = event.target;
-    this.setEndValue(getEndOfDay(new Date(value)));
+  function onEndChange(event) {
+    const { value: nextValue } = event.target;
+    setEndValue(getEndOfDay(new Date(nextValue)));
   }
 
-  render() {
-    return (
-      <fieldset id="valueOptions">
-        <legend htmlFor="valueOptions">
-          Value options
-        </legend>
+  return (
+    <fieldset id="valueOptions">
+      <legend htmlFor="valueOptions">
+        Value options
+      </legend>
 
-        <div>
-          <label htmlFor="startDate">
-            Start date
-          </label>
-          <input
-            id="startDate"
-            onChange={this.onStartChange}
-            type="date"
-            value={this.startDate ? getISOLocalDate(this.startDate) : ''}
-          />
-          &nbsp;
-          <button
-            type="button"
-            onClick={() => this.setStartValue(null)}
-          >
-            Clear to null
-          </button>
-          <button
-            type="button"
-            onClick={() => this.setStartValue('')}
-          >
-            Clear to empty string
-          </button>
-        </div>
+      <div>
+        <label htmlFor="startDate">
+          Start date
+        </label>
+        <input
+          id="startDate"
+          onChange={onStartChange}
+          type="date"
+          value={startDate ? getISOLocalDate(startDate) : ''}
+        />
+        &nbsp;
+        <button
+          type="button"
+          onClick={() => setStartValue(null)}
+        >
+          Clear to null
+        </button>
+        <button
+          type="button"
+          onClick={() => setStartValue('')}
+        >
+          Clear to empty string
+        </button>
+      </div>
 
-        <div>
-          <label htmlFor="endDate">
-            End date
-          </label>
-          <input
-            id="endDate"
-            onChange={this.onEndChange}
-            type="date"
-            value={this.endDate ? getISOLocalDate(this.endDate) : ''}
-          />
-          &nbsp;
-          <button
-            type="button"
-            onClick={() => this.setEndValue(null)}
-          >
-            Clear to null
-          </button>
-          <button
-            type="button"
-            onClick={() => this.setEndValue('')}
-          >
-            Clear to empty string
-          </button>
-        </div>
-      </fieldset>
-    );
-  }
+      <div>
+        <label htmlFor="endDate">
+          End date
+        </label>
+        <input
+          id="endDate"
+          onChange={onEndChange}
+          type="date"
+          value={endDate ? getISOLocalDate(endDate) : ''}
+        />
+        &nbsp;
+        <button
+          type="button"
+          onClick={() => setEndValue(null)}
+        >
+          Clear to null
+        </button>
+        <button
+          type="button"
+          onClick={() => setEndValue('')}
+        >
+          Clear to empty string
+        </button>
+      </div>
+    </fieldset>
+  );
 }
 
 ValueOptions.propTypes = {
