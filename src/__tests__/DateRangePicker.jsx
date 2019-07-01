@@ -176,7 +176,6 @@ describe('DateRangePicker', () => {
     expect(calendar2).toHaveLength(1);
   });
 
-
   it('closes Calendar component when clicked outside', () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
@@ -211,7 +210,7 @@ describe('DateRangePicker', () => {
     expect(component.state('isOpen')).toBe(false);
   });
 
-  it('closes Calendar component when tapping outside', () => {
+  it('closes Calendar component when tapped outside', () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
 

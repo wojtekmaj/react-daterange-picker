@@ -11,7 +11,6 @@ import DateInput from 'react-date-picker/dist/DateInput';
 import { callIfDefined } from './shared/utils';
 
 const baseClassName = 'react-daterange-picker';
-
 const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'];
 
 export default class DateRangePicker extends PureComponent {
