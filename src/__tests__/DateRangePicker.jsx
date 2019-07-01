@@ -211,6 +211,23 @@ describe('DateRangePicker', () => {
     expect(component.state('isOpen')).toBe(false);
   });
 
+  it('closes Calendar component when tapping outside', () => {
+    const root = document.createElement('div');
+    document.body.appendChild(root);
+
+    const component = mount(
+      <DateRangePicker isOpen />,
+      { attachTo: root }
+    );
+
+    const event = document.createEvent('TouchEvent');
+    event.initEvent('touchstart', true, true);
+    document.body.dispatchEvent(event);
+    component.update();
+
+    expect(component.state('isOpen')).toBe(false);
+  });
+
   it('does not close Calendar component when focused inside', () => {
     const component = mount(
       <DateRangePicker isOpen />
