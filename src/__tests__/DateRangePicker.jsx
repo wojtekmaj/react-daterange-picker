@@ -43,6 +43,33 @@ describe('DateRangePicker', () => {
     expect(dateInput.at(1).prop('format')).toBe(format);
   });
 
+  it('passes aria-label props to DateInput', () => {
+    const ariaLabelProps = {
+      calendarAriaLabel: 'Toggle calendar',
+      clearAriaLabel: 'Clear value',
+      dayAriaLabel: 'Day',
+      monthAriaLabel: 'Month',
+      yearAriaLabel: 'Year',
+    };
+
+    const component = mount(
+      <DateRangePicker {...ariaLabelProps} />
+    );
+
+    const calendarButton = component.find('button.react-daterange-picker__calendar-button');
+    const clearButton = component.find('button.react-daterange-picker__clear-button');
+    const dateInput = component.find('DateInput');
+
+    expect(calendarButton.prop('aria-label')).toBe(ariaLabelProps.calendarAriaLabel);
+    expect(clearButton.prop('aria-label')).toBe(ariaLabelProps.clearAriaLabel);
+    expect(dateInput.at(0).prop('dayAriaLabel')).toBe(ariaLabelProps.dayAriaLabel);
+    expect(dateInput.at(1).prop('dayAriaLabel')).toBe(ariaLabelProps.dayAriaLabel);
+    expect(dateInput.at(0).prop('monthAriaLabel')).toBe(ariaLabelProps.monthAriaLabel);
+    expect(dateInput.at(1).prop('monthAriaLabel')).toBe(ariaLabelProps.monthAriaLabel);
+    expect(dateInput.at(0).prop('yearAriaLabel')).toBe(ariaLabelProps.yearAriaLabel);
+    expect(dateInput.at(1).prop('yearAriaLabel')).toBe(ariaLabelProps.yearAriaLabel);
+  });
+
   it('applies className to its wrapper when given a string', () => {
     const className = 'testClassName';
 

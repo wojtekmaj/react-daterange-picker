@@ -25,8 +25,14 @@ export default class Sample extends Component {
         <div className="Sample__container">
           <main className="Sample__container__content">
             <DateRangePicker
+              calendarAriaLabel="Toggle calendar"
+              clearAriaLabel="Clear value"
+              dayAriaLabel="Day"
+              monthAriaLabel="Month"
+              nativeInputAriaLabel="Date"
               onChange={this.onChange}
               value={value}
+              yearAriaLabel="Year"
             />
           </main>
         </div>

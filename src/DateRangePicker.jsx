@@ -125,24 +125,38 @@ export default class DateRangePicker extends PureComponent {
 
   renderInputs() {
     const {
+      calendarAriaLabel,
       calendarIcon,
+      clearAriaLabel,
       clearIcon,
+      dayAriaLabel,
       disabled,
       format,
       locale,
       maxDate,
       maxDetail,
       minDate,
+      monthAriaLabel,
       name,
+      nativeInputAriaLabel,
       required,
       showLeadingZeros,
       value,
+      yearAriaLabel,
     } = this.props;
     const { isOpen } = this.state;
 
     const [valueFrom, valueTo] = [].concat(value);
 
+    const ariaLabelProps = {
+      dayAriaLabel,
+      monthAriaLabel,
+      nativeInputAriaLabel,
+      yearAriaLabel,
+    };
+
     const commonProps = {
+      ...ariaLabelProps,
       className: `${baseClassName}__inputGroup`,
       disabled,
       format,
@@ -176,6 +190,7 @@ export default class DateRangePicker extends PureComponent {
         />
         {clearIcon !== null && (
           <button
+            aria-label={clearAriaLabel}
             className={`${baseClassName}__clear-button ${baseClassName}__button`}
             disabled={disabled}
             onClick={this.clear}
@@ -187,6 +202,7 @@ export default class DateRangePicker extends PureComponent {
         )}
         {calendarIcon !== null && (
           <button
+            aria-label={calendarAriaLabel}
             className={`${baseClassName}__calendar-button ${baseClassName}__button`}
             disabled={disabled}
             onClick={this.toggleCalendar}
@@ -301,6 +317,7 @@ DateRangePicker.defaultProps = {
 
 DateRangePicker.propTypes = {
   ...Calendar.propTypes,
+  calendarAriaLabel: PropTypes.string,
   calendarClassName: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
@@ -310,15 +327,21 @@ DateRangePicker.propTypes = {
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
   ]),
+  clearAriaLabel: PropTypes.string,
   clearIcon: PropTypes.node,
+  dayAriaLabel: PropTypes.string,
   disabled: PropTypes.bool,
   format: PropTypes.string,
   isOpen: PropTypes.bool,
+  monthAriaLabel: PropTypes.string,
   name: PropTypes.string,
+  nativeInputAriaLabel: PropTypes.string,
   onCalendarClose: PropTypes.func,
   onCalendarOpen: PropTypes.func,
   required: PropTypes.bool,
+  returnValue: PropTypes.oneOf(['start', 'end', 'range']),
   showLeadingZeros: PropTypes.bool,
+  yearAriaLabel: PropTypes.string,
 };
 
 polyfill(DateRangePicker);

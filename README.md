@@ -83,10 +83,13 @@ Displays an input field complete with custom inputs, native input, and a calenda
 
 |Prop name|Description|Default value|Example values|
 |----|----|----|----|
+|calendarAriaLabel|`aria-label` for the calendar button.|n/a|`"Toggle calendar"`|
 |calendarClassName|Class name(s) that will be added along with `"react-calendar"` to the main React-Calendar `<div>` element.|n/a|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
 |calendarIcon|Content of the calendar button. Setting the value explicitly to `null` will hide the icon.|(default icon)|<ul><li>String: `"Calendar"`</li><li>React element: `<CalendarIcon />`</li></ul>|
 |className|Class name(s) that will be added along with `"react-daterange-picker"` to the main React-DateRange-Picker `<div>` element.|n/a|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
+|clearAriaLabel|`aria-label` for the clear button.|n/a|`"Clear value"`|
 |clearIcon|Content of the clear button. Setting the value explicitly to `null` will hide the icon.|(default icon)|<ul><li>String: `"Clear"`</li><li>React element: `<ClearIcon />`</li></ul>|
+|dayAriaLabel|`aria-label` for the day input.|n/a|`"Day"`|
 |disabled|Whether the date range picker should be disabled.|`false`|`true`|
 |format|Input format based on [Unicode Technical Standard #35](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table). Supported values are: `y`, `M`, `MM`, `MMM`, `MMMM`, `d`, `dd`.|n/a|`"y-MM-dd"`|
 |isOpen|Whether the calendar should be opened.|`false`|`true`|
@@ -95,13 +98,16 @@ Displays an input field complete with custom inputs, native input, and a calenda
 |maxDetail|The most detailed calendar view that the user shall see. View defined here also becomes the one on which clicking an item in the calendar will select a date and pass it to onChange. Can be `"month"`, `"year"`, `"decade"` or `"century"`.|`"month"`|`"year"`|
 |minDate|Minimum date that the user can select. Periods partially overlapped by minDate will also be selectable, although React-DateRange-Picker will ensure that no earlier date is selected.|n/a|Date: `new Date()`|
 |minDetail|The least detailed calendar view that the user shall see. Can be `"month"`, `"year"`, `"decade"` or `"century"`.|`"century"`|`"decade"`|
+|monthAriaLabel|`aria-label` for the month input.|n/a|`"Month"`|
 |name|Input name prefix. Date from/Date to fields will be named `"yourprefix_from"` and `"yourprefix_to"` respectively.|`"daterange"`|`"myCustomName"`|
+|nativeInputAriaLabel|`aria-label` for the native date input.|n/a|`"Date"`|
 |onCalendarClose|Function called when the calendar closes.|n/a|`() => alert('Calendar closed')`|
 |onCalendarOpen|Function called when the calendar opens.|n/a|`() => alert('Calendar opened')`|
 |onChange|Function called when the user clicks an item on the most detailed view available.|n/a|`(value) => alert('New date is: ', value)`|
 |required|Whether date input should be required.|`false`|`true`|
 |showLeadingZeros|Whether leading zeros should be rendered in date inputs.|`false`|`true`|
 |value|Input value.|n/a|<ul><li>Date: `new Date()`</li><li>An array of dates: `[new Date(2017, 0, 1), new Date(2017, 7, 1)]`</li></ul>|
+|yearAriaLabel|`aria-label` for the year input.|n/a|`"Year"`|
 
 ### Calendar
 
