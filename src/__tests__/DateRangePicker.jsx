@@ -49,6 +49,7 @@ describe('DateRangePicker', () => {
       clearAriaLabel: 'Clear value',
       dayAriaLabel: 'Day',
       monthAriaLabel: 'Month',
+      nativeInputAriaLabel: 'Date',
       yearAriaLabel: 'Year',
     };
 
@@ -63,10 +64,12 @@ describe('DateRangePicker', () => {
     expect(calendarButton.prop('aria-label')).toBe(ariaLabelProps.calendarAriaLabel);
     expect(clearButton.prop('aria-label')).toBe(ariaLabelProps.clearAriaLabel);
     expect(dateInput.at(0).prop('dayAriaLabel')).toBe(ariaLabelProps.dayAriaLabel);
-    expect(dateInput.at(1).prop('dayAriaLabel')).toBe(ariaLabelProps.dayAriaLabel);
     expect(dateInput.at(0).prop('monthAriaLabel')).toBe(ariaLabelProps.monthAriaLabel);
-    expect(dateInput.at(1).prop('monthAriaLabel')).toBe(ariaLabelProps.monthAriaLabel);
+    expect(dateInput.at(0).prop('nativeInputAriaLabel')).toBe(ariaLabelProps.nativeInputAriaLabel);
     expect(dateInput.at(0).prop('yearAriaLabel')).toBe(ariaLabelProps.yearAriaLabel);
+    expect(dateInput.at(1).prop('dayAriaLabel')).toBe(ariaLabelProps.dayAriaLabel);
+    expect(dateInput.at(1).prop('monthAriaLabel')).toBe(ariaLabelProps.monthAriaLabel);
+    expect(dateInput.at(1).prop('nativeInputAriaLabel')).toBe(ariaLabelProps.nativeInputAriaLabel);
     expect(dateInput.at(1).prop('yearAriaLabel')).toBe(ariaLabelProps.yearAriaLabel);
   });
 
