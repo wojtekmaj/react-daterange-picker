@@ -88,7 +88,7 @@ Displays an input field complete with custom inputs, native input, and a calenda
 |className|Class name(s) that will be added along with `"react-daterange-picker"` to the main React-DateRange-Picker `<div>` element.|n/a|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
 |clearIcon|Content of the clear button. Setting the value explicitly to `null` will hide the icon.|(default icon)|<ul><li>String: `"Clear"`</li><li>React element: `<ClearIcon />`</li></ul>|
 |disabled|Whether the date range picker should be disabled.|`false`|`true`|
-|format|Input format based on [Unicode Technical Standard #35](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table). Supported values are: `y`, `M`, `MM`, `d`, `DD`|n/a|`"y-MM-DD"`|
+|format|Input format based on [Unicode Technical Standard #35](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table). Supported values are: `y`, `M`, `MM`, `MMM`, `MMMM`, `d`, `dd`.|n/a|`"y-MM-dd"`|
 |isOpen|Whether the calendar should be opened.|`false`|`true`|
 |locale|Locale that should be used by the date range picker and the calendar. Can be any [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).|User's browser settings|`"hu-HU"`|
 |maxDate|Maximum date that the user can select. Periods partially overlapped by maxDate will also be selectable, although React-DateRange-Picker will ensure that no later date is selected.|n/a|Date: `new Date()`|
