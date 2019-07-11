@@ -132,6 +132,7 @@ export default class DateRangePicker extends PureComponent {
       clearAriaLabel,
       clearIcon,
       dayAriaLabel,
+      disableCalendar,
       disabled,
       format,
       locale,
@@ -202,7 +203,7 @@ export default class DateRangePicker extends PureComponent {
             {clearIcon}
           </button>
         )}
-        {calendarIcon !== null && (
+        {calendarIcon !== null && !disableCalendar && (
           <button
             aria-label={calendarAriaLabel}
             className={`${baseClassName}__calendar-button ${baseClassName}__button`}
@@ -220,9 +221,10 @@ export default class DateRangePicker extends PureComponent {
   }
 
   renderCalendar() {
+    const { disableCalendar } = this.props;
     const { isOpen } = this.state;
 
-    if (isOpen === null) {
+    if (isOpen === null || disableCalendar) {
       return null;
     }
 
@@ -336,6 +338,7 @@ DateRangePicker.propTypes = {
   clearAriaLabel: PropTypes.string,
   clearIcon: PropTypes.node,
   dayAriaLabel: PropTypes.string,
+  disableCalendar: PropTypes.bool,
   disabled: PropTypes.bool,
   format: PropTypes.string,
   isOpen: PropTypes.bool,
