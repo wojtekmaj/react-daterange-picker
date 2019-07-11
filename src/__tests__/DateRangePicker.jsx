@@ -73,6 +73,35 @@ describe('DateRangePicker', () => {
     expect(dateInput.at(1).prop('yearAriaLabel')).toBe(ariaLabelProps.yearAriaLabel);
   });
 
+  describe('passes value to DateInput components', () => {
+    it('passes single value to DateInput components', () => {
+      const value = new Date(2019, 0, 1);
+
+      const component = mount(
+        <DateRangePicker value={value} />
+      );
+
+      const dateInput = component.find('DateInput');
+
+      expect(dateInput.at(0).prop('value')).toBe(value);
+      expect(dateInput.at(1).prop('value')).toBe(undefined);
+    });
+
+    it('passes the first item of an array of values to DateInput components', () => {
+      const value1 = new Date(2019, 0, 1);
+      const value2 = new Date(2019, 6, 1);
+
+      const component = mount(
+        <DateRangePicker value={[value1, value2]} />
+      );
+
+      const dateInput = component.find('DateInput');
+
+      expect(dateInput.at(0).prop('value')).toBe(value1);
+      expect(dateInput.at(1).prop('value')).toBe(value2);
+    });
+  });
+
   it('applies className to its wrapper when given a string', () => {
     const className = 'testClassName';
 
