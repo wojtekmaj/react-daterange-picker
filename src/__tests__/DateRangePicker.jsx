@@ -6,7 +6,7 @@ import DateRangePicker from '../DateRangePicker';
 /* eslint-disable comma-dangle */
 
 describe('DateRangePicker', () => {
-  it('passes default name to DateInput', () => {
+  it('passes default name to DateInput components', () => {
     const component = mount(
       <DateRangePicker />
     );
@@ -17,7 +17,7 @@ describe('DateRangePicker', () => {
     expect(dateInput.at(1).prop('name')).toBe('daterange_to');
   });
 
-  it('passes custom name to DateInput', () => {
+  it('passes custom name to DateInput components', () => {
     const name = 'testName';
 
     const component = mount(
@@ -30,7 +30,7 @@ describe('DateRangePicker', () => {
     expect(dateInput.at(1).prop('name')).toBe(`${name}_to`);
   });
 
-  it('passes format to DateInput', () => {
+  it('passes format to DateInput components', () => {
     const format = 'y-MM-dd';
 
     const component = mount(
@@ -43,7 +43,7 @@ describe('DateRangePicker', () => {
     expect(dateInput.at(1).prop('format')).toBe(format);
   });
 
-  it('passes aria-label props to DateInput', () => {
+  it('passes aria-label props to DateInput components', () => {
     const ariaLabelProps = {
       calendarAriaLabel: 'Toggle calendar',
       clearAriaLabel: 'Clear value',
