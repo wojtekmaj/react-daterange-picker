@@ -4429,10 +4429,10 @@ react-calendar@^2.18.0:
     prop-types "^15.6.0"
     react-lifecycles-compat "^3.0.4"
 
-react-date-picker@^7.6.0:
-  version "7.6.0"
-  resolved "https://registry.yarnpkg.com/react-date-picker/-/react-date-picker-7.6.0.tgz#ad141b6bc8994f905298ff23c549f4d04371be24"
-  integrity sha512-hfKmejfRTtPDs+ra3Kh4aiXAeGd+QhrPEckzFuCovSGIoYsOupAWGhAXsJy9XjWDpI0vuSG2uTpRv5+b4cr8Fw==
+react-date-picker@^7.7.0:
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/react-date-picker/-/react-date-picker-7.7.0.tgz#2649978fdf59f3e71934d612d24d787cd721710b"
+  integrity sha512-I9w3imWFk1WpW63aohnhDxpSXrPETHONgyVDZ26EAlYTOi0Ti8UizFJEKl+hjENzffUEdPfJHZ7zDXFXD6Bpww==
   dependencies:
     get-user-locale "^1.1.1"
     make-event-props "^1.1.0"
