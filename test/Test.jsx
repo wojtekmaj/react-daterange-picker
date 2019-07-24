@@ -24,6 +24,12 @@ const ariaLabelProps = {
   yearAriaLabel: 'Year',
 };
 
+const placeholderProps = {
+  dayPlaceholder: 'dd',
+  monthPlaceholder: 'mm',
+  yearPlaceholder: 'yyyy',
+};
+
 /* eslint-disable no-console */
 
 export default class Test extends Component {
@@ -112,6 +118,7 @@ export default class Test extends Component {
             >
               <DateRangePicker
                 {...ariaLabelProps}
+                {...placeholderProps}
                 className="myCustomDateRangePickerClassName"
                 calendarClassName="myCustomCalendarClassName"
                 disabled={disabled}

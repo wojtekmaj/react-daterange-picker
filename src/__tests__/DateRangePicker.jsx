@@ -73,6 +73,27 @@ describe('DateRangePicker', () => {
     expect(dateInput.at(1).prop('yearAriaLabel')).toBe(ariaLabelProps.yearAriaLabel);
   });
 
+  it('passes placeholder props to DateInput components', () => {
+    const placeholderProps = {
+      dayPlaceholder: 'dd',
+      monthPlaceholder: 'mm',
+      yearPlaceholder: 'yyyy',
+    };
+
+    const component = mount(
+      <DateRangePicker {...placeholderProps} />
+    );
+
+    const dateInput = component.find('DateInput');
+
+    expect(dateInput.at(0).prop('dayPlaceholder')).toBe(placeholderProps.dayPlaceholder);
+    expect(dateInput.at(0).prop('monthPlaceholder')).toBe(placeholderProps.monthPlaceholder);
+    expect(dateInput.at(0).prop('yearPlaceholder')).toBe(placeholderProps.yearPlaceholder);
+    expect(dateInput.at(1).prop('dayPlaceholder')).toBe(placeholderProps.dayPlaceholder);
+    expect(dateInput.at(1).prop('monthPlaceholder')).toBe(placeholderProps.monthPlaceholder);
+    expect(dateInput.at(1).prop('yearPlaceholder')).toBe(placeholderProps.yearPlaceholder);
+  });
+
   describe('passes value to DateInput components', () => {
     it('passes single value to DateInput components', () => {
       const value = new Date(2019, 0, 1);
