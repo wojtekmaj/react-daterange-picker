@@ -92,8 +92,8 @@ export default class Test extends Component {
               setState={setState}
             />
             <LocaleOptions
-              setState={setState}
               locale={locale}
+              setState={setState}
             />
             <ValueOptions
               setState={setState}
@@ -119,8 +119,8 @@ export default class Test extends Component {
               <DateRangePicker
                 {...ariaLabelProps}
                 {...placeholderProps}
-                className="myCustomDateRangePickerClassName"
                 calendarClassName="myCustomCalendarClassName"
+                className="myCustomDateRangePickerClassName"
                 disabled={disabled}
                 locale={locale}
                 maxDate={maxDate}
@@ -128,9 +128,9 @@ export default class Test extends Component {
                 minDate={minDate}
                 minDetail={minDetail}
                 name="myCustomName"
-                onChange={this.onChange}
-                onCalendarOpen={() => console.log('Calendar opened')}
                 onCalendarClose={() => console.log('Calendar closed')}
+                onCalendarOpen={() => console.log('Calendar opened')}
+                onChange={this.onChange}
                 required={required}
                 showLeadingZeros={showLeadingZeros}
                 showNeighboringMonth={showNeighboringMonth}
@@ -140,8 +140,8 @@ export default class Test extends Component {
               <br />
               <br />
               <button
-                type="submit"
                 id="submit"
+                type="submit"
               >
                 Submit
               </button>
