@@ -7,8 +7,11 @@
   },
   "parser": "babel-eslint",
   "rules": {
+    "arrow-parens": ["error", "as-needed", {
+      "requireForBlockBody": true
+    }],
     "jsx-a11y/label-has-associated-control": ["error", { "required": { "some": ["id", "nesting"] }}],
-    "jsx-a11y/label-has-for": ["error", { "required": { "some": ["id", "nesting"] }}],
+    "react/jsx-props-no-spreading": "off",
     "react/jsx-sort-props": ["error", {
       "reservedFirst": ["key"]
     }],
