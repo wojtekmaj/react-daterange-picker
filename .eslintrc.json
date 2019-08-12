@@ -9,8 +9,6 @@
   "rules": {
     "jsx-a11y/label-has-associated-control": ["error", { "required": { "some": ["id", "nesting"] }}],
     "jsx-a11y/label-has-for": ["error", { "required": { "some": ["id", "nesting"] }}],
-    "prefer-destructuring": "warn",
-    "prefer-spread": "warn",
     "react/jsx-sort-props": ["error", {
       "reservedFirst": ["key"]
     }],
