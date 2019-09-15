@@ -30,6 +30,17 @@ describe('DateRangePicker', () => {
     expect(dateInput.at(1).prop('name')).toBe(`${name}_to`);
   });
 
+  it('passes disabled flag to DateInput components', () => {
+    const component = mount(
+      <DateRangePicker disabled />
+    );
+
+    const dateInput = component.find('DateInput');
+
+    expect(dateInput.at(0).prop('disabled')).toBeTruthy();
+    expect(dateInput.at(1).prop('disabled')).toBeTruthy();
+  });
+
   it('passes format to DateInput components', () => {
     const format = 'y-MM-dd';
 
