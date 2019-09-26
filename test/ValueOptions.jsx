@@ -46,12 +46,12 @@ export default function ValueOptions({
 
   function onStartChange(event) {
     const { value: nextValue } = event.target;
-    setStartValue(getBeginOfDay(new Date(nextValue)));
+    setStartValue(nextValue ? getBeginOfDay(new Date(nextValue)) : null);
   }
 
   function onEndChange(event) {
     const { value: nextValue } = event.target;
-    setEndValue(getEndOfDay(new Date(nextValue)));
+    setEndValue(nextValue ? getEndOfDay(new Date(nextValue)) : null);
   }
 
   return (
