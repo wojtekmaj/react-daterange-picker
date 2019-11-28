@@ -30,6 +30,17 @@ describe('DateRangePicker', () => {
     expect(dateInput.at(1).prop('name')).toBe(`${name}_to`);
   });
 
+  it('passes autoFocus flag to first DateInput component', () => {
+    const component = mount(
+      <DateRangePicker autoFocus />
+    );
+
+    const dateInput = component.find('DateInput');
+
+    expect(dateInput.at(0).prop('autoFocus')).toBeTruthy();
+    expect(dateInput.at(1).prop('autoFocus')).toBe(undefined);
+  });
+
   it('passes disabled flag to DateInput components', () => {
     const component = mount(
       <DateRangePicker disabled />
