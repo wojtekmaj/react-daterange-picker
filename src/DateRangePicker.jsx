@@ -127,6 +127,7 @@ export default class DateRangePicker extends PureComponent {
 
   renderInputs() {
     const {
+      autoFocus,
       calendarAriaLabel,
       calendarIcon,
       clearAriaLabel,
@@ -186,6 +187,7 @@ export default class DateRangePicker extends PureComponent {
       <div className={`${baseClassName}__wrapper`}>
         <DateInput
           {...commonProps}
+          autoFocus={autoFocus}
           name={`${name}_from`}
           onChange={this.onChangeFrom}
           returnValue="start"
@@ -335,6 +337,7 @@ const isValue = PropTypes.oneOfType([
 ]);
 
 DateRangePicker.propTypes = {
+  autoFocus: PropTypes.bool,
   calendarAriaLabel: PropTypes.string,
   calendarClassName: PropTypes.oneOfType([
     PropTypes.string,
