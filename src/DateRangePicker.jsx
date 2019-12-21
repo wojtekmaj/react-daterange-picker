@@ -145,6 +145,7 @@ export default class DateRangePicker extends PureComponent {
       monthPlaceholder,
       name,
       nativeInputAriaLabel,
+      rangeDivider,
       required,
       showLeadingZeros,
       value,
@@ -194,7 +195,7 @@ export default class DateRangePicker extends PureComponent {
           value={valueFrom}
         />
         <span className={`${baseClassName}__range-divider`}>
-          –
+          {rangeDivider}
         </span>
         <DateInput
           {...commonProps}
@@ -329,6 +330,7 @@ DateRangePicker.defaultProps = {
   clearIcon: ClearIcon,
   isOpen: null,
   name: 'daterange',
+  rangeDivider: '–',
 };
 
 const isValue = PropTypes.oneOfType([
@@ -368,6 +370,7 @@ DateRangePicker.propTypes = {
   onCalendarOpen: PropTypes.func,
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
+  rangeDivider: PropTypes.node,
   required: PropTypes.bool,
   returnValue: PropTypes.oneOf(['start', 'end', 'range']),
   showLeadingZeros: PropTypes.bool,
