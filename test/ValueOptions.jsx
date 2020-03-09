@@ -1,11 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import {
-  getISOLocalDate,
-  getBeginOfDay,
-  getEndOfDay,
-} from './shared/dates';
+import { getDayStart, getDayEnd, getISOLocalDate } from '@wojtekmaj/date-utils';
 
 export default function ValueOptions({
   setState,
@@ -46,12 +41,12 @@ export default function ValueOptions({
 
   function onStartChange(event) {
     const { value: nextValue } = event.target;
-    setStartValue(getBeginOfDay(new Date(nextValue)));
+    setStartValue(nextValue ? getDayStart(new Date(nextValue)) : null);
   }
 
   function onEndChange(event) {
     const { value: nextValue } = event.target;
-    setEndValue(getEndOfDay(new Date(nextValue)));
+    setEndValue(nextValue ? getDayEnd(new Date(nextValue)) : null);
   }
 
   return (

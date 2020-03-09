@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import DateRangePicker from '../DateRangePicker';
+import DateRangePicker from './DateRangePicker';
 
 /* eslint-disable comma-dangle */
 
@@ -28,6 +28,28 @@ describe('DateRangePicker', () => {
 
     expect(dateInput.at(0).prop('name')).toBe(`${name}_from`);
     expect(dateInput.at(1).prop('name')).toBe(`${name}_to`);
+  });
+
+  it('passes autoFocus flag to first DateInput component', () => {
+    const component = mount(
+      <DateRangePicker autoFocus />
+    );
+
+    const dateInput = component.find('DateInput');
+
+    expect(dateInput.at(0).prop('autoFocus')).toBeTruthy();
+    expect(dateInput.at(1).prop('autoFocus')).toBe(undefined);
+  });
+
+  it('passes disabled flag to DateInput components', () => {
+    const component = mount(
+      <DateRangePicker disabled />
+    );
+
+    const dateInput = component.find('DateInput');
+
+    expect(dateInput.at(0).prop('disabled')).toBeTruthy();
+    expect(dateInput.at(1).prop('disabled')).toBeTruthy();
   });
 
   it('passes format to DateInput components', () => {
@@ -161,7 +183,7 @@ describe('DateRangePicker', () => {
     expect(dateInput).toHaveLength(2);
   });
 
-  it('renders range divider', () => {
+  it('renders range divider with default divider', () => {
     const component = mount(
       <DateRangePicker />
     );
@@ -169,6 +191,18 @@ describe('DateRangePicker', () => {
     const rangeDivider = component.find('.react-daterange-picker__range-divider');
 
     expect(rangeDivider).toHaveLength(1);
+    expect(rangeDivider.text()).toBe('–');
+  });
+
+  it('renders range divider with custom divider', () => {
+    const component = mount(
+      <DateRangePicker rangeDivider="to" />
+    );
+
+    const rangeDivider = component.find('.react-daterange-picker__range-divider');
+
+    expect(rangeDivider).toHaveLength(1);
+    expect(rangeDivider.text()).toBe('to');
   });
 
   it('renders clear button', () => {
