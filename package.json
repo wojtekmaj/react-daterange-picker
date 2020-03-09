@@ -46,8 +46,7 @@
     "prop-types": "^15.6.0",
     "react-calendar": "^2.19.1",
     "react-date-picker": "^7.9.0",
-    "react-fit": "^1.0.3",
-    "react-lifecycles-compat": "^3.0.4"
+    "react-fit": "^1.0.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -73,8 +72,8 @@
     "rimraf": "^3.0.0"
   },
   "peerDependencies": {
-    "react": ">=15.5",
-    "react-dom": ">=15.5"
+    "react": ">=16.3",
+    "react-dom": ">=16.3"
   },
   "files": [
     "LICENSE",
