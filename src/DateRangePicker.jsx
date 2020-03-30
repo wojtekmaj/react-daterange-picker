@@ -67,13 +67,13 @@ export default class DateRangePicker extends PureComponent {
     }
   }
 
-  onChangeFrom = (valueFrom, closeCalendar = true) => {
+  onChangeFrom = (valueFrom, closeCalendar) => {
     const { value } = this.props;
     const [, valueTo] = [].concat(value);
     this.onChange([valueFrom, valueTo], closeCalendar);
   }
 
-  onChangeTo = (valueTo, closeCalendar = true) => {
+  onChangeTo = (valueTo, closeCalendar) => {
     const { value } = this.props;
     const [valueFrom] = [].concat(value);
     this.onChange([valueFrom, valueTo], closeCalendar);
