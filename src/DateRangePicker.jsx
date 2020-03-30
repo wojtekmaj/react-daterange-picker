@@ -56,12 +56,14 @@ export default class DateRangePicker extends PureComponent {
     }
   }
 
-  onChange = (value, closeCalendar = true) => {
-    this.setState({
-      isOpen: !closeCalendar,
-    });
-
+  // eslint-disable-next-line react/destructuring-assignment
+  onChange = (value, closeCalendar = this.props.closeCalendar) => {
     const { onChange } = this.props;
+
+    if (closeCalendar) {
+      this.closeCalendar();
+    }
+
     if (onChange) {
       onChange(value);
     }
@@ -327,6 +329,7 @@ const ClearIcon = (
 DateRangePicker.defaultProps = {
   calendarIcon: CalendarIcon,
   clearIcon: ClearIcon,
+  closeCalendar: true,
   isOpen: null,
   name: 'daterange',
   rangeDivider: '–',
@@ -351,6 +354,7 @@ DateRangePicker.propTypes = {
   ]),
   clearAriaLabel: PropTypes.string,
   clearIcon: PropTypes.node,
+  closeCalendar: PropTypes.bool,
   dayAriaLabel: PropTypes.string,
   dayPlaceholder: PropTypes.string,
   disableCalendar: PropTypes.bool,
