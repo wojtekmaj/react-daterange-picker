@@ -46,26 +46,20 @@ Add React-DateRange-Picker to your project by executing `npm install @wojtekmaj/
 Here's an example of basic usage:
 
 ```js
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 
-class MyApp extends Component {
-  state = {
-    date: [new Date(), new Date()],
-  }
+function MyApp() {
+  const [value, onChange] = useState([new Date(), new Date()]);
 
-  onChange = date => this.setState({ date })
-
-  render() {
-    return (
-      <div>
-        <DateRangePicker
-          onChange={this.onChange}
-          value={this.state.date}
-        />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <DateRangePicker
+        onChange={onChange}
+        value={value}
+      />
+    </div>
+  );
 }
 ```
 
