@@ -358,7 +358,7 @@ describe('DateRangePicker', () => {
       <DateRangePicker isOpen />
     );
 
-    const customInputs = component.find('input[type="number"]');
+    const customInputs = component.find('input[data-input]');
     const dayInput = customInputs.at(0);
     const monthInput = customInputs.at(1);
 
