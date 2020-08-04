@@ -1,4 +1,4 @@
-[![npm](https://img.shields.io/npm/v/@wojtekmaj/react-daterange-picker.svg)](https://www.npmjs.com/package/@wojtekmaj/react-daterange-picker) ![downloads](https://img.shields.io/npm/dt/@wojtekmaj/react-daterange-picker.svg) ![build](https://travis-ci.com/wojtekmaj/react-daterange-picker.svg?branch=master) ![dependencies](https://img.shields.io/david/wojtekmaj/react-daterange-picker.svg
+[![npm](https://img.shields.io/npm/v/@wojtekmaj/react-daterange-picker.svg)](https://www.npmjs.com/package/@wojtekmaj/react-daterange-picker) ![downloads](https://img.shields.io/npm/dt/@wojtekmaj/react-daterange-picker.svg) [![build](https://travis-ci.com/wojtekmaj/react-daterange-picker.svg?branch=master)](https://travis-ci.com/wojtekmaj/react-daterange-picker) ![dependencies](https://img.shields.io/david/wojtekmaj/react-daterange-picker.svg
 ) ![dev dependencies](https://img.shields.io/david/dev/wojtekmaj/react-daterange-picker.svg
 ) [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 
