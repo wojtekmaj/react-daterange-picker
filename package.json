@@ -6,7 +6,7 @@
   "source": "src/entry.js",
   "scripts": {
     "build": "yarn build-js && yarn copy-styles && yarn build-styles",
-    "build-js": "babel src -d dist --ignore **/*.spec.js,**/*.spec.jsx",
+    "build-js": "babel src -d dist --ignore \"**/*.spec.js,**/*.spec.jsx\"",
     "build-styles": "lessc ./dist/DateRangePicker.less ./dist/DateRangePicker.css",
     "clean": "rimraf dist",
     "copy-styles": "node ./copy-styles.js",
