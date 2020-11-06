@@ -12,7 +12,7 @@ export default class Sample extends Component {
     value: [yesterdayBegin, todayEnd],
   }
 
-  onChange = value => this.setState({ value })
+  onChange = (value) => this.setState({ value })
 
   render() {
     const { value } = this.state;
