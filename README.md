@@ -29,7 +29,12 @@ React-DateRange-Picker will play nicely with [React-Date-Picker](https://github.
 
 ### Compatibility
 
-Your project needs to use React 16 or later.
+Your project needs to use React 16.3 or later. If you use an older version of React, please refer to the table below to find a suitable React-DateRange-Picker version.
+
+| React version | Newest compatible React-DateRange-Picker version |
+|-------|--------|
+| ≥16.3 | latest |
+| ≥16.0 | 2.x    |
 
 [React-Calendar](https://github.com/wojtekmaj/react-calendar), on which React-DateRange-Picker relies heavily, uses modern web technologies. That's why it's so fast, lightweight and easy to style. This, however, comes at a cost of [supporting only modern browsers](https://caniuse.com/#feat=internationalization).
 
