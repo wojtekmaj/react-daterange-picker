@@ -3,12 +3,10 @@ import { mount } from 'enzyme';
 
 import DateRangePicker from './DateRangePicker';
 
-/* eslint-disable comma-dangle */
-
 describe('DateRangePicker', () => {
   it('passes default name to DateInput components', () => {
     const component = mount(
-      <DateRangePicker />
+      <DateRangePicker />,
     );
 
     const dateInput = component.find('DateInput');
@@ -21,7 +19,7 @@ describe('DateRangePicker', () => {
     const name = 'testName';
 
     const component = mount(
-      <DateRangePicker name={name} />
+      <DateRangePicker name={name} />,
     );
 
     const dateInput = component.find('DateInput');
@@ -32,7 +30,7 @@ describe('DateRangePicker', () => {
 
   it('passes autoFocus flag to first DateInput component', () => {
     const component = mount(
-      <DateRangePicker autoFocus />
+      <DateRangePicker autoFocus />,
     );
 
     const dateInput = component.find('DateInput');
@@ -43,7 +41,7 @@ describe('DateRangePicker', () => {
 
   it('passes disabled flag to DateInput components', () => {
     const component = mount(
-      <DateRangePicker disabled />
+      <DateRangePicker disabled />,
     );
 
     const dateInput = component.find('DateInput');
@@ -56,7 +54,7 @@ describe('DateRangePicker', () => {
     const format = 'y-MM-dd';
 
     const component = mount(
-      <DateRangePicker format={format} />
+      <DateRangePicker format={format} />,
     );
 
     const dateInput = component.find('DateInput');
@@ -76,7 +74,7 @@ describe('DateRangePicker', () => {
     };
 
     const component = mount(
-      <DateRangePicker {...ariaLabelProps} />
+      <DateRangePicker {...ariaLabelProps} />,
     );
 
     const calendarButton = component.find('button.react-daterange-picker__calendar-button');
@@ -103,7 +101,7 @@ describe('DateRangePicker', () => {
     };
 
     const component = mount(
-      <DateRangePicker {...placeholderProps} />
+      <DateRangePicker {...placeholderProps} />,
     );
 
     const dateInput = component.find('DateInput');
@@ -121,7 +119,7 @@ describe('DateRangePicker', () => {
       const value = new Date(2019, 0, 1);
 
       const component = mount(
-        <DateRangePicker value={value} />
+        <DateRangePicker value={value} />,
       );
 
       const dateInput = component.find('DateInput');
@@ -135,7 +133,7 @@ describe('DateRangePicker', () => {
       const value2 = new Date(2019, 6, 1);
 
       const component = mount(
-        <DateRangePicker value={[value1, value2]} />
+        <DateRangePicker value={[value1, value2]} />,
       );
 
       const dateInput = component.find('DateInput');
@@ -149,7 +147,7 @@ describe('DateRangePicker', () => {
     const className = 'testClassName';
 
     const component = mount(
-      <DateRangePicker className={className} />
+      <DateRangePicker className={className} />,
     );
 
     const wrapperClassName = component.prop('className');
@@ -164,7 +162,7 @@ describe('DateRangePicker', () => {
       <DateRangePicker
         calendarClassName={calendarClassName}
         isOpen
-      />
+      />,
     );
 
     const calendar = component.find('Calendar');
@@ -175,7 +173,7 @@ describe('DateRangePicker', () => {
 
   it('renders DateInput components', () => {
     const component = mount(
-      <DateRangePicker />
+      <DateRangePicker />,
     );
 
     const dateInput = component.find('DateInput');
@@ -185,7 +183,7 @@ describe('DateRangePicker', () => {
 
   it('renders range divider with default divider', () => {
     const component = mount(
-      <DateRangePicker />
+      <DateRangePicker />,
     );
 
     const rangeDivider = component.find('.react-daterange-picker__range-divider');
@@ -196,7 +194,7 @@ describe('DateRangePicker', () => {
 
   it('renders range divider with custom divider', () => {
     const component = mount(
-      <DateRangePicker rangeDivider="to" />
+      <DateRangePicker rangeDivider="to" />,
     );
 
     const rangeDivider = component.find('.react-daterange-picker__range-divider');
@@ -207,7 +205,7 @@ describe('DateRangePicker', () => {
 
   it('renders clear button', () => {
     const component = mount(
-      <DateRangePicker />
+      <DateRangePicker />,
     );
 
     const clearButton = component.find('button.react-daterange-picker__clear-button');
@@ -217,7 +215,7 @@ describe('DateRangePicker', () => {
 
   it('renders calendar button', () => {
     const component = mount(
-      <DateRangePicker />
+      <DateRangePicker />,
     );
 
     const calendarButton = component.find('button.react-daterange-picker__calendar-button');
@@ -227,7 +225,7 @@ describe('DateRangePicker', () => {
 
   it('renders DateInput and Calendar components when given isOpen flag', () => {
     const component = mount(
-      <DateRangePicker isOpen />
+      <DateRangePicker isOpen />,
     );
 
     const dateInput = component.find('DateInput');
@@ -239,7 +237,7 @@ describe('DateRangePicker', () => {
 
   it('does not render Calendar component when given disableCalendar & isOpen flags', () => {
     const component = mount(
-      <DateRangePicker disableCalendar isOpen />
+      <DateRangePicker disableCalendar isOpen />,
     );
 
     const dateInput = component.find('DateInput');
@@ -251,7 +249,7 @@ describe('DateRangePicker', () => {
 
   it('opens Calendar component when given isOpen flag by changing props', () => {
     const component = mount(
-      <DateRangePicker />
+      <DateRangePicker />,
     );
 
     const calendar = component.find('Calendar');
@@ -268,7 +266,7 @@ describe('DateRangePicker', () => {
 
   it('opens Calendar component when clicking on a button', () => {
     const component = mount(
-      <DateRangePicker />
+      <DateRangePicker />,
     );
 
     const calendar = component.find('Calendar');
@@ -286,7 +284,7 @@ describe('DateRangePicker', () => {
 
   it('opens Calendar component when focusing on an input inside', () => {
     const component = mount(
-      <DateRangePicker />
+      <DateRangePicker />,
     );
 
     const calendar = component.find('Calendar');
@@ -308,7 +306,7 @@ describe('DateRangePicker', () => {
 
     const component = mount(
       <DateRangePicker isOpen />,
-      { attachTo: root }
+      { attachTo: root },
     );
 
     const event = document.createEvent('MouseEvent');
@@ -325,7 +323,7 @@ describe('DateRangePicker', () => {
 
     const component = mount(
       <DateRangePicker isOpen />,
-      { attachTo: root }
+      { attachTo: root },
     );
 
     const event = document.createEvent('FocusEvent');
@@ -342,7 +340,7 @@ describe('DateRangePicker', () => {
 
     const component = mount(
       <DateRangePicker isOpen />,
-      { attachTo: root }
+      { attachTo: root },
     );
 
     const event = document.createEvent('TouchEvent');
@@ -355,7 +353,7 @@ describe('DateRangePicker', () => {
 
   it('does not close Calendar component when focused inside', () => {
     const component = mount(
-      <DateRangePicker isOpen />
+      <DateRangePicker isOpen />,
     );
 
     const customInputs = component.find('input[type="number"]');
@@ -371,7 +369,7 @@ describe('DateRangePicker', () => {
 
   it('closes Calendar when calling internal onChange by default', () => {
     const component = mount(
-      <DateRangePicker isOpen />
+      <DateRangePicker isOpen />,
     );
 
     const { onChange } = component.instance();
@@ -386,7 +384,7 @@ describe('DateRangePicker', () => {
       <DateRangePicker
         closeCalendar={false}
         isOpen
-      />
+      />,
     );
 
     const { onChange } = component.instance();
@@ -398,7 +396,7 @@ describe('DateRangePicker', () => {
 
   it('does not close Calendar when calling internal onChange with closeCalendar = false', () => {
     const component = mount(
-      <DateRangePicker isOpen />
+      <DateRangePicker isOpen />,
     );
 
     const { onChange } = component.instance();
@@ -413,7 +411,7 @@ describe('DateRangePicker', () => {
     const onChange = jest.fn();
 
     const component = mount(
-      <DateRangePicker onChange={onChange} />
+      <DateRangePicker onChange={onChange} />,
     );
 
     const { onChange: onChangeInternal } = component.instance();
@@ -427,7 +425,7 @@ describe('DateRangePicker', () => {
     const onChange = jest.fn();
 
     const component = mount(
-      <DateRangePicker onChange={onChange} />
+      <DateRangePicker onChange={onChange} />,
     );
 
     const calendar = component.find('Calendar');
@@ -444,7 +442,7 @@ describe('DateRangePicker', () => {
   describe('onChangeFrom', () => {
     it('calls onChange properly given no initial value', () => {
       const component = mount(
-        <DateRangePicker />
+        <DateRangePicker />,
       );
 
       const componentInstance = component.instance();
@@ -462,7 +460,7 @@ describe('DateRangePicker', () => {
       const value = new Date(2018, 0, 1);
 
       const component = mount(
-        <DateRangePicker value={value} />
+        <DateRangePicker value={value} />,
       );
 
       const componentInstance = component.instance();
@@ -482,7 +480,7 @@ describe('DateRangePicker', () => {
       const value = [valueFrom, valueTo];
 
       const component = mount(
-        <DateRangePicker value={value} />
+        <DateRangePicker value={value} />,
       );
 
       const componentInstance = component.instance();
@@ -500,7 +498,7 @@ describe('DateRangePicker', () => {
   describe('onChangeTo', () => {
     it('calls onChange properly given no initial value', () => {
       const component = mount(
-        <DateRangePicker />
+        <DateRangePicker />,
       );
 
       const componentInstance = component.instance();
@@ -518,7 +516,7 @@ describe('DateRangePicker', () => {
       const value = new Date(2018, 0, 1);
 
       const component = mount(
-        <DateRangePicker value={value} />
+        <DateRangePicker value={value} />,
       );
 
       const componentInstance = component.instance();
@@ -538,7 +536,7 @@ describe('DateRangePicker', () => {
       const value = [valueFrom, valueTo];
 
       const component = mount(
-        <DateRangePicker value={value} />
+        <DateRangePicker value={value} />,
       );
 
       const componentInstance = component.instance();
