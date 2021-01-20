@@ -3,15 +3,11 @@ import PropTypes from 'prop-types';
 import { getDayStart, getDayEnd, getISOLocalDate } from '@wojtekmaj/date-utils';
 
 export default function ValueOptions({
-  setState,
+  setValue,
   value,
 }) {
   const startDate = [].concat(value)[0];
   const endDate = [].concat(value)[1];
-
-  function setValue(nextValue) {
-    setState({ value: nextValue });
-  }
 
   function setStartValue(startValue) {
     if (!startValue) {
@@ -109,7 +105,7 @@ export default function ValueOptions({
 }
 
 ValueOptions.propTypes = {
-  setState: PropTypes.func.isRequired,
+  setValue: PropTypes.func.isRequired,
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.instanceOf(Date),
