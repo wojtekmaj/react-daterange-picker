@@ -1781,7 +1781,7 @@ __metadata:
     prop-types: ^15.6.0
     react: ^17.0.0
     react-calendar: ^3.3.1
-    react-date-picker: ^8.0.7
+    react-date-picker: ^8.1.0
     react-dom: ^17.0.0
     react-fit: ^1.0.3
     rimraf: ^3.0.0
@@ -6730,9 +6730,9 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"react-date-picker@npm:^8.0.7":
-  version: 8.0.7
-  resolution: "react-date-picker@npm:8.0.7"
+"react-date-picker@npm:^8.1.0":
+  version: 8.1.0
+  resolution: "react-date-picker@npm:8.1.0"
   dependencies:
     "@types/react-calendar": ^3.0.0
     "@wojtekmaj/date-utils": ^1.0.3
@@ -6746,7 +6746,7 @@ fsevents@^2.1.2:
   peerDependencies:
     react: ^16.3.0 || ^17.0.0-0
     react-dom: ^16.3.0 || ^17.0.0-0
-  checksum: 9b6aec0ba9016db5c42a8a537efd4e4761014674b4ff653e19a9c41f318d1eaa45d5caeb20d8d84ea076c994b84c6f10180c6686e96fb189224b5acb6fd360c0
+  checksum: b871f9ede4ebbdcf665824ed8fb9d85e14f72a40006913a2d17db9e06cbc1527363cfb7f837410764f225f5ffec89ed4b4e367446adee5ae6aba44276df25f1f
   languageName: node
   linkType: hard
 
