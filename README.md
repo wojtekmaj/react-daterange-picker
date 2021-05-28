@@ -110,6 +110,7 @@ Displays an input field complete with custom inputs, native input, and a calenda
 |onCalendarClose|Function called when the calendar closes.|n/a|`() => alert('Calendar closed')`|
 |onCalendarOpen|Function called when the calendar opens.|n/a|`() => alert('Calendar opened')`|
 |onChange|Function called when the user clicks an item on the most detailed view available.|n/a|`(value) => alert('New date is: ', value)`|
+|openCalendarOnFocus|Whether to open the calendar on input focus.|`true`|`false`|
 |rangeDivider|Divider between date inputs.|`"–"`|`" to "`|
 |required|Whether date input should be required.|`false`|`true`|
 |showLeadingZeros|Whether leading zeros should be rendered in date inputs.|`false`|`true`|
