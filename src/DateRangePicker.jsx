@@ -82,7 +82,7 @@ export default class DateRangePicker extends PureComponent {
   }
 
   onFocus = (event) => {
-    const { disabled, onFocus } = this.props;
+    const { disabled, onFocus, openCalendarOnFocus } = this.props;
 
     if (onFocus) {
       onFocus(event);
@@ -93,7 +93,9 @@ export default class DateRangePicker extends PureComponent {
       return;
     }
 
-    this.openCalendar();
+    if (openCalendarOnFocus) {
+      this.openCalendar();
+    }
   }
 
   openCalendar = () => {
@@ -332,6 +334,7 @@ DateRangePicker.defaultProps = {
   closeCalendar: true,
   isOpen: null,
   name: 'daterange',
+  openCalendarOnFocus: true,
   rangeDivider: '–',
 };
 
@@ -373,6 +376,7 @@ DateRangePicker.propTypes = {
   onCalendarOpen: PropTypes.func,
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
+  openCalendarOnFocus: PropTypes.bool,
   rangeDivider: PropTypes.node,
   required: PropTypes.bool,
   returnValue: PropTypes.oneOf(['start', 'end', 'range']),
