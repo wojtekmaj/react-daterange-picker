@@ -96,6 +96,10 @@ export default class DateRangePicker extends PureComponent {
     }
 
     if (openCalendarOnFocus) {
+      if (event.target.getAttribute('data-select') === 'true') {
+        return;
+      }
+
       this.openCalendar();
     }
   }
