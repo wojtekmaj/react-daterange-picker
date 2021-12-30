@@ -59,15 +59,15 @@ export default class DateRangePicker extends PureComponent {
   }
 
   // eslint-disable-next-line react/destructuring-assignment
-  onChange = (value, closeCalendar = this.props.closeCalendar) => {
-    const { onChange } = this.props;
+  onChange = (value, event) => {
+    const { onChange, closeCalendar } = this.props;
 
     if (closeCalendar) {
       this.closeCalendar();
     }
 
     if (onChange) {
-      onChange(value);
+      onChange(value, event);
     }
   }
 
