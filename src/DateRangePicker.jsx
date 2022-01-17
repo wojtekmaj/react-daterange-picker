@@ -269,7 +269,14 @@ export default class DateRangePicker extends PureComponent {
 
     return (
       <Fit>
-        <div className={mergeClassNames(className, `${className}--${isOpen ? 'open' : 'closed'}`)}>
+        <div
+          ref={(ref) => {
+            if (ref && !isOpen) {
+              ref.removeAttribute('style');
+            }
+          }}
+          className={mergeClassNames(className, `${className}--${isOpen ? 'open' : 'closed'}`)}
+        >
           <Calendar
             className={calendarClassName}
             onChange={this.onChange}
