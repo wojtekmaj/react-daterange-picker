@@ -56,9 +56,8 @@ export default class DateRangePicker extends PureComponent {
     if (this.wrapper && !this.wrapper.contains(target)) {
       this.closeCalendar();
     }
-  }
+  };
 
-  // eslint-disable-next-line react/destructuring-assignment
   onChange = (value, closeCalendar = this.props.closeCalendar) => {
     const { onChange } = this.props;
 
@@ -69,19 +68,19 @@ export default class DateRangePicker extends PureComponent {
     if (onChange) {
       onChange(value);
     }
-  }
+  };
 
   onChangeFrom = (valueFrom, closeCalendar) => {
     const { value } = this.props;
     const [, valueTo] = [].concat(value);
     this.onChange([valueFrom, valueTo], closeCalendar);
-  }
+  };
 
   onChangeTo = (valueTo, closeCalendar) => {
     const { value } = this.props;
     const [valueFrom] = [].concat(value);
     this.onChange([valueFrom, valueTo], closeCalendar);
-  }
+  };
 
   onFocus = (event) => {
     const { disabled, onFocus, openCalendarOnFocus } = this.props;
@@ -102,17 +101,17 @@ export default class DateRangePicker extends PureComponent {
 
       this.openCalendar();
     }
-  }
+  };
 
   onKeyDown = (event) => {
     if (event.key === 'Escape') {
       this.closeCalendar();
     }
-  }
+  };
 
   openCalendar = () => {
     this.setState({ isOpen: true });
-  }
+  };
 
   closeCalendar = () => {
     this.setState((prevState) => {
@@ -122,11 +121,11 @@ export default class DateRangePicker extends PureComponent {
 
       return { isOpen: false };
     });
-  }
+  };
 
   toggleCalendar = () => {
     this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
-  }
+  };
 
   stopPropagation = (event) => event.stopPropagation();
 
@@ -204,15 +203,14 @@ export default class DateRangePicker extends PureComponent {
       <div className={`${baseClassName}__wrapper`}>
         <DateInput
           {...commonProps}
+          // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus={autoFocus}
           name={`${name}_from`}
           onChange={this.onChangeFrom}
           returnValue="start"
           value={valueFrom}
         />
-        <span className={`${baseClassName}__range-divider`}>
-          {rangeDivider}
-        </span>
+        <span className={`${baseClassName}__range-divider`}>{rangeDivider}</span>
         <DateInput
           {...commonProps}
           name={`${name}_to`}
@@ -361,23 +359,14 @@ DateRangePicker.defaultProps = {
   rangeDivider: '–',
 };
 
-const isValue = PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.instanceOf(Date),
-]);
+const isValue = PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]);
 
 DateRangePicker.propTypes = {
   autoFocus: PropTypes.bool,
   calendarAriaLabel: PropTypes.string,
-  calendarClassName: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-  ]),
+  calendarClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   calendarIcon: PropTypes.node,
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   clearAriaLabel: PropTypes.string,
   clearIcon: PropTypes.node,
   closeCalendar: PropTypes.bool,
@@ -404,10 +393,7 @@ DateRangePicker.propTypes = {
   required: PropTypes.bool,
   returnValue: PropTypes.oneOf(['start', 'end', 'range']),
   showLeadingZeros: PropTypes.bool,
-  value: PropTypes.oneOfType([
-    isValue,
-    PropTypes.arrayOf(isValue),
-  ]),
+  value: PropTypes.oneOfType([isValue, PropTypes.arrayOf(isValue)]),
   yearAriaLabel: PropTypes.string,
   yearPlaceholder: PropTypes.string,
 };

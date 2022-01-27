@@ -2,10 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getDayStart, getDayEnd, getISOLocalDate } from '@wojtekmaj/date-utils';
 
-export default function ValueOptions({
-  setValue,
-  value,
-}) {
+export default function ValueOptions({ setValue, value }) {
   const startDate = [].concat(value)[0];
   const endDate = [].concat(value)[1];
 
@@ -47,14 +44,10 @@ export default function ValueOptions({
 
   return (
     <fieldset id="valueOptions">
-      <legend htmlFor="valueOptions">
-        Value options
-      </legend>
+      <legend htmlFor="valueOptions">Value options</legend>
 
       <div>
-        <label htmlFor="startDate">
-          Start date
-        </label>
+        <label htmlFor="startDate">Start date</label>
         <input
           id="startDate"
           onChange={onStartChange}
@@ -62,24 +55,16 @@ export default function ValueOptions({
           value={startDate ? getISOLocalDate(startDate) : ''}
         />
         &nbsp;
-        <button
-          onClick={() => setStartValue(null)}
-          type="button"
-        >
+        <button onClick={() => setStartValue(null)} type="button">
           Clear to null
         </button>
-        <button
-          onClick={() => setStartValue('')}
-          type="button"
-        >
+        <button onClick={() => setStartValue('')} type="button">
           Clear to empty string
         </button>
       </div>
 
       <div>
-        <label htmlFor="endDate">
-          End date
-        </label>
+        <label htmlFor="endDate">End date</label>
         <input
           id="endDate"
           onChange={onEndChange}
@@ -87,16 +72,10 @@ export default function ValueOptions({
           value={endDate ? getISOLocalDate(endDate) : ''}
         />
         &nbsp;
-        <button
-          onClick={() => setEndValue(null)}
-          type="button"
-        >
+        <button onClick={() => setEndValue(null)} type="button">
           Clear to null
         </button>
-        <button
-          onClick={() => setEndValue('')}
-          type="button"
-        >
+        <button onClick={() => setEndValue('')} type="button">
           Clear to empty string
         </button>
       </div>
@@ -109,9 +88,6 @@ ValueOptions.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.instanceOf(Date),
-    PropTypes.arrayOf(PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.instanceOf(Date),
-    ])),
+    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])),
   ]),
 };

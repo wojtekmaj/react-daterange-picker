@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker/src/entry.nostyle';
 import '@wojtekmaj/react-daterange-picker/src/DateRangePicker.less';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import 'react-calendar/src/Calendar.less';
 
 import ValidityOptions from './ValidityOptions';
 import MaxDetailOptions from './MaxDetailOptions';
@@ -51,9 +49,7 @@ export default function Test() {
   return (
     <div className="Test">
       <header>
-        <h1>
-          react-daterange-picker test page
-        </h1>
+        <h1>react-daterange-picker test page</h1>
       </header>
       <div className="Test__container">
         <aside className="Test__container__options">
@@ -75,14 +71,8 @@ export default function Test() {
             setMinDate={setMinDate}
             setRequired={setRequired}
           />
-          <LocaleOptions
-            locale={locale}
-            setLocale={setLocale}
-          />
-          <ValueOptions
-            setValue={setValue}
-            value={value}
-          />
+          <LocaleOptions locale={locale} setLocale={setLocale} />
+          <ValueOptions setValue={setValue} value={value} />
           <ViewOptions
             disabled={disabled}
             setDisabled={setDisabled}
@@ -126,10 +116,7 @@ export default function Test() {
             />
             <br />
             <br />
-            <button
-              id="submit"
-              type="submit"
-            >
+            <button id="submit" type="submit">
               Submit
             </button>
           </form>
