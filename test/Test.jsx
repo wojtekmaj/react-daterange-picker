@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker/src/entry.nostyle';
 import '@wojtekmaj/react-daterange-picker/src/DateRangePicker.less';
 
@@ -34,12 +34,14 @@ const nineteenNinetyFive = new Date(1995, now.getUTCMonth() + 1, 15, 12);
 const fifteenthOfNextMonth = new Date(now.getUTCFullYear(), now.getUTCMonth() + 1, 15, 12);
 
 export default function Test() {
+  const portalContainer = useRef();
   const [disabled, setDisabled] = useState(false);
   const [locale, setLocale] = useState(null);
   const [maxDate, setMaxDate] = useState(fifteenthOfNextMonth);
   const [maxDetail, setMaxDetail] = useState('month');
   const [minDate, setMinDate] = useState(nineteenNinetyFive);
   const [minDetail, setMinDetail] = useState('century');
+  const [renderInPortal, setRenderInPortal] = useState(false);
   const [required, setRequired] = useState(true);
   const [showLeadingZeros, setShowLeadingZeros] = useState(true);
   const [showNeighboringMonth, setShowNeighboringMonth] = useState(false);
@@ -75,7 +77,9 @@ export default function Test() {
           <ValueOptions setValue={setValue} value={value} />
           <ViewOptions
             disabled={disabled}
+            renderInPortal={renderInPortal}
             setDisabled={setDisabled}
+            setRenderInPortal={setRenderInPortal}
             setShowLeadingZeros={setShowLeadingZeros}
             setShowNeighboringMonth={setShowNeighboringMonth}
             setShowWeekNumbers={setShowWeekNumbers}
@@ -108,12 +112,14 @@ export default function Test() {
               onCalendarClose={() => console.log('Calendar closed')}
               onCalendarOpen={() => console.log('Calendar opened')}
               onChange={setValue}
+              portalContainer={renderInPortal ? portalContainer.current : undefined}
               required={required}
               showLeadingZeros={showLeadingZeros}
               showNeighboringMonth={showNeighboringMonth}
               showWeekNumbers={showWeekNumbers}
               value={value}
             />
+            <div ref={portalContainer} />
             <br />
             <br />
             <button id="submit" type="submit">

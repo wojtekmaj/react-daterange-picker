@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import makeEventProps from 'make-event-props';
 import mergeClassNames from 'merge-class-names';
@@ -259,13 +260,27 @@ export default class DateRangePicker extends PureComponent {
       calendarClassName,
       className: datePickerClassName, // Unused, here to exclude it from calendarProps
       onChange,
+      portalContainer,
       value,
       ...calendarProps
     } = this.props;
 
     const className = `${baseClassName}__calendar`;
+    const classNames = mergeClassNames(className, `${className}--${isOpen ? 'open' : 'closed'}`);
 
-    return (
+    const calendar = (
+      <Calendar
+        className={calendarClassName}
+        onChange={(value) => this.onChange(value)}
+        selectRange
+        value={value || null}
+        {...calendarProps}
+      />
+    );
+
+    return portalContainer ? (
+      createPortal(<div className={classNames}>{calendar}</div>, portalContainer)
+    ) : (
       <Fit>
         <div
           ref={(ref) => {
@@ -273,15 +288,9 @@ export default class DateRangePicker extends PureComponent {
               ref.removeAttribute('style');
             }
           }}
-          className={mergeClassNames(className, `${className}--${isOpen ? 'open' : 'closed'}`)}
+          className={classNames}
         >
-          <Calendar
-            className={calendarClassName}
-            onChange={(value) => this.onChange(value)}
-            selectRange
-            value={value || null}
-            {...calendarProps}
-          />
+          {calendar}
         </div>
       </Fit>
     );
@@ -389,6 +398,7 @@ DateRangePicker.propTypes = {
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
   openCalendarOnFocus: PropTypes.bool,
+  portalContainer: PropTypes.object,
   rangeDivider: PropTypes.node,
   required: PropTypes.bool,
   returnValue: PropTypes.oneOf(['start', 'end', 'range']),
