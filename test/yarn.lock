@@ -1868,8 +1868,8 @@ __metadata:
     react-date-picker: ^8.4.0
     react-fit: ^1.4.0
   peerDependencies:
-    react: ^16.3.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.3.0 || ^17.0.0 || ^18.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
   languageName: node
   linkType: soft
 
