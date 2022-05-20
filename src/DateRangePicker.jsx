@@ -107,7 +107,7 @@ export default class DateRangePicker extends PureComponent {
     }
 
     if (openCalendarOnFocus) {
-      if (event.target.getAttribute('data-select') === 'true') {
+      if (event.target.dataset.select === 'true') {
         return;
       }
 
