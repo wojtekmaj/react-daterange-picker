@@ -411,7 +411,6 @@ DateRangePicker.propTypes = {
   portalContainer: PropTypes.object,
   rangeDivider: PropTypes.node,
   required: PropTypes.bool,
-  returnValue: PropTypes.oneOf(['start', 'end', 'range']),
   showLeadingZeros: PropTypes.bool,
   value: PropTypes.oneOfType([isValue, PropTypes.arrayOf(isValue)]),
   yearAriaLabel: PropTypes.string,
