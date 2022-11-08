@@ -1,5 +1,5 @@
 import React, { createRef } from 'react';
-import { fireEvent, render, waitForElementToBeRemoved } from '@testing-library/react';
+import { act, fireEvent, render, waitForElementToBeRemoved } from '@testing-library/react';
 
 import DateRangePicker from './DateRangePicker';
 
@@ -386,9 +386,11 @@ describe('DateRangePicker', () => {
 
     const { container } = render(<DateRangePicker isOpen ref={instance} />);
 
-    const { onChange } = instance.current;
+    const { onChange: onChangeInternal } = instance.current;
 
-    onChange(new Date());
+    act(() => {
+      onChangeInternal(new Date());
+    });
 
     waitForElementToBeRemoved(() => container.querySelector('.react-calendar'));
   });
@@ -398,9 +400,11 @@ describe('DateRangePicker', () => {
 
     const { container } = render(<DateRangePicker closeCalendar={false} isOpen ref={instance} />);
 
-    const { onChange } = instance.current;
+    const { onChange: onChangeInternal } = instance.current;
 
-    onChange(new Date());
+    act(() => {
+      onChangeInternal(new Date());
+    });
 
     const calendar = container.querySelector('.react-calendar');
 
@@ -412,9 +416,11 @@ describe('DateRangePicker', () => {
 
     const { container } = render(<DateRangePicker isOpen ref={instance} />);
 
-    const { onChange } = instance.current;
+    const { onChange: onChangeInternal } = instance.current;
 
-    onChange(new Date(), false);
+    act(() => {
+      onChangeInternal(new Date(), false);
+    });
 
     const calendar = container.querySelector('.react-calendar');
 
@@ -430,7 +436,9 @@ describe('DateRangePicker', () => {
 
     const { onChange: onChangeInternal } = instance.current;
 
-    onChangeInternal(nextValue);
+    act(() => {
+      onChangeInternal(nextValue);
+    });
 
     expect(onChange).toHaveBeenCalledWith(nextValue);
   });
@@ -457,11 +465,15 @@ describe('DateRangePicker', () => {
       render(<DateRangePicker ref={instance} />);
 
       const componentInstance = instance.current;
+      const { onChangeFrom: onChangeFromInternal } = componentInstance;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
       const nextValueFrom = new Date();
-      componentInstance.onChangeFrom(nextValueFrom);
+
+      act(() => {
+        onChangeFromInternal(nextValueFrom);
+      });
 
       expect(onChangeSpy).toHaveBeenCalled();
       expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], undefined);
@@ -474,11 +486,15 @@ describe('DateRangePicker', () => {
       render(<DateRangePicker value={value} ref={instance} />);
 
       const componentInstance = instance.current;
+      const { onChangeFrom: onChangeFromInternal } = componentInstance;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
       const nextValueFrom = new Date();
-      componentInstance.onChangeFrom(nextValueFrom);
+
+      act(() => {
+        onChangeFromInternal(nextValueFrom);
+      });
 
       expect(onChangeSpy).toHaveBeenCalled();
       expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], undefined);
@@ -493,11 +509,15 @@ describe('DateRangePicker', () => {
       render(<DateRangePicker value={value} ref={instance} />);
 
       const componentInstance = instance.current;
+      const { onChangeFrom: onChangeFromInternal } = componentInstance;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
       const nextValueFrom = new Date();
-      componentInstance.onChangeFrom(nextValueFrom);
+
+      act(() => {
+        onChangeFromInternal(nextValueFrom);
+      });
 
       expect(onChangeSpy).toHaveBeenCalled();
       expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, valueTo], undefined);
@@ -511,11 +531,15 @@ describe('DateRangePicker', () => {
       render(<DateRangePicker ref={instance} />);
 
       const componentInstance = instance.current;
+      const { onChangeTo: onChangeToInternal } = componentInstance;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
       const nextValueTo = new Date();
-      componentInstance.onChangeTo(nextValueTo);
+
+      act(() => {
+        onChangeToInternal(nextValueTo);
+      });
 
       expect(onChangeSpy).toHaveBeenCalled();
       expect(onChangeSpy).toHaveBeenCalledWith([undefined, nextValueTo], undefined);
@@ -528,11 +552,15 @@ describe('DateRangePicker', () => {
       render(<DateRangePicker value={value} ref={instance} />);
 
       const componentInstance = instance.current;
+      const { onChangeTo: onChangeToInternal } = componentInstance;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
       const nextValueTo = new Date();
-      componentInstance.onChangeTo(nextValueTo);
+
+      act(() => {
+        onChangeToInternal(nextValueTo);
+      });
 
       expect(onChangeSpy).toHaveBeenCalled();
       expect(onChangeSpy).toHaveBeenCalledWith([value, nextValueTo], undefined);
@@ -547,11 +575,15 @@ describe('DateRangePicker', () => {
       render(<DateRangePicker value={value} ref={instance} />);
 
       const componentInstance = instance.current;
+      const { onChangeTo: onChangeToInternal } = componentInstance;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
       const nextValueTo = new Date();
-      componentInstance.onChangeTo(nextValueTo);
+
+      act(() => {
+        onChangeToInternal(nextValueTo);
+      });
 
       expect(onChangeSpy).toHaveBeenCalled();
       expect(onChangeSpy).toHaveBeenCalledWith([valueFrom, nextValueTo], undefined);
