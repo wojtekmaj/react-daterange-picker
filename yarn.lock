@@ -2125,6 +2125,7 @@ __metadata:
     "@babel/preset-react": ^7.14.0
     "@testing-library/jest-dom": ^5.15.0
     "@testing-library/react": ^13.4.0
+    clsx: ^1.2.1
     eslint: ^8.26.0
     eslint-config-wojtekmaj: ^0.7.1
     husky: ^8.0.0
@@ -2132,7 +2133,6 @@ __metadata:
     jest-environment-jsdom: ^29.0.0
     less: ^4.0.0
     make-event-props: ^1.1.0
-    merge-class-names: ^1.1.1
     prettier: ^2.7.0
     pretty-quick: ^3.1.0
     prop-types: ^15.6.0
@@ -2767,6 +2767,13 @@ __metadata:
     strip-ansi: ^6.0.1
     wrap-ansi: ^7.0.0
   checksum: 79648b3b0045f2e285b76fb2e24e207c6db44323581e421c3acbd0e86454cba1b37aea976ab50195a49e7384b871e6dfb2247ad7dec53c02454ac6497394cb56
+  languageName: node
+  linkType: hard
+
+"clsx@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "clsx@npm:1.2.1"
+  checksum: 30befca8019b2eb7dbad38cff6266cf543091dae2825c856a62a8ccf2c3ab9c2907c4d12b288b73101196767f66812365400a227581484a05f968b0307cfaf12
   languageName: node
   linkType: hard
 

@@ -32,8 +32,8 @@
   },
   "license": "MIT",
   "dependencies": {
+    "clsx": "^1.2.1",
     "make-event-props": "^1.1.0",
-    "merge-class-names": "^1.1.1",
     "prop-types": "^15.6.0",
     "react-calendar": "^3.7.0",
     "react-date-picker": "^9.0.0",
