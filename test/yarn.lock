@@ -1964,8 +1964,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@wojtekmaj/react-daterange-picker@portal:../::locator=react-daterange-picker-test-page%40workspace%3A."
   dependencies:
+    clsx: ^1.2.1
     make-event-props: ^1.1.0
-    merge-class-names: ^1.1.1
     prop-types: ^15.6.0
     react-calendar: ^3.7.0
     react-date-picker: ^9.0.0
@@ -2521,6 +2521,13 @@ __metadata:
     kind-of: ^6.0.2
     shallow-clone: ^3.0.0
   checksum: 770f912fe4e6f21873c8e8fbb1e99134db3b93da32df271d00589ea4a29dbe83a9808a322c93f3bcaf8584b8b4fa6fc269fc8032efbaa6728e0c9886c74467d2
+  languageName: node
+  linkType: hard
+
+"clsx@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "clsx@npm:1.2.1"
+  checksum: 30befca8019b2eb7dbad38cff6266cf543091dae2825c856a62a8ccf2c3ab9c2907c4d12b288b73101196767f66812365400a227581484a05f968b0307cfaf12
   languageName: node
   linkType: hard
 
