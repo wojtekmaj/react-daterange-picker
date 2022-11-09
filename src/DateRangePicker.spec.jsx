@@ -1,7 +1,22 @@
 import React, { createRef } from 'react';
-import { act, fireEvent, render, waitForElementToBeRemoved } from '@testing-library/react';
+import { act, fireEvent, render, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import DateRangePicker from './DateRangePicker';
+
+async function waitForElementToBeRemovedOrHidden(callback) {
+  const element = callback();
+
+  if (element) {
+    try {
+      await waitFor(() =>
+        expect(element).toHaveAttribute('class', expect.stringContaining('--closed')),
+      );
+    } catch (error) {
+      await waitForElementToBeRemoved(element);
+    }
+  }
+}
 
 describe('DateRangePicker', () => {
   it('passes default name to DateInput components', () => {
@@ -333,18 +348,20 @@ describe('DateRangePicker', () => {
     });
   });
 
-  it('closes Calendar component when clicked outside', () => {
+  it('closes Calendar component when clicked outside', async () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
 
     const { container } = render(<DateRangePicker isOpen />, { attachTo: root });
 
-    fireEvent.mouseDown(document.body);
+    userEvent.click(document.body);
 
-    waitForElementToBeRemoved(() => container.querySelector('.react-calendar'));
+    await waitForElementToBeRemovedOrHidden(() =>
+      container.querySelector('.react-daterange-picker__calendar'),
+    );
   });
 
-  it('closes Calendar component when focused outside', () => {
+  it('closes Calendar component when focused outside', async () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
 
@@ -352,10 +369,12 @@ describe('DateRangePicker', () => {
 
     fireEvent.focusIn(document.body);
 
-    waitForElementToBeRemoved(() => container.querySelector('.react-calendar'));
+    await waitForElementToBeRemovedOrHidden(() =>
+      container.querySelector('.react-daterange-picker__calendar'),
+    );
   });
 
-  it('closes Calendar component when tapped outside', () => {
+  it('closes Calendar component when tapped outside', async () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
 
@@ -363,7 +382,9 @@ describe('DateRangePicker', () => {
 
     fireEvent.touchStart(document.body);
 
-    waitForElementToBeRemoved(() => container.querySelector('.react-calendar'));
+    await waitForElementToBeRemovedOrHidden(() =>
+      container.querySelector('.react-daterange-picker__calendar'),
+    );
   });
 
   it('does not close Calendar component when focused inside', () => {
@@ -381,7 +402,7 @@ describe('DateRangePicker', () => {
     expect(calendar).toBeInTheDocument();
   });
 
-  it('closes Calendar when calling internal onChange by default', () => {
+  it('closes Calendar when calling internal onChange by default', async () => {
     const instance = createRef();
 
     const { container } = render(<DateRangePicker isOpen ref={instance} />);
@@ -392,7 +413,9 @@ describe('DateRangePicker', () => {
       onChangeInternal(new Date());
     });
 
-    waitForElementToBeRemoved(() => container.querySelector('.react-calendar'));
+    await waitForElementToBeRemovedOrHidden(() =>
+      container.querySelector('.react-daterange-picker__calendar'),
+    );
   });
 
   it('does not close Calendar when calling internal onChange with prop closeCalendar = false', () => {
