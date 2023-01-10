@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker/src/entry.nostyle';
-import '@wojtekmaj/react-daterange-picker/src/DateRangePicker.less';
+import '@wojtekmaj/react-daterange-picker/src/DateRangePicker.css';
 
 import ValidityOptions from './ValidityOptions';
 import MaxDetailOptions from './MaxDetailOptions';
@@ -9,7 +9,7 @@ import LocaleOptions from './LocaleOptions';
 import ValueOptions from './ValueOptions';
 import ViewOptions from './ViewOptions';
 
-import './Test.less';
+import './Test.css';
 
 const now = new Date();
 
