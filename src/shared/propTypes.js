@@ -1,4 +1,4 @@
-export const isMinDate = (props, propName, componentName) => {
+export function isMinDate(props, propName, componentName) {
   const { [propName]: minDate } = props;
 
   if (!minDate) {
@@ -20,9 +20,9 @@ export const isMinDate = (props, propName, componentName) => {
   }
 
   return null;
-};
+}
 
-export const isMaxDate = (props, propName, componentName) => {
+export function isMaxDate(props, propName, componentName) {
   const { [propName]: maxDate } = props;
 
   if (!maxDate) {
@@ -44,4 +44,4 @@ export const isMaxDate = (props, propName, componentName) => {
   }
 
   return null;
-};
+}
