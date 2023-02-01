@@ -43,8 +43,8 @@ export default function ValueOptions({ setValue, value }) {
   }
 
   return (
-    <fieldset id="valueOptions">
-      <legend htmlFor="valueOptions">Value options</legend>
+    <fieldset>
+      <legend>Value options</legend>
 
       <div>
         <label htmlFor="startDate">Start date</label>
