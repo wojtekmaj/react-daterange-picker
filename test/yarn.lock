@@ -1971,7 +1971,7 @@ __metadata:
     make-event-props: ^1.1.0
     prop-types: ^15.6.0
     react-calendar: ^4.0.0
-    react-date-picker: ^9.1.0
+    react-date-picker: ^9.2.0
     react-fit: ^1.4.0
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -3753,9 +3753,9 @@ __metadata:
   linkType: hard
 
 "http-cache-semantics@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "http-cache-semantics@npm:4.1.0"
-  checksum: 974de94a81c5474be07f269f9fd8383e92ebb5a448208223bfb39e172a9dbc26feff250192ecc23b9593b3f92098e010406b0f24bd4d588d631f80214648ed42
+  version: 4.1.1
+  resolution: "http-cache-semantics@npm:4.1.1"
+  checksum: 83ac0bc60b17a3a36f9953e7be55e5c8f41acc61b22583060e8dedc9dd5e3607c823a88d0926f9150e571f90946835c7fe150732801010845c72cd8bbff1a236
   languageName: node
   linkType: hard
 
@@ -5168,9 +5168,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-date-picker@npm:^9.1.0":
-  version: 9.1.0
-  resolution: "react-date-picker@npm:9.1.0"
+"react-date-picker@npm:^9.2.0":
+  version: 9.2.0
+  resolution: "react-date-picker@npm:9.2.0"
   dependencies:
     "@types/react-calendar": ^3.0.0
     "@wojtekmaj/date-utils": ^1.0.3
@@ -5184,7 +5184,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 03aab326d0d826796601744c8111f8374480d708ab6a3cb7a1918d57c02f2a55fb8f43ab08c81a016746996a51e279aedf80156b85ab33fccb11d03969812a81
+  checksum: 2573a71ef4b36adbb627f63ea835ade436ad04e827f488572da899ac66a9f85b8db2fa7c007fbdf6a505ab014d520514f6bcf4bcc771bd57976a7c901644ebd6
   languageName: node
   linkType: hard
 
