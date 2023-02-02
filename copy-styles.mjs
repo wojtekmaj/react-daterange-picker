@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 fs.copyFile('src/DateRangePicker.css', 'dist/DateRangePicker.css', (error) => {
   if (error) {
