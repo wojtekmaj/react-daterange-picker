@@ -66,9 +66,12 @@ function MyApp() {
 
 ### Custom styling
 
-If you don't want to use default React-DateRange-Picker and React-Calendar styles, you can import React-DateRange-Picker without them by using `import DateRangePicker from '@wojtekmaj/react-daterange-picker/dist/entry.nostyle';` instead.
+If you want to use default React-DateRange-Picker and React-Calendar styling to build upon it, you can import them by using:
 
-Styles loaded by the default entry file are `@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css` and `react-calendar/dist/Calendar.css`. You can copy them to your project to build your own upon them.
+```js
+import '@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css';
+import 'react-calendar/dist/Calendar.css';
+```
 
 ### Next.js and Vite
 
