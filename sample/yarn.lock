@@ -567,19 +567,19 @@ __metadata:
   linkType: hard
 
 "@wojtekmaj/react-daterange-picker@npm:latest":
-  version: 4.1.0
-  resolution: "@wojtekmaj/react-daterange-picker@npm:4.1.0"
+  version: 4.2.0
+  resolution: "@wojtekmaj/react-daterange-picker@npm:4.2.0"
   dependencies:
     clsx: ^1.2.1
     make-event-props: ^1.1.0
     prop-types: ^15.6.0
     react-calendar: ^4.0.0
-    react-date-picker: ^9.1.0
+    react-date-picker: ^9.2.0
     react-fit: ^1.4.0
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 70d937d59772fcf1c8386e3fea4e670cb304a0174880809b7a5f42b9a48691319e7c54b5d5734dbfd618a8a3fc197ae74d083b24d747520489216cd4664daa61
+  checksum: 89f378af381a2f4d87d361bd0582aa80a9c3bb7c9afe7d0388f43d665a47a81820eedecaefac7fc493a7a17d564fe44fc70f27095693786b87c07ca40613644a
   languageName: node
   linkType: hard
 
@@ -1623,9 +1623,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-date-picker@npm:^9.1.0":
-  version: 9.1.0
-  resolution: "react-date-picker@npm:9.1.0"
+"react-date-picker@npm:^9.2.0":
+  version: 9.2.0
+  resolution: "react-date-picker@npm:9.2.0"
   dependencies:
     "@types/react-calendar": ^3.0.0
     "@wojtekmaj/date-utils": ^1.0.3
@@ -1639,7 +1639,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 03aab326d0d826796601744c8111f8374480d708ab6a3cb7a1918d57c02f2a55fb8f43ab08c81a016746996a51e279aedf80156b85ab33fccb11d03969812a81
+  checksum: 2573a71ef4b36adbb627f63ea835ade436ad04e827f488572da899ac66a9f85b8db2fa7c007fbdf6a505ab014d520514f6bcf4bcc771bd57976a7c901644ebd6
   languageName: node
   linkType: hard
 
