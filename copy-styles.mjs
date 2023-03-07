@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'node:fs';
 
 fs.copyFile('src/DateRangePicker.css', 'dist/DateRangePicker.css', (error) => {
   if (error) {
