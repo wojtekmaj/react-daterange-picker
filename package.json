@@ -1,6 +1,6 @@
 {
   "name": "@wojtekmaj/react-daterange-picker",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "A date range picker for your React app.",
   "main": "dist/entry.js",
   "source": "src/entry.js",
@@ -34,7 +34,7 @@
     "clsx": "^1.2.1",
     "make-event-props": "^1.1.0",
     "prop-types": "^15.6.0",
-    "react-calendar": "^4.0.0",
+    "react-calendar": "~4.0.0",
     "react-date-picker": "^9.2.0",
     "react-fit": "^1.4.0"
   },
