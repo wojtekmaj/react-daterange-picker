@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import React, { createRef } from 'react';
+import React from 'react';
 import { act, fireEvent, render, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -481,15 +481,17 @@ describe('DateRangePicker', () => {
     expect(calendar).toBeInTheDocument();
   });
 
-  it('closes Calendar when calling internal onChange by default', async () => {
-    const instance = createRef();
+  it('closes Calendar when changing value by default', async () => {
+    const { container } = render(<DateRangePicker isOpen />);
 
-    const { container } = render(<DateRangePicker isOpen ref={instance} />);
-
-    const { onChange: onChangeInternal } = instance.current;
+    const [firstTile, secondTile] = container.querySelectorAll('.react-calendar__tile');
 
     act(() => {
-      onChangeInternal(new Date());
+      fireEvent.click(firstTile);
+    });
+
+    act(() => {
+      fireEvent.click(secondTile);
     });
 
     await waitForElementToBeRemovedOrHidden(() =>
@@ -497,15 +499,35 @@ describe('DateRangePicker', () => {
     );
   });
 
-  it('does not close Calendar when calling internal onChange with prop closeCalendar = false', () => {
-    const instance = createRef();
+  it('closes Calendar when changing value with prop closeCalendar = true', async () => {
+    const { container } = render(<DateRangePicker closeCalendar isOpen />);
 
-    const { container } = render(<DateRangePicker closeCalendar={false} isOpen ref={instance} />);
-
-    const { onChange: onChangeInternal } = instance.current;
+    const [firstTile, secondTile] = container.querySelectorAll('.react-calendar__tile');
 
     act(() => {
-      onChangeInternal(new Date());
+      fireEvent.click(firstTile);
+    });
+
+    act(() => {
+      fireEvent.click(secondTile);
+    });
+
+    await waitForElementToBeRemovedOrHidden(() =>
+      container.querySelector('.react-daterange-picker__calendar'),
+    );
+  });
+
+  it('does not close Calendar when changing value with prop closeCalendar = false', () => {
+    const { container } = render(<DateRangePicker closeCalendar={false} isOpen />);
+
+    const [firstTile, secondTile] = container.querySelectorAll('.react-calendar__tile');
+
+    act(() => {
+      fireEvent.click(firstTile);
+    });
+
+    act(() => {
+      fireEvent.click(secondTile);
     });
 
     const calendar = container.querySelector('.react-calendar');
@@ -513,15 +535,13 @@ describe('DateRangePicker', () => {
     expect(calendar).toBeInTheDocument();
   });
 
-  it('does not close Calendar when calling internal onChange with closeCalendar = false', () => {
-    const instance = createRef();
+  it('does not close Calendar when changing value using inputs', () => {
+    const { container } = render(<DateRangePicker isOpen />);
 
-    const { container } = render(<DateRangePicker isOpen ref={instance} />);
-
-    const { onChange: onChangeInternal } = instance.current;
+    const dayInput = container.querySelector('input[name="day"]');
 
     act(() => {
-      onChangeInternal(new Date(), false);
+      fireEvent.change(dayInput, { target: { value: '1' } });
     });
 
     const calendar = container.querySelector('.react-calendar');
@@ -529,20 +549,19 @@ describe('DateRangePicker', () => {
     expect(calendar).toBeInTheDocument();
   });
 
-  it('calls onChange callback when calling internal onChange', () => {
-    const instance = createRef();
-    const nextValue = new Date(2019, 0, 1);
+  it('calls onChange callback when changing value', () => {
+    const value = new Date(2023, 0, 31);
     const onChange = vi.fn();
 
-    render(<DateRangePicker onChange={onChange} ref={instance} />);
+    const { container } = render(<DateRangePicker onChange={onChange} value={value} />);
 
-    const { onChange: onChangeInternal } = instance.current;
+    const dayInput = container.querySelector('input[name="day"]');
 
     act(() => {
-      onChangeInternal(nextValue);
+      fireEvent.change(dayInput, { target: { value: '1' } });
     });
 
-    expect(onChange).toHaveBeenCalledWith(nextValue);
+    expect(onChange).toHaveBeenCalledWith([new Date(2023, 0, 1), undefined]);
   });
 
   it('clears the value when clicking on a button', () => {
@@ -562,133 +581,187 @@ describe('DateRangePicker', () => {
 
   describe('onChangeFrom', () => {
     it('calls onChange properly given no initial value', () => {
-      const instance = createRef();
+      const onChange = vi.fn();
 
-      render(<DateRangePicker ref={instance} />);
+      const { container } = render(<DateRangePicker onChange={onChange} />);
 
-      const componentInstance = instance.current;
-      const { onChangeFrom: onChangeFromInternal } = componentInstance;
+      const nextValueFrom = new Date(2018, 1, 15);
 
-      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
-
-      const nextValueFrom = new Date();
+      const customInputs = container.querySelectorAll('input[data-input]');
+      const monthInput = customInputs[0];
+      const dayInput = customInputs[1];
+      const yearInput = customInputs[2];
 
       act(() => {
-        onChangeFromInternal(nextValueFrom);
+        fireEvent.change(monthInput, { target: { value: '2' } });
       });
 
-      expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], undefined);
+      act(() => {
+        fireEvent.change(dayInput, { target: { value: '15' } });
+      });
+
+      act(() => {
+        fireEvent.change(yearInput, { target: { value: '2018' } });
+      });
+
+      expect(onChange).toHaveBeenCalled();
+      expect(onChange).toHaveBeenCalledWith([nextValueFrom, undefined]);
     });
 
     it('calls onChange properly given single initial value', () => {
-      const instance = createRef();
+      const onChange = vi.fn();
       const value = new Date(2018, 0, 1);
 
-      render(<DateRangePicker value={value} ref={instance} />);
+      const { container } = render(<DateRangePicker onChange={onChange} value={value} />);
 
-      const componentInstance = instance.current;
-      const { onChangeFrom: onChangeFromInternal } = componentInstance;
+      const nextValueFrom = new Date(2018, 1, 15);
 
-      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
-
-      const nextValueFrom = new Date();
+      const customInputs = container.querySelectorAll('input[data-input]');
+      const monthInput = customInputs[0];
+      const dayInput = customInputs[1];
+      const yearInput = customInputs[2];
 
       act(() => {
-        onChangeFromInternal(nextValueFrom);
+        fireEvent.change(monthInput, { target: { value: '2' } });
       });
 
-      expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], undefined);
+      act(() => {
+        fireEvent.change(dayInput, { target: { value: '15' } });
+      });
+
+      act(() => {
+        fireEvent.change(yearInput, { target: { value: '2018' } });
+      });
+
+      expect(onChange).toHaveBeenCalled();
+      expect(onChange).toHaveBeenCalledWith([nextValueFrom, undefined]);
     });
 
     it('calls onChange properly given initial value as an array', () => {
-      const instance = createRef();
+      const onChange = vi.fn();
       const valueFrom = new Date(2018, 0, 1);
       const valueTo = new Date(2018, 6, 1);
       const value = [valueFrom, valueTo];
 
-      render(<DateRangePicker value={value} ref={instance} />);
+      const { container } = render(<DateRangePicker onChange={onChange} value={value} />);
 
-      const componentInstance = instance.current;
-      const { onChangeFrom: onChangeFromInternal } = componentInstance;
+      const nextValueFrom = new Date(2018, 1, 15);
 
-      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
-
-      const nextValueFrom = new Date();
+      const customInputs = container.querySelectorAll('input[data-input]');
+      const monthInput = customInputs[0];
+      const dayInput = customInputs[1];
+      const yearInput = customInputs[2];
 
       act(() => {
-        onChangeFromInternal(nextValueFrom);
+        fireEvent.change(monthInput, { target: { value: '2' } });
       });
 
-      expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, valueTo], undefined);
+      act(() => {
+        fireEvent.change(dayInput, { target: { value: '15' } });
+      });
+
+      act(() => {
+        fireEvent.change(yearInput, { target: { value: '2018' } });
+      });
+
+      expect(onChange).toHaveBeenCalled();
+      expect(onChange).toHaveBeenCalledWith([nextValueFrom, valueTo]);
     });
   });
 
   describe('onChangeTo', () => {
     it('calls onChange properly given no initial value', () => {
-      const instance = createRef();
+      const onChange = vi.fn();
 
-      render(<DateRangePicker ref={instance} />);
+      const { container } = render(<DateRangePicker onChange={onChange} />);
 
-      const componentInstance = instance.current;
-      const { onChangeTo: onChangeToInternal } = componentInstance;
+      const nextValueTo = new Date(2018, 1, 15);
+      nextValueTo.setDate(nextValueTo.getDate() + 1);
+      nextValueTo.setTime(nextValueTo.getTime() - 1);
 
-      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
-
-      const nextValueTo = new Date();
+      const customInputs = container.querySelectorAll('input[data-input]');
+      const monthInput = customInputs[3];
+      const dayInput = customInputs[4];
+      const yearInput = customInputs[5];
 
       act(() => {
-        onChangeToInternal(nextValueTo);
+        fireEvent.change(dayInput, { target: { value: '15' } });
       });
 
-      expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([undefined, nextValueTo], undefined);
+      act(() => {
+        fireEvent.change(monthInput, { target: { value: '2' } });
+      });
+
+      act(() => {
+        fireEvent.change(yearInput, { target: { value: '2018' } });
+      });
+
+      expect(onChange).toHaveBeenCalled();
+      expect(onChange).toHaveBeenCalledWith([undefined, nextValueTo]);
     });
 
     it('calls onChange properly given single initial value', () => {
-      const instance = createRef();
+      const onChange = vi.fn();
       const value = new Date(2018, 0, 1);
 
-      render(<DateRangePicker value={value} ref={instance} />);
+      const { container } = render(<DateRangePicker onChange={onChange} value={value} />);
 
-      const componentInstance = instance.current;
-      const { onChangeTo: onChangeToInternal } = componentInstance;
+      const nextValueTo = new Date(2018, 1, 15);
+      nextValueTo.setDate(nextValueTo.getDate() + 1);
+      nextValueTo.setTime(nextValueTo.getTime() - 1);
 
-      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
-
-      const nextValueTo = new Date();
+      const customInputs = container.querySelectorAll('input[data-input]');
+      const monthInput = customInputs[3];
+      const dayInput = customInputs[4];
+      const yearInput = customInputs[5];
 
       act(() => {
-        onChangeToInternal(nextValueTo);
+        fireEvent.change(dayInput, { target: { value: '15' } });
       });
 
-      expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([value, nextValueTo], undefined);
+      act(() => {
+        fireEvent.change(monthInput, { target: { value: '2' } });
+      });
+
+      act(() => {
+        fireEvent.change(yearInput, { target: { value: '2018' } });
+      });
+
+      expect(onChange).toHaveBeenCalled();
+      expect(onChange).toHaveBeenCalledWith([value, nextValueTo]);
     });
 
     it('calls onChange properly given initial value as an array', () => {
-      const instance = createRef();
+      const onChange = vi.fn();
       const valueFrom = new Date(2018, 0, 1);
       const valueTo = new Date(2018, 6, 1);
       const value = [valueFrom, valueTo];
 
-      render(<DateRangePicker value={value} ref={instance} />);
+      const { container } = render(<DateRangePicker onChange={onChange} value={value} />);
 
-      const componentInstance = instance.current;
-      const { onChangeTo: onChangeToInternal } = componentInstance;
+      const nextValueTo = new Date(2018, 1, 15);
+      nextValueTo.setDate(nextValueTo.getDate() + 1);
+      nextValueTo.setTime(nextValueTo.getTime() - 1);
 
-      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
-
-      const nextValueTo = new Date();
+      const customInputs = container.querySelectorAll('input[data-input]');
+      const monthInput = customInputs[3];
+      const dayInput = customInputs[4];
+      const yearInput = customInputs[5];
 
       act(() => {
-        onChangeToInternal(nextValueTo);
+        fireEvent.change(dayInput, { target: { value: '15' } });
       });
 
-      expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([valueFrom, nextValueTo], undefined);
+      act(() => {
+        fireEvent.change(monthInput, { target: { value: '2' } });
+      });
+
+      act(() => {
+        fireEvent.change(yearInput, { target: { value: '2018' } });
+      });
+
+      expect(onChange).toHaveBeenCalled();
+      expect(onChange).toHaveBeenCalledWith([valueFrom, nextValueTo]);
     });
   });
 });
