@@ -1,4 +1,4 @@
-import React, { createRef, PureComponent } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import makeEventProps from 'make-event-props';
@@ -44,224 +44,175 @@ const ClearIcon = (
   </svg>
 );
 
-const isValue = PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]);
+export default function DateRangePicker(props) {
+  const {
+    autoFocus,
+    calendarAriaLabel,
+    calendarIcon,
+    className,
+    clearAriaLabel,
+    clearIcon,
+    closeCalendar: shouldCloseCalendarProps,
+    'data-testid': dataTestid,
+    dayAriaLabel,
+    dayPlaceholder,
+    disableCalendar,
+    disabled,
+    format,
+    id,
+    isOpen: isOpenProps,
+    locale,
+    maxDate,
+    maxDetail,
+    minDate,
+    monthAriaLabel,
+    monthPlaceholder,
+    name,
+    nativeInputAriaLabel,
+    onCalendarClose,
+    onCalendarOpen,
+    onChange: onChangeProps,
+    onFocus: onFocusProps,
+    openCalendarOnFocus,
+    rangeDivider,
+    required,
+    showLeadingZeros,
+    value,
+    yearAriaLabel,
+    yearPlaceholder,
+    ...otherProps
+  } = props;
 
-export default class DateRangePicker extends PureComponent {
-  static defaultProps = {
-    calendarIcon: CalendarIcon,
-    clearIcon: ClearIcon,
-    closeCalendar: true,
-    isOpen: null,
-    name: 'daterange',
-    openCalendarOnFocus: true,
-    rangeDivider: '–',
-  };
+  const [isOpen, setIsOpen] = useState(isOpenProps);
+  const wrapper = useRef();
+  const calendarWrapper = useRef();
 
-  static propTypes = {
-    autoFocus: PropTypes.bool,
-    calendarAriaLabel: PropTypes.string,
-    calendarClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-    calendarIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-    clearAriaLabel: PropTypes.string,
-    clearIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    closeCalendar: PropTypes.bool,
-    'data-testid': PropTypes.string,
-    dayAriaLabel: PropTypes.string,
-    dayPlaceholder: PropTypes.string,
-    disableCalendar: PropTypes.bool,
-    disabled: PropTypes.bool,
-    format: PropTypes.string,
-    id: PropTypes.string,
-    isOpen: PropTypes.bool,
-    locale: PropTypes.string,
-    maxDate: isMaxDate,
-    maxDetail: PropTypes.oneOf(allViews),
-    minDate: isMinDate,
-    monthAriaLabel: PropTypes.string,
-    monthPlaceholder: PropTypes.string,
-    name: PropTypes.string,
-    nativeInputAriaLabel: PropTypes.string,
-    onCalendarClose: PropTypes.func,
-    onCalendarOpen: PropTypes.func,
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    openCalendarOnFocus: PropTypes.bool,
-    portalContainer: PropTypes.object,
-    rangeDivider: PropTypes.node,
-    required: PropTypes.bool,
-    showLeadingZeros: PropTypes.bool,
-    value: PropTypes.oneOfType([isValue, PropTypes.arrayOf(isValue)]),
-    yearAriaLabel: PropTypes.string,
-    yearPlaceholder: PropTypes.string,
-  };
+  useEffect(() => {
+    setIsOpen(isOpenProps);
+  }, [isOpenProps]);
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.isOpen !== prevState.isOpenProps) {
-      return {
-        isOpen: nextProps.isOpen,
-        isOpenProps: nextProps.isOpen,
-      };
-    }
+  function openCalendar() {
+    setIsOpen(true);
 
-    return null;
-  }
-
-  state = {};
-
-  wrapper = createRef();
-
-  calendarWrapper = createRef();
-
-  componentDidMount() {
-    this.handleOutsideActionListeners();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const { isOpen } = this.state;
-    const { onCalendarClose, onCalendarOpen } = this.props;
-
-    if (isOpen !== prevState.isOpen) {
-      this.handleOutsideActionListeners();
-      const callback = isOpen ? onCalendarOpen : onCalendarClose;
-      if (callback) callback();
+    if (onCalendarOpen) {
+      onCalendarOpen();
     }
   }
 
-  componentWillUnmount() {
-    this.handleOutsideActionListeners(false);
+  const closeCalendar = useCallback(() => {
+    setIsOpen(false);
+
+    if (onCalendarClose) {
+      onCalendarClose();
+    }
+  }, [onCalendarClose]);
+
+  function toggleCalendar() {
+    if (isOpen) {
+      closeCalendar();
+    } else {
+      openCalendar();
+    }
   }
 
-  get eventProps() {
-    return makeEventProps(this.props);
+  function onChange(value, shouldCloseCalendar = shouldCloseCalendarProps) {
+    if (shouldCloseCalendar) {
+      closeCalendar();
+    }
+
+    if (onChangeProps) {
+      onChangeProps(value);
+    }
   }
 
-  onOutsideAction = (event) => {
-    const { wrapper, calendarWrapper } = this;
+  function onChangeFrom(valueFrom, closeCalendar) {
+    const [, valueTo] = [].concat(value);
 
-    // Try event.composedPath first to handle clicks inside a Shadow DOM.
-    const target = 'composedPath' in event ? event.composedPath()[0] : event.target;
+    onChange([valueFrom, valueTo], closeCalendar);
+  }
+
+  function onChangeTo(valueTo, closeCalendar) {
+    const [valueFrom] = [].concat(value);
+
+    onChange([valueFrom, valueTo], closeCalendar);
+  }
+
+  function onFocus(event) {
+    if (onFocusProps) {
+      onFocusProps(event);
+    }
 
     if (
-      wrapper.current &&
-      !wrapper.current.contains(target) &&
-      (!calendarWrapper.current || !calendarWrapper.current.contains(target))
+      // Internet Explorer still fires onFocus on disabled elements
+      disabled ||
+      isOpen ||
+      !openCalendarOnFocus ||
+      event.target.dataset.select === 'true'
     ) {
-      this.closeCalendar();
-    }
-  };
-
-  onChange = (value, closeCalendar = this.props.closeCalendar) => {
-    const { onChange } = this.props;
-
-    if (closeCalendar) {
-      this.closeCalendar();
-    }
-
-    if (onChange) {
-      onChange(value);
-    }
-  };
-
-  onChangeFrom = (valueFrom, closeCalendar) => {
-    const { value } = this.props;
-    const [, valueTo] = [].concat(value);
-    this.onChange([valueFrom, valueTo], closeCalendar);
-  };
-
-  onChangeTo = (valueTo, closeCalendar) => {
-    const { value } = this.props;
-    const [valueFrom] = [].concat(value);
-    this.onChange([valueFrom, valueTo], closeCalendar);
-  };
-
-  onFocus = (event) => {
-    const { disabled, onFocus, openCalendarOnFocus } = this.props;
-
-    if (onFocus) {
-      onFocus(event);
-    }
-
-    // Internet Explorer still fires onFocus on disabled elements
-    if (disabled) {
       return;
     }
 
-    if (openCalendarOnFocus) {
-      if (event.target.dataset.select === 'true') {
-        return;
-      }
-
-      this.openCalendar();
-    }
-  };
-
-  onKeyDown = (event) => {
-    if (event.key === 'Escape') {
-      this.closeCalendar();
-    }
-  };
-
-  openCalendar = () => {
-    this.setState({ isOpen: true });
-  };
-
-  closeCalendar = () => {
-    this.setState((prevState) => {
-      if (!prevState.isOpen) {
-        return null;
-      }
-
-      return { isOpen: false };
-    });
-  };
-
-  toggleCalendar = () => {
-    this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
-  };
-
-  stopPropagation = (event) => event.stopPropagation();
-
-  clear = () => this.onChange(null);
-
-  handleOutsideActionListeners(shouldListen) {
-    const { isOpen } = this.state;
-
-    const shouldListenWithFallback = typeof shouldListen !== 'undefined' ? shouldListen : isOpen;
-    const fnName = shouldListenWithFallback ? 'addEventListener' : 'removeEventListener';
-    outsideActionEvents.forEach((eventName) => document[fnName](eventName, this.onOutsideAction));
-    document[fnName]('keydown', this.onKeyDown);
+    openCalendar();
   }
 
-  renderInputs() {
-    const {
-      autoFocus,
-      calendarAriaLabel,
-      calendarIcon,
-      clearAriaLabel,
-      clearIcon,
-      dayAriaLabel,
-      dayPlaceholder,
-      disableCalendar,
-      disabled,
-      format,
-      locale,
-      maxDate,
-      maxDetail,
-      minDate,
-      monthAriaLabel,
-      monthPlaceholder,
-      name,
-      nativeInputAriaLabel,
-      rangeDivider,
-      required,
-      showLeadingZeros,
-      value,
-      yearAriaLabel,
-      yearPlaceholder,
-    } = this.props;
-    const { isOpen } = this.state;
+  const onKeyDown = useCallback(
+    (event) => {
+      if (event.key === 'Escape') {
+        closeCalendar();
+      }
+    },
+    [closeCalendar],
+  );
 
+  function clear() {
+    onChange(null);
+  }
+
+  function stopPropagation(event) {
+    event.stopPropagation();
+  }
+
+  const onOutsideAction = useCallback(
+    (event) => {
+      const { current: wrapperEl } = wrapper;
+      const { current: calendarWrapperEl } = calendarWrapper;
+
+      // Try event.composedPath first to handle clicks inside a Shadow DOM.
+      const target = 'composedPath' in event ? event.composedPath()[0] : event.target;
+
+      if (
+        wrapperEl &&
+        !wrapperEl.contains(target) &&
+        (!calendarWrapperEl || !calendarWrapperEl.contains(target))
+      ) {
+        closeCalendar();
+      }
+    },
+    [calendarWrapper, closeCalendar, wrapper],
+  );
+
+  const handleOutsideActionListeners = useCallback(
+    (shouldListen = isOpen) => {
+      const action = shouldListen ? 'addEventListener' : 'removeEventListener';
+
+      outsideActionEvents.forEach((event) => {
+        document[action](event, onOutsideAction);
+      });
+
+      document[action]('keydown', onKeyDown);
+    },
+    [isOpen, onOutsideAction, onKeyDown],
+  );
+
+  useEffect(() => {
+    handleOutsideActionListeners();
+
+    return () => {
+      handleOutsideActionListeners(false);
+    };
+  }, [handleOutsideActionListeners, isOpen]);
+
+  function renderInputs() {
     const [valueFrom, valueTo] = [].concat(value);
 
     const ariaLabelProps = {
@@ -299,7 +250,7 @@ export default class DateRangePicker extends PureComponent {
           // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus={autoFocus}
           name={`${name}_from`}
-          onChange={this.onChangeFrom}
+          onChange={onChangeFrom}
           returnValue="start"
           value={valueFrom}
         />
@@ -307,7 +258,7 @@ export default class DateRangePicker extends PureComponent {
         <DateInput
           {...commonProps}
           name={`${name}_to`}
-          onChange={this.onChangeTo}
+          onChange={onChangeTo}
           returnValue="end"
           value={valueTo}
         />
@@ -316,8 +267,8 @@ export default class DateRangePicker extends PureComponent {
             aria-label={clearAriaLabel}
             className={`${baseClassName}__clear-button ${baseClassName}__button`}
             disabled={disabled}
-            onClick={this.clear}
-            onFocus={this.stopPropagation}
+            onClick={clear}
+            onFocus={stopPropagation}
             type="button"
           >
             {typeof clearIcon === 'function' ? React.createElement(clearIcon) : clearIcon}
@@ -328,8 +279,8 @@ export default class DateRangePicker extends PureComponent {
             aria-label={calendarAriaLabel}
             className={`${baseClassName}__calendar-button ${baseClassName}__button`}
             disabled={disabled}
-            onClick={this.toggleCalendar}
-            onFocus={this.stopPropagation}
+            onClick={toggleCalendar}
+            onFocus={stopPropagation}
             type="button"
           >
             {typeof calendarIcon === 'function' ? React.createElement(calendarIcon) : calendarIcon}
@@ -339,22 +290,19 @@ export default class DateRangePicker extends PureComponent {
     );
   }
 
-  renderCalendar() {
-    const { disableCalendar } = this.props;
-    const { isOpen } = this.state;
-
+  function renderCalendar() {
     if (isOpen === null || disableCalendar) {
       return null;
     }
 
     const {
       calendarClassName,
-      className: datePickerClassName, // Unused, here to exclude it from calendarProps
-      onChange,
+      className: dateRangePickerClassName, // Unused, here to exclude it from calendarProps
+      onChange: onChangeProps, // Unused, here to exclude it from calendarProps
       portalContainer,
       value,
       ...calendarProps
-    } = this.props;
+    } = props;
 
     const className = `${baseClassName}__calendar`;
     const classNames = clsx(className, `${className}--${isOpen ? 'open' : 'closed'}`);
@@ -362,7 +310,7 @@ export default class DateRangePicker extends PureComponent {
     const calendar = (
       <Calendar
         className={calendarClassName}
-        onChange={(value) => this.onChange(value)}
+        onChange={(value) => onChange(value)}
         selectRange
         value={value || null}
         {...calendarProps}
@@ -371,7 +319,7 @@ export default class DateRangePicker extends PureComponent {
 
     return portalContainer ? (
       createPortal(
-        <div ref={this.calendarWrapper} className={classNames}>
+        <div ref={calendarWrapper} className={classNames}>
           {calendar}
         </div>,
         portalContainer,
@@ -392,30 +340,80 @@ export default class DateRangePicker extends PureComponent {
     );
   }
 
-  render() {
-    const { eventProps } = this;
-    const { className, 'data-testid': dataTestid, disabled, id } = this.props;
-    const { isOpen } = this.state;
+  const eventProps = useMemo(() => makeEventProps(otherProps), [otherProps]);
 
-    const { onChange, ...eventPropsWithoutOnChange } = eventProps;
+  const {
+    onChange: onChangeEventProps, // Unused, here to exclude it from eventPropsWithoutOnChange
+    ...eventPropsWithoutOnChange
+  } = eventProps;
 
-    return (
-      <div
-        className={clsx(
-          baseClassName,
-          `${baseClassName}--${isOpen ? 'open' : 'closed'}`,
-          `${baseClassName}--${disabled ? 'disabled' : 'enabled'}`,
-          className,
-        )}
-        data-testid={dataTestid}
-        id={id}
-        {...eventPropsWithoutOnChange}
-        onFocus={this.onFocus}
-        ref={this.wrapper}
-      >
-        {this.renderInputs()}
-        {this.renderCalendar()}
-      </div>
-    );
-  }
+  return (
+    <div
+      className={clsx(
+        baseClassName,
+        `${baseClassName}--${isOpen ? 'open' : 'closed'}`,
+        `${baseClassName}--${disabled ? 'disabled' : 'enabled'}`,
+        className,
+      )}
+      data-testid={dataTestid}
+      id={id}
+      {...eventPropsWithoutOnChange}
+      onFocus={onFocus}
+      ref={wrapper}
+    >
+      {renderInputs()}
+      {renderCalendar()}
+    </div>
+  );
 }
+
+DateRangePicker.defaultProps = {
+  calendarIcon: CalendarIcon,
+  clearIcon: ClearIcon,
+  closeCalendar: true,
+  isOpen: null,
+  name: 'daterange',
+  openCalendarOnFocus: true,
+  rangeDivider: '–',
+};
+
+const isValue = PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]);
+
+DateRangePicker.propTypes = {
+  autoFocus: PropTypes.bool,
+  calendarAriaLabel: PropTypes.string,
+  calendarClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  calendarIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  clearAriaLabel: PropTypes.string,
+  clearIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  closeCalendar: PropTypes.bool,
+  'data-testid': PropTypes.string,
+  dayAriaLabel: PropTypes.string,
+  dayPlaceholder: PropTypes.string,
+  disableCalendar: PropTypes.bool,
+  disabled: PropTypes.bool,
+  format: PropTypes.string,
+  id: PropTypes.string,
+  isOpen: PropTypes.bool,
+  locale: PropTypes.string,
+  maxDate: isMaxDate,
+  maxDetail: PropTypes.oneOf(allViews),
+  minDate: isMinDate,
+  monthAriaLabel: PropTypes.string,
+  monthPlaceholder: PropTypes.string,
+  name: PropTypes.string,
+  nativeInputAriaLabel: PropTypes.string,
+  onCalendarClose: PropTypes.func,
+  onCalendarOpen: PropTypes.func,
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  openCalendarOnFocus: PropTypes.bool,
+  portalContainer: PropTypes.object,
+  rangeDivider: PropTypes.node,
+  required: PropTypes.bool,
+  showLeadingZeros: PropTypes.bool,
+  value: PropTypes.oneOfType([isValue, PropTypes.arrayOf(isValue)]),
+  yearAriaLabel: PropTypes.string,
+  yearPlaceholder: PropTypes.string,
+};
