@@ -14,38 +14,6 @@ const baseClassName = 'react-daterange-picker';
 const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'];
 const allViews = ['century', 'decade', 'year', 'month'];
 
-const iconProps = {
-  xmlns: 'http://www.w3.org/2000/svg',
-  width: 19,
-  height: 19,
-  viewBox: '0 0 19 19',
-  stroke: 'black',
-  strokeWidth: 2,
-};
-
-const CalendarIcon = (
-  <svg
-    {...iconProps}
-    className={`${baseClassName}__calendar-button__icon ${baseClassName}__button__icon`}
-  >
-    <rect fill="none" height="15" width="15" x="2" y="2" />
-    <line x1="6" x2="6" y1="0" y2="4" />
-    <line x1="13" x2="13" y1="0" y2="4" />
-  </svg>
-);
-
-const ClearIcon = (
-  <svg
-    {...iconProps}
-    className={`${baseClassName}__clear-button__icon ${baseClassName}__button__icon`}
-  >
-    <line x1="4" x2="15" y1="4" y2="15" />
-    <line x1="15" x2="4" y1="4" y2="15" />
-  </svg>
-);
-
-const isValue = PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]);
-
 export default function DateRangePicker(props) {
   const {
     autoFocus,
@@ -369,6 +337,36 @@ export default function DateRangePicker(props) {
   );
 }
 
+const iconProps = {
+  xmlns: 'http://www.w3.org/2000/svg',
+  width: 19,
+  height: 19,
+  viewBox: '0 0 19 19',
+  stroke: 'black',
+  strokeWidth: 2,
+};
+
+const CalendarIcon = (
+  <svg
+    {...iconProps}
+    className={`${baseClassName}__calendar-button__icon ${baseClassName}__button__icon`}
+  >
+    <rect fill="none" height="15" width="15" x="2" y="2" />
+    <line x1="6" x2="6" y1="0" y2="4" />
+    <line x1="13" x2="13" y1="0" y2="4" />
+  </svg>
+);
+
+const ClearIcon = (
+  <svg
+    {...iconProps}
+    className={`${baseClassName}__clear-button__icon ${baseClassName}__button__icon`}
+  >
+    <line x1="4" x2="15" y1="4" y2="15" />
+    <line x1="15" x2="4" y1="4" y2="15" />
+  </svg>
+);
+
 DateRangePicker.defaultProps = {
   calendarIcon: CalendarIcon,
   clearIcon: ClearIcon,
@@ -378,6 +376,8 @@ DateRangePicker.defaultProps = {
   openCalendarOnFocus: true,
   rangeDivider: '–',
 };
+
+const isValue = PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]);
 
 DateRangePicker.propTypes = {
   autoFocus: PropTypes.bool,
