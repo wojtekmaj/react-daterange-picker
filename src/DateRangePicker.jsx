@@ -48,11 +48,11 @@ export default function DateRangePicker(props) {
   const {
     autoFocus,
     calendarAriaLabel,
-    calendarIcon,
+    calendarIcon = CalendarIcon,
     className,
     clearAriaLabel,
-    clearIcon,
-    closeCalendar: shouldCloseCalendarProps,
+    clearIcon = ClearIcon,
+    closeCalendar: shouldCloseCalendarProps = true,
     'data-testid': dataTestid,
     dayAriaLabel,
     dayPlaceholder,
@@ -60,21 +60,21 @@ export default function DateRangePicker(props) {
     disabled,
     format,
     id,
-    isOpen: isOpenProps,
+    isOpen: isOpenProps = null,
     locale,
     maxDate,
-    maxDetail,
+    maxDetail = 'month',
     minDate,
     monthAriaLabel,
     monthPlaceholder,
-    name,
+    name = 'daterange',
     nativeInputAriaLabel,
     onCalendarClose,
     onCalendarOpen,
     onChange: onChangeProps,
     onFocus: onFocusProps,
-    openCalendarOnFocus,
-    rangeDivider,
+    openCalendarOnFocus = true,
+    rangeDivider = '–',
     required,
     showLeadingZeros,
     value,
@@ -366,16 +366,6 @@ export default function DateRangePicker(props) {
     </div>
   );
 }
-
-DateRangePicker.defaultProps = {
-  calendarIcon: CalendarIcon,
-  clearIcon: ClearIcon,
-  closeCalendar: true,
-  isOpen: null,
-  name: 'daterange',
-  openCalendarOnFocus: true,
-  rangeDivider: '–',
-};
 
 const isValue = PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]);
 
