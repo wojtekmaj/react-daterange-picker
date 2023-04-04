@@ -428,10 +428,7 @@ describe('DateRangePicker', () => {
   });
 
   it('closes Calendar component when clicked outside', async () => {
-    const root = document.createElement('div');
-    document.body.appendChild(root);
-
-    const { container } = render(<DateRangePicker isOpen />, { attachTo: root });
+    const { container } = render(<DateRangePicker isOpen />);
 
     userEvent.click(document.body);
 
@@ -441,10 +438,7 @@ describe('DateRangePicker', () => {
   });
 
   it('closes Calendar component when focused outside', async () => {
-    const root = document.createElement('div');
-    document.body.appendChild(root);
-
-    const { container } = render(<DateRangePicker isOpen />, { attachTo: root });
+    const { container } = render(<DateRangePicker isOpen />);
 
     fireEvent.focusIn(document.body);
 
@@ -454,10 +448,7 @@ describe('DateRangePicker', () => {
   });
 
   it('closes Calendar component when tapped outside', async () => {
-    const root = document.createElement('div');
-    document.body.appendChild(root);
-
-    const { container } = render(<DateRangePicker isOpen />, { attachTo: root });
+    const { container } = render(<DateRangePicker isOpen />);
 
     fireEvent.touchStart(document.body);
 
