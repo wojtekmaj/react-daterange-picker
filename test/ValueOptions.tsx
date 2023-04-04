@@ -2,43 +2,47 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getDayStart, getDayEnd, getISOLocalDate } from '@wojtekmaj/date-utils';
 
-export default function ValueOptions({ setValue, value }) {
-  const startDate = [].concat(value)[0];
-  const endDate = [].concat(value)[1];
+import type { LooseValue } from './shared/types';
 
-  function setStartValue(startValue) {
-    if (!startValue) {
-      setValue(value[1] || startValue);
+type ValueOptionsProps = {
+  setValue: (value: LooseValue) => void;
+  value?: LooseValue;
+};
+
+export default function ValueOptions({ setValue, value }: ValueOptionsProps) {
+  const [startDate, endDate] = Array.isArray(value) ? value : [value, null];
+
+  function setStartValue(nextStartDate: string | Date | null) {
+    if (!nextStartDate) {
+      setValue(endDate);
       return;
     }
 
     if (Array.isArray(value)) {
-      setValue([startValue, value[1]]);
+      setValue([nextStartDate, endDate]);
     } else {
-      setValue(startValue);
+      setValue(nextStartDate);
     }
   }
 
-  function setEndValue(endValue) {
-    if (!endValue) {
-      setValue(value[0]);
+  function setEndValue(nextEndDate: string | Date | null) {
+    if (!nextEndDate) {
+      setValue(startDate || null);
       return;
     }
 
-    if (Array.isArray(value)) {
-      setValue([value[0], endValue]);
-    } else {
-      setValue([value, endValue]);
-    }
+    setValue([startDate || null, nextEndDate]);
   }
 
-  function onStartChange(event) {
+  function onStartChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { value: nextValue } = event.target;
+
     setStartValue(nextValue ? getDayStart(new Date(nextValue)) : null);
   }
 
-  function onEndChange(event) {
+  function onEndChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { value: nextValue } = event.target;
+
     setEndValue(nextValue ? getDayEnd(new Date(nextValue)) : null);
   }
 
@@ -52,7 +56,11 @@ export default function ValueOptions({ setValue, value }) {
           id="startDate"
           onChange={onStartChange}
           type="date"
-          value={startDate ? getISOLocalDate(startDate) : ''}
+          value={
+            startDate && startDate instanceof Date
+              ? getISOLocalDate(startDate)
+              : startDate || undefined
+          }
         />
         &nbsp;
         <button onClick={() => setStartValue(null)} type="button">
@@ -69,7 +77,9 @@ export default function ValueOptions({ setValue, value }) {
           id="endDate"
           onChange={onEndChange}
           type="date"
-          value={endDate ? getISOLocalDate(endDate) : ''}
+          value={
+            endDate && endDate instanceof Date ? getISOLocalDate(endDate) : endDate || undefined
+          }
         />
         &nbsp;
         <button onClick={() => setEndValue(null)} type="button">
