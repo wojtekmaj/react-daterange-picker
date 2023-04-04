@@ -10,7 +10,7 @@ import DateInput from 'react-date-picker/dist/cjs/DateInput';
 
 import { isMaxDate, isMinDate } from './shared/propTypes';
 
-import type { ClassName, Detail, LooseValue } from './shared/types';
+import type { ClassName, Detail, LooseValue, Value } from './shared/types';
 
 const baseClassName = 'react-daterange-picker';
 const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'];
@@ -77,7 +77,7 @@ type DateRangePickerProps = {
   nativeInputAriaLabel?: string;
   onCalendarClose?: () => void;
   onCalendarOpen?: () => void;
-  onChange?: (value: Date | null | (Date | null)[]) => void;
+  onChange?: (value: Value) => void;
   onFocus?: (event: React.FocusEvent<HTMLDivElement>) => void;
   openCalendarOnFocus?: boolean;
   portalContainer?: HTMLElement;
@@ -160,10 +160,7 @@ export default function DateRangePicker(props: DateRangePickerProps) {
     }
   }
 
-  function onChange(
-    value: Date | null | (Date | null)[],
-    shouldCloseCalendar = shouldCloseCalendarProps,
-  ) {
+  function onChange(value: Value, shouldCloseCalendar = shouldCloseCalendarProps) {
     if (shouldCloseCalendar) {
       closeCalendar();
     }
@@ -173,7 +170,7 @@ export default function DateRangePicker(props: DateRangePickerProps) {
     }
   }
 
-  function onChangeFrom(nextValue: Date | null | (Date | null)[], closeCalendar: boolean) {
+  function onChangeFrom(nextValue: Value, closeCalendar: boolean) {
     const [nextValueFrom] = Array.isArray(nextValue) ? nextValue : [nextValue];
     const [, valueTo] = Array.isArray(value) ? value : [value];
 
@@ -182,7 +179,7 @@ export default function DateRangePicker(props: DateRangePickerProps) {
     onChange([nextValueFrom || null, valueToDate], closeCalendar);
   }
 
-  function onChangeTo(nextValue: Date | null | (Date | null)[], closeCalendar: boolean) {
+  function onChangeTo(nextValue: Value, closeCalendar: boolean) {
     const [, nextValueTo] = Array.isArray(nextValue) ? nextValue : [null, nextValue];
     const [valueFrom] = Array.isArray(value) ? value : [value];
 
