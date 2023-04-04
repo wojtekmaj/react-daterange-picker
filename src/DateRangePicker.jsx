@@ -365,6 +365,8 @@ export default function DateRangePicker(props) {
 
 const isValue = PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]);
 
+const isValueOrValueArray = PropTypes.oneOfType([isValue, PropTypes.arrayOf(isValue)]);
+
 DateRangePicker.propTypes = {
   autoFocus: PropTypes.bool,
   calendarAriaLabel: PropTypes.string,
@@ -399,7 +401,7 @@ DateRangePicker.propTypes = {
   rangeDivider: PropTypes.node,
   required: PropTypes.bool,
   showLeadingZeros: PropTypes.bool,
-  value: PropTypes.oneOfType([isValue, PropTypes.arrayOf(isValue)]),
+  value: isValueOrValueArray,
   yearAriaLabel: PropTypes.string,
   yearPlaceholder: PropTypes.string,
 };
