@@ -323,7 +323,7 @@ describe('DateRangePicker', () => {
 
     const calendar = container.querySelector('.react-calendar');
 
-    expect(calendar).toBeInTheDocument(1);
+    expect(calendar).toBeInTheDocument();
   });
 
   it('does not render Calendar component when given disableCalendar & isOpen flags', () => {
