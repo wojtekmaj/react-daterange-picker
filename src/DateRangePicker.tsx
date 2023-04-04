@@ -10,6 +10,8 @@ import DateInput from 'react-date-picker/dist/cjs/DateInput';
 
 import { isMaxDate, isMinDate } from './shared/propTypes';
 
+import type { ClassName, Detail, LooseValue } from './shared/types';
+
 const baseClassName = 'react-daterange-picker';
 const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'];
 const allViews = ['century', 'decade', 'year', 'month'];
@@ -44,7 +46,50 @@ const ClearIcon = (
   </svg>
 );
 
-export default function DateRangePicker(props) {
+type Icon = React.ReactElement | string;
+
+type IconOrRenderFunction = Icon | React.ComponentType | React.ReactElement;
+
+type DateRangePickerProps = {
+  autoFocus?: boolean;
+  calendarAriaLabel?: string;
+  calendarClassName?: ClassName;
+  calendarIcon?: IconOrRenderFunction;
+  className?: ClassName;
+  clearAriaLabel?: string;
+  clearIcon?: IconOrRenderFunction;
+  closeCalendar?: boolean;
+  'data-testid'?: string;
+  dayAriaLabel?: string;
+  dayPlaceholder?: string;
+  disableCalendar?: boolean;
+  disabled?: boolean;
+  format?: string;
+  id?: string;
+  isOpen?: boolean;
+  locale?: string;
+  maxDate?: Date;
+  maxDetail?: Detail;
+  minDate?: Date;
+  monthAriaLabel?: string;
+  monthPlaceholder?: string;
+  name?: string;
+  nativeInputAriaLabel?: string;
+  onCalendarClose?: () => void;
+  onCalendarOpen?: () => void;
+  onChange?: (value: Date | null | (Date | null)[]) => void;
+  onFocus?: (event: React.FocusEvent<HTMLDivElement>) => void;
+  openCalendarOnFocus?: boolean;
+  portalContainer?: HTMLElement;
+  rangeDivider?: React.ReactNode;
+  required?: boolean;
+  showLeadingZeros?: boolean;
+  value?: LooseValue;
+  yearAriaLabel?: string;
+  yearPlaceholder?: string;
+};
+
+export default function DateRangePicker(props: DateRangePickerProps) {
   const {
     autoFocus,
     calendarAriaLabel,
@@ -84,8 +129,8 @@ export default function DateRangePicker(props) {
   } = props;
 
   const [isOpen, setIsOpen] = useState(isOpenProps);
-  const wrapper = useRef();
-  const calendarWrapper = useRef();
+  const wrapper = useRef<HTMLDivElement>(null);
+  const calendarWrapper = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsOpen(isOpenProps);
@@ -115,7 +160,10 @@ export default function DateRangePicker(props) {
     }
   }
 
-  function onChange(value, shouldCloseCalendar = shouldCloseCalendarProps) {
+  function onChange(
+    value: Date | null | (Date | null)[],
+    shouldCloseCalendar = shouldCloseCalendarProps,
+  ) {
     if (shouldCloseCalendar) {
       closeCalendar();
     }
@@ -125,19 +173,25 @@ export default function DateRangePicker(props) {
     }
   }
 
-  function onChangeFrom(valueFrom, closeCalendar) {
-    const [, valueTo] = [].concat(value);
+  function onChangeFrom(nextValue: Date | null | (Date | null)[], closeCalendar: boolean) {
+    const [nextValueFrom] = Array.isArray(nextValue) ? nextValue : [nextValue];
+    const [, valueTo] = Array.isArray(value) ? value : [value];
 
-    onChange([valueFrom, valueTo], closeCalendar);
+    const valueToDate = valueTo ? new Date(valueTo) : null;
+
+    onChange([nextValueFrom || null, valueToDate], closeCalendar);
   }
 
-  function onChangeTo(valueTo, closeCalendar) {
-    const [valueFrom] = [].concat(value);
+  function onChangeTo(nextValue: Date | null | (Date | null)[], closeCalendar: boolean) {
+    const [, nextValueTo] = Array.isArray(nextValue) ? nextValue : [null, nextValue];
+    const [valueFrom] = Array.isArray(value) ? value : [value];
 
-    onChange([valueFrom, valueTo], closeCalendar);
+    const valueFromDate = valueFrom ? new Date(valueFrom) : null;
+
+    onChange([valueFromDate, nextValueTo || null], closeCalendar);
   }
 
-  function onFocus(event) {
+  function onFocus(event: React.FocusEvent<HTMLInputElement>) {
     if (onFocusProps) {
       onFocusProps(event);
     }
@@ -156,7 +210,7 @@ export default function DateRangePicker(props) {
   }
 
   const onKeyDown = useCallback(
-    (event) => {
+    (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         closeCalendar();
       }
@@ -168,17 +222,19 @@ export default function DateRangePicker(props) {
     onChange(null);
   }
 
-  function stopPropagation(event) {
+  function stopPropagation(event: React.FocusEvent) {
     event.stopPropagation();
   }
 
   const onOutsideAction = useCallback(
-    (event) => {
+    (event: Event) => {
       const { current: wrapperEl } = wrapper;
       const { current: calendarWrapperEl } = calendarWrapper;
 
       // Try event.composedPath first to handle clicks inside a Shadow DOM.
-      const target = 'composedPath' in event ? event.composedPath()[0] : event.target;
+      const target = (
+        'composedPath' in event ? event.composedPath()[0] : (event as Event).target
+      ) as HTMLElement;
 
       if (
         target &&
@@ -194,13 +250,19 @@ export default function DateRangePicker(props) {
 
   const handleOutsideActionListeners = useCallback(
     (shouldListen = isOpen) => {
-      const action = shouldListen ? 'addEventListener' : 'removeEventListener';
-
       outsideActionEvents.forEach((event) => {
-        document[action](event, onOutsideAction);
+        if (shouldListen) {
+          document.addEventListener(event, onOutsideAction);
+        } else {
+          document.removeEventListener(event, onOutsideAction);
+        }
       });
 
-      document[action]('keydown', onKeyDown);
+      if (shouldListen) {
+        document.addEventListener('keydown', onKeyDown);
+      } else {
+        document.removeEventListener('keydown', onKeyDown);
+      }
     },
     [isOpen, onOutsideAction, onKeyDown],
   );
@@ -214,7 +276,7 @@ export default function DateRangePicker(props) {
   }, [handleOutsideActionListeners, isOpen]);
 
   function renderInputs() {
-    const [valueFrom, valueTo] = [].concat(value);
+    const [valueFrom, valueTo] = Array.isArray(value) ? value : [value];
 
     const ariaLabelProps = {
       dayAriaLabel,
@@ -313,7 +375,7 @@ export default function DateRangePicker(props) {
         className={calendarClassName}
         onChange={(value) => onChange(value)}
         selectRange
-        value={value || null}
+        value={value}
         {...calendarProps}
       />
     );
