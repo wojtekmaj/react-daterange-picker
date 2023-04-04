@@ -80,7 +80,7 @@ type DateRangePickerProps = {
   onChange?: (value: Value) => void;
   onFocus?: (event: React.FocusEvent<HTMLDivElement>) => void;
   openCalendarOnFocus?: boolean;
-  portalContainer?: HTMLElement;
+  portalContainer?: HTMLElement | null;
   rangeDivider?: React.ReactNode;
   required?: boolean;
   showLeadingZeros?: boolean;
