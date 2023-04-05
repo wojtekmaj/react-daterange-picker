@@ -176,7 +176,7 @@ export default function DateRangePicker(props: DateRangePickerProps) {
 
     const valueToDate = valueTo ? new Date(valueTo) : null;
 
-    onChange([nextValueFrom || null, valueToDate], closeCalendar);
+    onChange([nextValueFrom, valueToDate], closeCalendar);
   }
 
   function onChangeTo(nextValue: Value, closeCalendar: boolean) {
@@ -185,7 +185,7 @@ export default function DateRangePicker(props: DateRangePickerProps) {
 
     const valueFromDate = valueFrom ? new Date(valueFrom) : null;
 
-    onChange([valueFromDate, nextValueTo || null], closeCalendar);
+    onChange([valueFromDate, nextValueTo], closeCalendar);
   }
 
   function onFocus(event: React.FocusEvent<HTMLInputElement>) {
