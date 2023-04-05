@@ -87,7 +87,7 @@ type DateRangePickerProps = {
   value?: LooseValue;
   yearAriaLabel?: string;
   yearPlaceholder?: string;
-};
+} & Omit<React.ComponentPropsWithoutRef<typeof Calendar>, 'className' | 'maxDetail' | 'onChange'>;
 
 export default function DateRangePicker(props: DateRangePickerProps) {
   const {
