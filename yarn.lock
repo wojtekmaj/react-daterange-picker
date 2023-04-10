@@ -4011,8 +4011,8 @@ __metadata:
   linkType: hard
 
 "react-date-picker@npm:^10.0.1":
-  version: 10.0.1
-  resolution: "react-date-picker@npm:10.0.1"
+  version: 10.0.2
+  resolution: "react-date-picker@npm:10.0.2"
   dependencies:
     "@wojtekmaj/date-utils": ^1.1.3
     clsx: ^1.2.1
@@ -4025,7 +4025,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: eb2fdc9b8d843ec49a87e9776367c8952f4fd941d52dae069551c13f9752498fa71daa0f204aae82e759586e2c51d2b4ef48b1b915ca2f1ddb7be73fc4ea20fa
+  checksum: 04bc0a665a81da56e25e644fac8a04d910d6f352840b65f74d578582399e0baf07b3ce9b0d29ed67898f122952f48207456e9f9d6c3afef6560b18790c3ff7d2
   languageName: node
   linkType: hard
 
