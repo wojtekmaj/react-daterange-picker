@@ -54,10 +54,10 @@ type DateRangePickerProps = {
   autoFocus?: boolean;
   calendarAriaLabel?: string;
   calendarClassName?: ClassName;
-  calendarIcon?: IconOrRenderFunction;
+  calendarIcon?: IconOrRenderFunction | null;
   className?: ClassName;
   clearAriaLabel?: string;
-  clearIcon?: IconOrRenderFunction;
+  clearIcon?: IconOrRenderFunction | null;
   closeCalendar?: boolean;
   'data-testid'?: string;
   dayAriaLabel?: string;
