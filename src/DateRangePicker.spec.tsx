@@ -789,4 +789,26 @@ describe('DateRangePicker', () => {
       expect(onChange).toHaveBeenCalledWith([valueFrom, nextValueTo]);
     });
   });
+
+  it('calls onClick callback when clicked a page (sample of mouse events family)', () => {
+    const onClick = vi.fn();
+
+    const { container } = render(<DateRangePicker onClick={onClick} />);
+
+    const wrapper = container.firstElementChild as HTMLDivElement;
+    fireEvent.click(wrapper);
+
+    expect(onClick).toHaveBeenCalled();
+  });
+
+  it('calls onTouchStart callback when touched a page (sample of touch events family)', () => {
+    const onTouchStart = vi.fn();
+
+    const { container } = render(<DateRangePicker onTouchStart={onTouchStart} />);
+
+    const wrapper = container.firstElementChild as HTMLDivElement;
+    fireEvent.touchStart(wrapper);
+
+    expect(onTouchStart).toHaveBeenCalled();
+  });
 });
