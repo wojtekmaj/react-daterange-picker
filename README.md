@@ -73,10 +73,6 @@ import '@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css';
 import 'react-calendar/dist/Calendar.css';
 ```
 
-### Next.js and Vite
-
-Next.js and Vite do not allow components from `node_modules` to import styles. You'll need to follow instructions from [Custom styling](#custom-styling) to get going.
-
 ## User guide
 
 ### DateRangePicker
