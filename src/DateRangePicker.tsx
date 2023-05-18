@@ -57,7 +57,7 @@ type CalendarProps = Omit<
 
 type EventProps = ReturnType<typeof makeEventProps>;
 
-type DateRangePickerProps = {
+export type DateRangePickerProps = {
   autoFocus?: boolean;
   calendarAriaLabel?: string;
   calendarClassName?: ClassName;
