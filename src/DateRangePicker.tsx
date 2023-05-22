@@ -97,7 +97,7 @@ export type DateRangePickerProps = {
   yearAriaLabel?: string;
   yearPlaceholder?: string;
 } & CalendarProps &
-  EventProps;
+  Omit<EventProps, 'onChange' | 'onFocus'>;
 
 export default function DateRangePicker(props: DateRangePickerProps) {
   const {
