@@ -86,6 +86,7 @@ export type DateRangePickerProps = {
   onCalendarOpen?: () => void;
   onChange?: (value: Value) => void;
   onFocus?: (event: React.FocusEvent<HTMLDivElement>) => void;
+  onInvalidChange?: () => void;
   openCalendarOnFocus?: boolean;
   portalContainer?: HTMLElement | null;
   rangeDivider?: React.ReactNode;
@@ -128,6 +129,7 @@ export default function DateRangePicker(props: DateRangePickerProps) {
     onCalendarOpen,
     onChange: onChangeProps,
     onFocus: onFocusProps,
+    onInvalidChange,
     openCalendarOnFocus = true,
     rangeDivider = '–',
     required,
@@ -326,6 +328,7 @@ export default function DateRangePicker(props: DateRangePickerProps) {
       maxDate,
       maxDetail,
       minDate,
+      onInvalidChange,
       required,
       showLeadingZeros,
     };

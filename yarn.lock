@@ -808,7 +808,7 @@ __metadata:
     prop-types: ^15.6.0
     react: ^18.2.0
     react-calendar: ^4.2.1
-    react-date-picker: ^10.0.1
+    react-date-picker: ^10.2.0
     react-dom: ^18.2.0
     react-fit: ^1.5.1
     rimraf: ^3.0.0
@@ -4047,9 +4047,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-date-picker@npm:^10.0.1":
-  version: 10.0.1
-  resolution: "react-date-picker@npm:10.0.1"
+"react-date-picker@npm:^10.2.0":
+  version: 10.2.0
+  resolution: "react-date-picker@npm:10.2.0"
   dependencies:
     "@wojtekmaj/date-utils": ^1.1.3
     clsx: ^1.2.1
@@ -4062,7 +4062,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: eb2fdc9b8d843ec49a87e9776367c8952f4fd941d52dae069551c13f9752498fa71daa0f204aae82e759586e2c51d2b4ef48b1b915ca2f1ddb7be73fc4ea20fa
+  checksum: 0aaf5b7bbab59113aec542e3b807d33335a9758739797fa9bf54433f3754b8e24a36b1a53814f344a1841df64888fa0cfdc6423155533aa64ff34d0d03c6d6bd
   languageName: node
   linkType: hard
 
