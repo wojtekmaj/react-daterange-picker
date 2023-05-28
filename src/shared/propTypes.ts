@@ -1,4 +1,10 @@
-export function isMinDate(props: Record<string, unknown>, propName: string, componentName: string) {
+import type { Validator } from 'prop-types';
+
+export const isMinDate: Validator<Date | null | undefined> = function isMinDate(
+  props,
+  propName,
+  componentName,
+) {
   const { [propName]: minDate } = props;
 
   if (!minDate) {
@@ -20,9 +26,13 @@ export function isMinDate(props: Record<string, unknown>, propName: string, comp
   }
 
   return null;
-}
+};
 
-export function isMaxDate(props: Record<string, unknown>, propName: string, componentName: string) {
+export const isMaxDate: Validator<Date | null | undefined> = function isMaxDate(
+  props,
+  propName,
+  componentName,
+) {
   const { [propName]: maxDate } = props;
 
   if (!maxDate) {
@@ -44,4 +54,4 @@ export function isMaxDate(props: Record<string, unknown>, propName: string, comp
   }
 
   return null;
-}
+};
