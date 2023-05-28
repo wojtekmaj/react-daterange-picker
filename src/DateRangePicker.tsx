@@ -8,7 +8,7 @@ import Fit from 'react-fit';
 
 import DateInput from 'react-date-picker/dist/cjs/DateInput';
 
-import { isMaxDate, isMinDate } from './shared/propTypes';
+import { isMaxDate, isMinDate, rangeOf } from './shared/propTypes';
 
 import type { ClassName, CloseReason, Detail, LooseValue, OpenReason, Value } from './shared/types';
 
@@ -454,7 +454,7 @@ export default function DateRangePicker(props: DateRangePickerProps) {
 
 const isValue = PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]);
 
-const isValueOrValueArray = PropTypes.oneOfType([isValue, PropTypes.arrayOf(isValue)]);
+const isValueOrValueArray = PropTypes.oneOfType([isValue, rangeOf(isValue)]);
 
 DateRangePicker.propTypes = {
   autoFocus: PropTypes.bool,
