@@ -49,12 +49,16 @@ Add React-DateRange-Picker to your project by executing `npm install @wojtekmaj/
 
 Here's an example of basic usage:
 
-```js
-import React, { useState } from 'react';
+```tsx
+import { useState } from 'react';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 
+type ValuePiece = Date | null;
+
+type Value = ValuePiece | [ValuePiece, ValuePiece];
+
 function MyApp() {
-  const [value, onChange] = useState([new Date(), new Date()]);
+  const [value, onChange] = useState<Value>([new Date(), new Date()]);
 
   return (
     <div>
@@ -68,7 +72,7 @@ function MyApp() {
 
 If you want to use default React-DateRange-Picker and React-Calendar styling to build upon it, you can import them by using:
 
-```js
+```ts
 import '@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css';
 import 'react-calendar/dist/Calendar.css';
 ```
