@@ -17,7 +17,7 @@ import type { ClassName, CloseReason, Detail, LooseValue, OpenReason, Value } fr
 
 const baseClassName = 'react-daterange-picker';
 const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'];
-const allViews = ['century', 'decade', 'year', 'month'];
+const allViews = ['century', 'decade', 'year', 'month'] as const;
 
 const iconProps = {
   xmlns: 'http://www.w3.org/2000/svg',
@@ -489,7 +489,7 @@ DateRangePicker.propTypes = {
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
   openCalendarOnFocus: PropTypes.bool,
-  portalContainer: PropTypes.object,
+  portalContainer: PropTypes.instanceOf(HTMLElement),
   rangeDivider: PropTypes.node,
   required: PropTypes.bool,
   showLeadingZeros: PropTypes.bool,
