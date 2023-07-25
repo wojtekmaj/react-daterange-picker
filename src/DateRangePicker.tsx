@@ -16,7 +16,7 @@ import type { ReactNodeArray } from 'prop-types';
 import type { ClassName, CloseReason, Detail, LooseValue, OpenReason, Value } from './shared/types';
 
 const baseClassName = 'react-daterange-picker';
-const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'];
+const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'] as const;
 const allViews = ['century', 'decade', 'year', 'month'] as const;
 
 const iconProps = {
