@@ -103,7 +103,7 @@ export type DateRangePickerProps = {
 } & CalendarProps &
   Omit<EventProps, 'onChange' | 'onFocus'>;
 
-export default function DateRangePicker(props: DateRangePickerProps) {
+const DateRangePicker: React.FC<DateRangePickerProps> = function DateRangePicker(props) {
   const {
     autoFocus,
     calendarAriaLabel,
@@ -453,7 +453,7 @@ export default function DateRangePicker(props: DateRangePickerProps) {
       {renderCalendar()}
     </div>
   );
-}
+};
 
 const isValue = PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]);
 
@@ -497,3 +497,5 @@ DateRangePicker.propTypes = {
   yearAriaLabel: PropTypes.string,
   yearPlaceholder: PropTypes.string,
 };
+
+export default DateRangePicker;
