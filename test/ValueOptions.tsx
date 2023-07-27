@@ -1,7 +1,7 @@
 import React from 'react';
 import { getDayStart, getDayEnd, getISOLocalDate } from '@wojtekmaj/date-utils';
 
-import type { LooseValue } from './shared/types';
+import type { LooseValue } from './shared/types.js';
 
 type ValueOptionsProps = {
   setValue: (value: LooseValue) => void;
