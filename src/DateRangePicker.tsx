@@ -8,7 +8,7 @@ import clsx from 'clsx';
 import Calendar from 'react-calendar';
 import Fit from 'react-fit';
 
-import DateInput from 'react-date-picker/dist/cjs/DateInput';
+import DateInput from 'react-date-picker/dist/esm/DateInput';
 
 import { isMaxDate, isMinDate, rangeOf } from './shared/propTypes.js';
 
