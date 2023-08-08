@@ -498,7 +498,6 @@ DateRangePicker.propTypes = {
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
   openCalendarOnFocus: PropTypes.bool,
-  portalContainer: isBrowser ? PropTypes.instanceOf(HTMLElement) : undefined,
   rangeDivider: PropTypes.node,
   required: PropTypes.bool,
   showLeadingZeros: PropTypes.bool,
@@ -506,5 +505,9 @@ DateRangePicker.propTypes = {
   yearAriaLabel: PropTypes.string,
   yearPlaceholder: PropTypes.string,
 };
+
+if (isBrowser) {
+  DateRangePicker.propTypes.portalContainer = PropTypes.instanceOf(HTMLElement);
+}
 
 export default DateRangePicker;
