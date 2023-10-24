@@ -18,7 +18,7 @@ A date range picker for your React app.
 
 A minimal demo page can be found in `sample` directory.
 
-[Online demo](http://projects.wojtekmaj.pl/react-daterange-picker/) is also available!
+[Online demo](https://projects.wojtekmaj.pl/react-daterange-picker/) is also available!
 
 ## Looking for a time picker or a datetime picker?
 
