@@ -599,6 +599,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = function DateRangePicker
         )}
         {calendarIcon !== null && !disableCalendar && (
           <button
+            aria-expanded={isOpen || false}
             aria-label={calendarAriaLabel}
             className={`${baseClassName}__calendar-button ${baseClassName}__button`}
             disabled={disabled}
