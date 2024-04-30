@@ -41,6 +41,7 @@
 .react-daterange-picker__inputGroup__divider,
 .react-daterange-picker__inputGroup__leadingZero {
   display: inline-block;
+  font: inherit;
 }
 
 .react-daterange-picker__inputGroup__input {
