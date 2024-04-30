@@ -103,7 +103,12 @@ export default function Test() {
             <DateRangePicker
               {...ariaLabelProps}
               {...placeholderProps}
-              calendarClassName="myCustomCalendarClassName"
+              calendarProps={{
+                className: 'myCustomCalendarClassName',
+                minDetail,
+                showNeighboringMonth,
+                showWeekNumbers,
+              }}
               className="myCustomDateRangePickerClassName"
               data-testid="myCustomDateRangePicker"
               disabled={disabled}
@@ -111,7 +116,6 @@ export default function Test() {
               maxDate={maxDate}
               maxDetail={maxDetail}
               minDate={minDate}
-              minDetail={minDetail}
               name="myCustomName"
               onCalendarClose={() => console.log('Calendar closed')}
               onCalendarOpen={() => console.log('Calendar opened')}
@@ -119,8 +123,6 @@ export default function Test() {
               portalContainer={renderInPortal ? portalContainer.current : undefined}
               required={required}
               showLeadingZeros={showLeadingZeros}
-              showNeighboringMonth={showNeighboringMonth}
-              showWeekNumbers={showWeekNumbers}
               value={value}
             />
             <div ref={portalContainer} />

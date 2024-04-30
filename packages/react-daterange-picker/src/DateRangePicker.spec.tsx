@@ -191,7 +191,9 @@ describe('DateRangePicker', () => {
   it('applies calendarClassName to the calendar when given a string', () => {
     const calendarClassName = 'testClassName';
 
-    const { container } = render(<DateRangePicker calendarClassName={calendarClassName} isOpen />);
+    const { container } = render(
+      <DateRangePicker calendarProps={{ className: calendarClassName }} isOpen />,
+    );
 
     const calendar = container.querySelector('.react-calendar');
 

@@ -59,7 +59,7 @@ type IconOrRenderFunction = Icon | React.ComponentType | React.ReactElement;
 
 type CalendarProps = Omit<
   React.ComponentPropsWithoutRef<typeof Calendar>,
-  'className' | 'maxDetail' | 'onChange'
+  'onChange' | 'selectRange' | 'value'
 >;
 
 type EventProps = ReturnType<typeof makeEventProps>;
@@ -78,13 +78,6 @@ export type DateRangePickerProps = {
    */
   calendarAriaLabel?: string;
   /**
-   * Class name(s) that will be added along with `"react-calendar"` to the main React-Calendar `<div>` element.
-   *
-   * @example 'class1 class2'
-   * @example ['class1', 'class2 class3']
-   */
-  calendarClassName?: ClassName;
-  /**
    * Content of the calendar button. Setting the value explicitly to `null` will hide the icon.
    *
    * @example 'Calendar'
@@ -92,6 +85,10 @@ export type DateRangePickerProps = {
    * @example CalendarIcon
    */
   calendarIcon?: IconOrRenderFunction | null;
+  /**
+   * Props to pass to React-Calendar component.
+   */
+  calendarProps?: CalendarProps;
   /**
    * Class name(s) that will be added along with `"react-daterange-picker"` to the main React-DateRange-Picker `<div>` element.
    *
@@ -325,8 +322,7 @@ export type DateRangePickerProps = {
    * @example 'yyyy'
    */
   yearPlaceholder?: string;
-} & CalendarProps &
-  Omit<EventProps, 'onChange' | 'onFocus'>;
+} & Omit<EventProps, 'onChange' | 'onFocus'>;
 
 export default function DateRangePicker(props: DateRangePickerProps) {
   const {
@@ -614,21 +610,17 @@ export default function DateRangePicker(props: DateRangePickerProps) {
       return null;
     }
 
-    const {
-      calendarClassName,
-      className: dateRangePickerClassName, // Unused, here to exclude it from calendarProps
-      onChange: onChangeProps, // Unused, here to exclude it from calendarProps
-      portalContainer,
-      value,
-      ...calendarProps
-    } = props;
+    const { calendarProps, portalContainer, value } = props;
 
     const className = `${baseClassName}__calendar`;
     const classNames = clsx(className, `${className}--${isOpen ? 'open' : 'closed'}`);
 
     const calendar = (
       <Calendar
-        className={calendarClassName}
+        locale={locale}
+        maxDate={maxDate}
+        maxDetail={maxDetail}
+        minDate={minDate}
         onChange={(value) => onChange(value)}
         selectRange
         value={value}
