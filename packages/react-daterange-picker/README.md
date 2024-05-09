@@ -46,10 +46,6 @@ Your project needs to use React 16.3 or later. If you use an older version of Re
 
 [React-Calendar](https://github.com/wojtekmaj/react-calendar), on which React-DateRange-Picker relies heavily, uses modern web technologies. That's why it's so fast, lightweight and easy to style. This, however, comes at a cost of [supporting only modern browsers](https://caniuse.com/#feat=internationalization).
 
-#### Legacy browsers
-
-If you need to support legacy browsers like Internet Explorer 10, you will need to use [Intl.js](https://github.com/andyearnshaw/Intl.js/) or another Intl polyfill along with React-DateRange-Picker.
-
 ### Installation
 
 Add React-DateRange-Picker to your project by executing `npm install @wojtekmaj/react-daterange-picker` or `yarn add @wojtekmaj/react-daterange-picker`.
