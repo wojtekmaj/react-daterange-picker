@@ -31,8 +31,6 @@ const placeholderProps = {
   yearPlaceholder: 'yyyy',
 };
 
-/* eslint-disable no-console */
-
 const nineteenNinetyFive = new Date(1995, now.getUTCMonth() + 1, 15, 12);
 const fifteenthOfNextMonth = new Date(now.getUTCFullYear(), now.getUTCMonth() + 1, 15, 12);
 

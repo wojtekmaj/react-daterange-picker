@@ -31,6 +31,7 @@ const iconProps = {
 };
 
 const CalendarIcon = (
+  // biome-ignore lint/a11y/noSvgWithoutTitle: Purely decorative icon
   <svg
     {...iconProps}
     className={`${baseClassName}__calendar-button__icon ${baseClassName}__button__icon`}
@@ -42,6 +43,7 @@ const CalendarIcon = (
 );
 
 const ClearIcon = (
+  // biome-ignore lint/a11y/noSvgWithoutTitle: Purely decorative icon
   <svg
     {...iconProps}
     className={`${baseClassName}__clear-button__icon ${baseClassName}__button__icon`}
@@ -517,6 +519,7 @@ export default function DateRangePicker(props: DateRangePickerProps) {
     [isOpen, onOutsideAction, onKeyDown],
   );
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: useEffect intentionally triggered on isOpen change
   useEffect(() => {
     handleOutsideActionListeners();
 
@@ -561,7 +564,6 @@ export default function DateRangePicker(props: DateRangePickerProps) {
       <div className={`${baseClassName}__wrapper`}>
         <DateInput
           {...commonProps}
-          // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus={autoFocus}
           name={`${name}_from`}
           onChange={onChangeFrom}
@@ -651,7 +653,11 @@ export default function DateRangePicker(props: DateRangePickerProps) {
     );
   }
 
-  const eventProps = useMemo(() => makeEventProps(otherProps), [otherProps]);
+  const eventProps = useMemo(
+    () => makeEventProps(otherProps),
+    // biome-ignore lint/correctness/useExhaustiveDependencies: FIXME
+    [otherProps],
+  );
 
   return (
     <div
