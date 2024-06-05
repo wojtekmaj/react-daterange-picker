@@ -495,18 +495,18 @@ export default function DateRangePicker(props: DateRangePickerProps) {
         closeCalendar({ reason: 'outsideAction' });
       }
     },
-    [calendarWrapper, closeCalendar, wrapper],
+    [closeCalendar],
   );
 
   const handleOutsideActionListeners = useCallback(
     (shouldListen = isOpen) => {
-      outsideActionEvents.forEach((event) => {
+      for (const event of outsideActionEvents) {
         if (shouldListen) {
           document.addEventListener(event, onOutsideAction);
         } else {
           document.removeEventListener(event, onOutsideAction);
         }
-      });
+      }
 
       if (shouldListen) {
         document.addEventListener('keydown', onKeyDown);
