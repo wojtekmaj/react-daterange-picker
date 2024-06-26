@@ -326,7 +326,7 @@ export type DateRangePickerProps = {
   yearPlaceholder?: string;
 } & Omit<EventProps, 'onChange' | 'onFocus'>;
 
-export default function DateRangePicker(props: DateRangePickerProps) {
+export default function DateRangePicker(props: DateRangePickerProps): React.ReactElement {
   const {
     autoFocus,
     calendarAriaLabel,
