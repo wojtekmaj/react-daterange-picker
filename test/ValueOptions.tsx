@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import { getDayStart, getDayEnd, getISOLocalDate } from '@wojtekmaj/date-utils';
 
 import type { LooseValue } from './shared/types.js';
@@ -8,6 +9,9 @@ type ValueOptionsProps = {
 };
 
 export default function ValueOptions({ setValue, value }: ValueOptionsProps) {
+  const startDateId = useId();
+  const endDateId = useId();
+
   const [startDate, endDate] = Array.isArray(value) ? value : [value, null];
 
   function setStartValue(nextStartDate: string | Date | null) {
@@ -49,9 +53,9 @@ export default function ValueOptions({ setValue, value }: ValueOptionsProps) {
       <legend>Value options</legend>
 
       <div>
-        <label htmlFor="startDate">Start date</label>
+        <label htmlFor={startDateId}>Start date</label>
         <input
-          id="startDate"
+          id={startDateId}
           onChange={onStartChange}
           type="date"
           value={
@@ -70,9 +74,9 @@ export default function ValueOptions({ setValue, value }: ValueOptionsProps) {
       </div>
 
       <div>
-        <label htmlFor="endDate">End date</label>
+        <label htmlFor={endDateId}>End date</label>
         <input
-          id="endDate"
+          id={endDateId}
           onChange={onEndChange}
           type="date"
           value={
