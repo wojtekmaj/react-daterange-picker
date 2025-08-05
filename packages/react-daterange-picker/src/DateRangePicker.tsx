@@ -2,12 +2,11 @@
 
 import { createElement, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import makeEventProps from 'make-event-props';
 import clsx from 'clsx';
+import makeEventProps from 'make-event-props';
 import Calendar from 'react-calendar';
-import Fit from 'react-fit';
-
 import DateInput from 'react-date-picker/dist/esm/DateInput';
+import Fit from 'react-fit';
 
 import type {
   ClassName,
