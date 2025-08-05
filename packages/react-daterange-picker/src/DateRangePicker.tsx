@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 import clsx from 'clsx';
 import makeEventProps from 'make-event-props';
 import Calendar from 'react-calendar';
-import DateInput from 'react-date-picker/dist/esm/DateInput';
+import DateInput from 'react-date-picker/dist/DateInput';
 import Fit from 'react-fit';
 
 import type {
