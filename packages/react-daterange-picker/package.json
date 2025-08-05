@@ -50,7 +50,7 @@
   "license": "MIT",
   "dependencies": {
     "clsx": "^2.0.0",
-    "make-event-props": "^1.6.0",
+    "make-event-props": "^2.0.0",
     "react-calendar": "^5.0.0",
     "react-date-picker": "^11.0.0",
     "react-fit": "^2.0.0"
