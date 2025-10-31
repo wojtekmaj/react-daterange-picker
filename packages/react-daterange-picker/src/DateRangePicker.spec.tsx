@@ -600,8 +600,8 @@ describe('DateRangePicker', () => {
 
     const dayInput = container.querySelector('input[name="day"]') as HTMLInputElement;
 
-    act(() => {
-      fireEvent.change(dayInput, { target: { value: '1' } });
+    await act(async () => {
+      await userEvent.fill(dayInput, '1');
     });
 
     const calendar = container.querySelector('.react-calendar');
@@ -617,8 +617,8 @@ describe('DateRangePicker', () => {
 
     const dayInput = container.querySelector('input[name="day"]') as HTMLInputElement;
 
-    act(() => {
-      fireEvent.change(dayInput, { target: { value: '1' } });
+    await act(async () => {
+      await userEvent.fill(dayInput, '1');
     });
 
     expect(onChange).toHaveBeenCalledWith([new Date(2023, 0, 1), null]);
@@ -634,8 +634,8 @@ describe('DateRangePicker', () => {
 
     const dayInput = container.querySelector('input[name="day"]') as HTMLInputElement;
 
-    act(() => {
-      fireEvent.change(dayInput, { target: { value: '32' } });
+    await act(async () => {
+      await userEvent.fill(dayInput, '32');
     });
 
     expect(onInvalidChange).toHaveBeenCalled();
@@ -671,16 +671,10 @@ describe('DateRangePicker', () => {
       const dayInput = customInputs[1] as HTMLInputElement;
       const yearInput = customInputs[2] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(monthInput, { target: { value: '2' } });
-      });
-
-      act(() => {
-        fireEvent.change(dayInput, { target: { value: '15' } });
-      });
-
-      act(() => {
-        fireEvent.change(yearInput, { target: { value: '2018' } });
+      await act(async () => {
+        await userEvent.fill(monthInput, '2');
+        await userEvent.fill(dayInput, '15');
+        await userEvent.fill(yearInput, '2018');
       });
 
       expect(onChange).toHaveBeenCalled();
@@ -700,16 +694,12 @@ describe('DateRangePicker', () => {
       const dayInput = customInputs[1] as HTMLInputElement;
       const yearInput = customInputs[2] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(monthInput, { target: { value: '2' } });
-      });
+      await act(async () => {
+        await userEvent.fill(monthInput, '2');
 
-      act(() => {
-        fireEvent.change(dayInput, { target: { value: '15' } });
-      });
+        await userEvent.fill(dayInput, '15');
 
-      act(() => {
-        fireEvent.change(yearInput, { target: { value: '2018' } });
+        await userEvent.fill(yearInput, '2018');
       });
 
       expect(onChange).toHaveBeenCalled();
@@ -731,16 +721,12 @@ describe('DateRangePicker', () => {
       const dayInput = customInputs[1] as HTMLInputElement;
       const yearInput = customInputs[2] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(monthInput, { target: { value: '2' } });
-      });
+      await act(async () => {
+        await userEvent.fill(monthInput, '2');
 
-      act(() => {
-        fireEvent.change(dayInput, { target: { value: '15' } });
-      });
+        await userEvent.fill(dayInput, '15');
 
-      act(() => {
-        fireEvent.change(yearInput, { target: { value: '2018' } });
+        await userEvent.fill(yearInput, '2018');
       });
 
       expect(onChange).toHaveBeenCalled();
@@ -763,16 +749,12 @@ describe('DateRangePicker', () => {
       const dayInput = customInputs[4] as HTMLInputElement;
       const yearInput = customInputs[5] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(dayInput, { target: { value: '15' } });
-      });
+      await act(async () => {
+        await userEvent.fill(dayInput, '15');
 
-      act(() => {
-        fireEvent.change(monthInput, { target: { value: '2' } });
-      });
+        await userEvent.fill(monthInput, '2');
 
-      act(() => {
-        fireEvent.change(yearInput, { target: { value: '2018' } });
+        await userEvent.fill(yearInput, '2018');
       });
 
       expect(onChange).toHaveBeenCalled();
@@ -794,16 +776,12 @@ describe('DateRangePicker', () => {
       const dayInput = customInputs[4] as HTMLInputElement;
       const yearInput = customInputs[5] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(dayInput, { target: { value: '15' } });
-      });
+      await act(async () => {
+        await userEvent.fill(dayInput, '15');
 
-      act(() => {
-        fireEvent.change(monthInput, { target: { value: '2' } });
-      });
+        await userEvent.fill(monthInput, '2');
 
-      act(() => {
-        fireEvent.change(yearInput, { target: { value: '2018' } });
+        await userEvent.fill(yearInput, '2018');
       });
 
       expect(onChange).toHaveBeenCalled();
@@ -827,16 +805,12 @@ describe('DateRangePicker', () => {
       const dayInput = customInputs[4] as HTMLInputElement;
       const yearInput = customInputs[5] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(dayInput, { target: { value: '15' } });
-      });
+      await act(async () => {
+        await userEvent.fill(dayInput, '15');
 
-      act(() => {
-        fireEvent.change(monthInput, { target: { value: '2' } });
-      });
+        await userEvent.fill(monthInput, '2');
 
-      act(() => {
-        fireEvent.change(yearInput, { target: { value: '2018' } });
+        await userEvent.fill(yearInput, '2018');
       });
 
       expect(onChange).toHaveBeenCalled();
