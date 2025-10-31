@@ -386,6 +386,15 @@ describe('DateRangePicker', () => {
     expect(calendar2).toBeInTheDocument();
   });
 
+  function triggerFocusEvent(element: HTMLElement) {
+    element.dispatchEvent(
+      new FocusEvent('focusin', { bubbles: true, cancelable: false, composed: true }),
+    );
+    element.dispatchEvent(
+      new FocusEvent('focus', { bubbles: false, cancelable: false, composed: true }),
+    );
+  }
+
   describe('handles opening Calendar component when focusing on an input inside properly', () => {
     it('opens Calendar component when focusing on an input inside by default', async () => {
       const { container } = await render(<DateRangePicker />);
@@ -396,7 +405,9 @@ describe('DateRangePicker', () => {
 
       const input = container.querySelector('input[name="day"]') as HTMLInputElement;
 
-      fireEvent.focus(input);
+      act(() => {
+        triggerFocusEvent(input);
+      });
 
       const calendar2 = container.querySelector('.react-calendar');
 
@@ -411,7 +422,9 @@ describe('DateRangePicker', () => {
 
       expect(calendar).toBeFalsy();
 
-      fireEvent.focus(input);
+      act(() => {
+        triggerFocusEvent(input);
+      });
 
       const calendar2 = container.querySelector('.react-calendar');
 
@@ -426,7 +439,9 @@ describe('DateRangePicker', () => {
 
       expect(calendar).toBeFalsy();
 
-      fireEvent.focus(input);
+      act(() => {
+        triggerFocusEvent(input);
+      });
 
       const calendar2 = container.querySelector('.react-calendar');
 
@@ -445,7 +460,7 @@ describe('DateRangePicker', () => {
 
       expect(calendar).toBeFalsy();
 
-      fireEvent.focus(input);
+      triggerFocusEvent(input);
 
       const calendar2 = container.querySelector('.react-calendar');
 
@@ -460,7 +475,7 @@ describe('DateRangePicker', () => {
 
       expect(calendar).toBeFalsy();
 
-      fireEvent.focus(select);
+      triggerFocusEvent(select);
 
       const calendar2 = container.querySelector('.react-calendar');
 
@@ -510,7 +525,7 @@ describe('DateRangePicker', () => {
     const dayInput = customInputs[1] as HTMLInputElement;
 
     fireEvent.blur(monthInput);
-    fireEvent.focus(dayInput);
+    triggerFocusEvent(dayInput);
 
     const calendar = container.querySelector('.react-calendar');
 
