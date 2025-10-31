@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { userEvent } from 'vitest/browser';
-import { act, fireEvent, render, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { render } from 'vitest-browser-react';
+import { act } from 'react-dom/test-utils';
 
 import DateRangePicker from './DateRangePicker.js';
 
@@ -8,19 +9,15 @@ async function waitForElementToBeRemovedOrHidden(callback: () => HTMLElement | n
   const element = callback();
 
   if (element) {
-    try {
-      await waitFor(() =>
-        expect(element).toHaveAttribute('class', expect.stringContaining('--closed')),
-      );
-    } catch {
-      await waitForElementToBeRemoved(element);
-    }
+    await vi.waitFor(() =>
+      expect(element).toHaveAttribute('class', expect.stringContaining('--closed')),
+    );
   }
 }
 
 describe('DateRangePicker', () => {
-  it('passes default name to DateInput components', () => {
-    const { container } = render(<DateRangePicker />);
+  it('passes default name to DateInput components', async () => {
+    const { container } = await render(<DateRangePicker />);
 
     const nativeInputs = container.querySelectorAll('input[type="date"]');
 
@@ -28,10 +25,10 @@ describe('DateRangePicker', () => {
     expect(nativeInputs[1]).toHaveAttribute('name', 'daterange_to');
   });
 
-  it('passes custom name to DateInput components', () => {
+  it('passes custom name to DateInput components', async () => {
     const name = 'testName';
 
-    const { container } = render(<DateRangePicker name={name} />);
+    const { container } = await render(<DateRangePicker name={name} />);
 
     const nativeInputs = container.querySelectorAll('input[type="date"]');
 
@@ -39,16 +36,16 @@ describe('DateRangePicker', () => {
     expect(nativeInputs[1]).toHaveAttribute('name', `${name}_to`);
   });
 
-  it('passes autoFocus flag to first DateInput component', () => {
-    const { container } = render(<DateRangePicker autoFocus />);
+  it('passes autoFocus flag to first DateInput component', async () => {
+    const { container } = await render(<DateRangePicker autoFocus />);
 
     const customInputs = container.querySelectorAll('input[data-input]');
 
     expect(customInputs[0]).toHaveFocus();
   });
 
-  it('passes disabled flag to DateInput components', () => {
-    const { container } = render(<DateRangePicker disabled />);
+  it('passes disabled flag to DateInput components', async () => {
+    const { container } = await render(<DateRangePicker disabled />);
 
     const nativeInputs = container.querySelectorAll('input[type="date"]');
 
@@ -56,8 +53,8 @@ describe('DateRangePicker', () => {
     expect(nativeInputs[1]).toBeDisabled();
   });
 
-  it('passes format to DateInput components', () => {
-    const { container } = render(<DateRangePicker format="yyyy" />);
+  it('passes format to DateInput components', async () => {
+    const { container } = await render(<DateRangePicker format="yyyy" />);
 
     const customInputs = container.querySelectorAll('input[data-input]');
 
@@ -66,7 +63,7 @@ describe('DateRangePicker', () => {
     expect(customInputs[1]).toHaveAttribute('name', 'year');
   });
 
-  it('passes aria-label props to DateInput components', () => {
+  it('passes aria-label props to DateInput components', async () => {
     const ariaLabelProps = {
       calendarAriaLabel: 'Toggle calendar',
       clearAriaLabel: 'Clear value',
@@ -76,7 +73,7 @@ describe('DateRangePicker', () => {
       yearAriaLabel: 'Year',
     };
 
-    const { container } = render(<DateRangePicker {...ariaLabelProps} />);
+    const { container } = await render(<DateRangePicker {...ariaLabelProps} />);
 
     const calendarButton = container.querySelector(
       'button.react-daterange-picker__calendar-button',
@@ -112,14 +109,14 @@ describe('DateRangePicker', () => {
     expect(yearToInput).toHaveAttribute('aria-label', ariaLabelProps.yearAriaLabel);
   });
 
-  it('passes placeholder props to DateInput components', () => {
+  it('passes placeholder props to DateInput components', async () => {
     const placeholderProps = {
       dayPlaceholder: 'dd',
       monthPlaceholder: 'mm',
       yearPlaceholder: 'yyyy',
     };
 
-    const { container } = render(<DateRangePicker {...placeholderProps} />);
+    const { container } = await render(<DateRangePicker {...placeholderProps} />);
 
     const dateInputs = container.querySelectorAll(
       '.react-daterange-picker__inputGroup',
@@ -145,10 +142,10 @@ describe('DateRangePicker', () => {
   });
 
   describe('passes value to DateInput components', () => {
-    it('passes single value to DateInput components', () => {
+    it('passes single value to DateInput components', async () => {
       const value = new Date(2019, 0, 1);
 
-      const { container } = render(<DateRangePicker value={value} />);
+      const { container } = await render(<DateRangePicker value={value} />);
 
       const nativeInputs = container.querySelectorAll('input[type="date"]');
 
@@ -156,11 +153,11 @@ describe('DateRangePicker', () => {
       expect(nativeInputs[1]).toHaveValue('');
     });
 
-    it('passes the first item of an array of values to DateInput components', () => {
+    it('passes the first item of an array of values to DateInput components', async () => {
       const value1 = new Date(2019, 0, 1);
       const value2 = new Date(2019, 6, 1);
 
-      const { container } = render(<DateRangePicker value={[value1, value2]} />);
+      const { container } = await render(<DateRangePicker value={[value1, value2]} />);
 
       const nativeInputs = container.querySelectorAll('input[type="date"]');
 
@@ -169,28 +166,28 @@ describe('DateRangePicker', () => {
     });
   });
 
-  it('applies className to its wrapper when given a string', () => {
+  it('applies className to its wrapper when given a string', async () => {
     const className = 'testClassName';
 
-    const { container } = render(<DateRangePicker className={className} />);
+    const { container } = await render(<DateRangePicker className={className} />);
 
     const wrapper = container.firstElementChild;
 
     expect(wrapper).toHaveClass(className);
   });
 
-  it('applies "--open" className to its wrapper when given isOpen flag', () => {
-    const { container } = render(<DateRangePicker isOpen />);
+  it('applies "--open" className to its wrapper when given isOpen flag', async () => {
+    const { container } = await render(<DateRangePicker isOpen />);
 
     const wrapper = container.firstElementChild;
 
     expect(wrapper).toHaveClass('react-daterange-picker--open');
   });
 
-  it('applies calendarClassName to the calendar when given a string', () => {
+  it('applies calendarClassName to the calendar when given a string', async () => {
     const calendarClassName = 'testClassName';
 
-    const { container } = render(
+    const { container } = await render(
       <DateRangePicker calendarProps={{ className: calendarClassName }} isOpen />,
     );
 
@@ -199,16 +196,16 @@ describe('DateRangePicker', () => {
     expect(calendar).toHaveClass(calendarClassName);
   });
 
-  it('renders DateInput components', () => {
-    const { container } = render(<DateRangePicker />);
+  it('renders DateInput components', async () => {
+    const { container } = await render(<DateRangePicker />);
 
     const nativeInputs = container.querySelectorAll('input[type="date"]');
 
     expect(nativeInputs.length).toBe(2);
   });
 
-  it('renders range divider with default divider', () => {
-    const { container } = render(<DateRangePicker />);
+  it('renders range divider with default divider', async () => {
+    const { container } = await render(<DateRangePicker />);
 
     const rangeDivider = container.querySelector('.react-daterange-picker__range-divider');
 
@@ -216,8 +213,8 @@ describe('DateRangePicker', () => {
     expect(rangeDivider).toHaveTextContent('–');
   });
 
-  it('renders range divider with custom divider', () => {
-    const { container } = render(<DateRangePicker rangeDivider="to" />);
+  it('renders range divider with custom divider', async () => {
+    const { container } = await render(<DateRangePicker rangeDivider="to" />);
 
     const rangeDivider = container.querySelector('.react-daterange-picker__range-divider');
 
@@ -226,16 +223,16 @@ describe('DateRangePicker', () => {
   });
 
   describe('renders clear button properly', () => {
-    it('renders clear button', () => {
-      const { container } = render(<DateRangePicker />);
+    it('renders clear button', async () => {
+      const { container } = await render(<DateRangePicker />);
 
       const clearButton = container.querySelector('button.react-daterange-picker__clear-button');
 
       expect(clearButton).toBeInTheDocument();
     });
 
-    it('renders clear icon by default when clearIcon is not given', () => {
-      const { container } = render(<DateRangePicker />);
+    it('renders clear icon by default when clearIcon is not given', async () => {
+      const { container } = await render(<DateRangePicker />);
 
       const clearButton = container.querySelector(
         'button.react-daterange-picker__clear-button',
@@ -246,32 +243,32 @@ describe('DateRangePicker', () => {
       expect(clearIcon).toBeInTheDocument();
     });
 
-    it('renders clear icon when given clearIcon as a string', () => {
-      const { container } = render(<DateRangePicker clearIcon="❌" />);
+    it('renders clear icon when given clearIcon as a string', async () => {
+      const { container } = await render(<DateRangePicker clearIcon="❌" />);
 
       const clearButton = container.querySelector('button.react-daterange-picker__clear-button');
 
       expect(clearButton).toHaveTextContent('❌');
     });
 
-    it('renders clear icon when given clearIcon as a React element', () => {
+    it('renders clear icon when given clearIcon as a React element', async () => {
       function ClearIcon() {
         return <>❌</>;
       }
 
-      const { container } = render(<DateRangePicker clearIcon={<ClearIcon />} />);
+      const { container } = await render(<DateRangePicker clearIcon={<ClearIcon />} />);
 
       const clearButton = container.querySelector('button.react-daterange-picker__clear-button');
 
       expect(clearButton).toHaveTextContent('❌');
     });
 
-    it('renders clear icon when given clearIcon as a function', () => {
+    it('renders clear icon when given clearIcon as a function', async () => {
       function ClearIcon() {
         return <>❌</>;
       }
 
-      const { container } = render(<DateRangePicker clearIcon={ClearIcon} />);
+      const { container } = await render(<DateRangePicker clearIcon={ClearIcon} />);
 
       const clearButton = container.querySelector('button.react-daterange-picker__clear-button');
 
@@ -280,8 +277,8 @@ describe('DateRangePicker', () => {
   });
 
   describe('renders calendar button properly', () => {
-    it('renders calendar button', () => {
-      const { container } = render(<DateRangePicker />);
+    it('renders calendar button', async () => {
+      const { container } = await render(<DateRangePicker />);
 
       const calendarButton = container.querySelector(
         'button.react-daterange-picker__calendar-button',
@@ -290,8 +287,8 @@ describe('DateRangePicker', () => {
       expect(calendarButton).toBeInTheDocument();
     });
 
-    it('renders calendar icon by default when calendarIcon is not given', () => {
-      const { container } = render(<DateRangePicker />);
+    it('renders calendar icon by default when calendarIcon is not given', async () => {
+      const { container } = await render(<DateRangePicker />);
 
       const calendarButton = container.querySelector(
         'button.react-daterange-picker__calendar-button',
@@ -302,8 +299,8 @@ describe('DateRangePicker', () => {
       expect(calendarIcon).toBeInTheDocument();
     });
 
-    it('renders calendar icon when given calendarIcon as a string', () => {
-      const { container } = render(<DateRangePicker calendarIcon="📅" />);
+    it('renders calendar icon when given calendarIcon as a string', async () => {
+      const { container } = await render(<DateRangePicker calendarIcon="📅" />);
 
       const calendarButton = container.querySelector(
         'button.react-daterange-picker__calendar-button',
@@ -312,12 +309,12 @@ describe('DateRangePicker', () => {
       expect(calendarButton).toHaveTextContent('📅');
     });
 
-    it('renders calendar icon when given calendarIcon as a React element', () => {
+    it('renders calendar icon when given calendarIcon as a React element', async () => {
       function CalendarIcon() {
         return <>📅</>;
       }
 
-      const { container } = render(<DateRangePicker calendarIcon={<CalendarIcon />} />);
+      const { container } = await render(<DateRangePicker calendarIcon={<CalendarIcon />} />);
 
       const calendarButton = container.querySelector(
         'button.react-daterange-picker__calendar-button',
@@ -326,12 +323,12 @@ describe('DateRangePicker', () => {
       expect(calendarButton).toHaveTextContent('📅');
     });
 
-    it('renders calendar icon when given calendarIcon as a function', () => {
+    it('renders calendar icon when given calendarIcon as a function', async () => {
       function CalendarIcon() {
         return <>📅</>;
       }
 
-      const { container } = render(<DateRangePicker calendarIcon={CalendarIcon} />);
+      const { container } = await render(<DateRangePicker calendarIcon={CalendarIcon} />);
 
       const calendarButton = container.querySelector(
         'button.react-daterange-picker__calendar-button',
@@ -341,24 +338,24 @@ describe('DateRangePicker', () => {
     });
   });
 
-  it('renders Calendar component when given isOpen flag', () => {
-    const { container } = render(<DateRangePicker isOpen />);
+  it('renders Calendar component when given isOpen flag', async () => {
+    const { container } = await render(<DateRangePicker isOpen />);
 
     const calendar = container.querySelector('.react-calendar');
 
     expect(calendar).toBeInTheDocument();
   });
 
-  it('does not render Calendar component when given disableCalendar & isOpen flags', () => {
-    const { container } = render(<DateRangePicker disableCalendar isOpen />);
+  it('does not render Calendar component when given disableCalendar & isOpen flags', async () => {
+    const { container } = await render(<DateRangePicker disableCalendar isOpen />);
 
     const calendar = container.querySelector('.react-calendar');
 
     expect(calendar).toBeFalsy();
   });
 
-  it('opens Calendar component when given isOpen flag by changing props', () => {
-    const { container, rerender } = render(<DateRangePicker />);
+  it('opens Calendar component when given isOpen flag by changing props', async () => {
+    const { container, rerender } = await render(<DateRangePicker />);
 
     const calendar = container.querySelector('.react-calendar');
 
@@ -371,8 +368,8 @@ describe('DateRangePicker', () => {
     expect(calendar2).toBeInTheDocument();
   });
 
-  it('opens Calendar component when clicking on a button', () => {
-    const { container } = render(<DateRangePicker />);
+  it('opens Calendar component when clicking on a button', async () => {
+    const { container } = await render(<DateRangePicker />);
 
     const calendar = container.querySelector('.react-calendar');
 
@@ -382,16 +379,30 @@ describe('DateRangePicker', () => {
       'button.react-daterange-picker__calendar-button',
     ) as HTMLButtonElement;
 
-    fireEvent.click(button);
+    await userEvent.click(button);
 
     const calendar2 = container.querySelector('.react-calendar');
 
     expect(calendar2).toBeInTheDocument();
   });
 
+  function triggerFocusInEvent(element: HTMLElement) {
+    element.dispatchEvent(
+      new FocusEvent('focusin', { bubbles: true, cancelable: false, composed: true }),
+    );
+  }
+
+  function triggerFocusEvent(element: HTMLElement) {
+    triggerFocusInEvent(element);
+
+    element.dispatchEvent(
+      new FocusEvent('focus', { bubbles: false, cancelable: false, composed: true }),
+    );
+  }
+
   describe('handles opening Calendar component when focusing on an input inside properly', () => {
-    it('opens Calendar component when focusing on an input inside by default', () => {
-      const { container } = render(<DateRangePicker />);
+    it('opens Calendar component when focusing on an input inside by default', async () => {
+      const { container } = await render(<DateRangePicker />);
 
       const calendar = container.querySelector('.react-calendar');
 
@@ -399,69 +410,77 @@ describe('DateRangePicker', () => {
 
       const input = container.querySelector('input[name="day"]') as HTMLInputElement;
 
-      fireEvent.focus(input);
+      act(() => {
+        triggerFocusEvent(input);
+      });
 
       const calendar2 = container.querySelector('.react-calendar');
 
       expect(calendar2).toBeInTheDocument();
     });
 
-    it('opens Calendar component when focusing on an input inside given openCalendarOnFocus = true', () => {
-      const { container } = render(<DateRangePicker openCalendarOnFocus />);
+    it('opens Calendar component when focusing on an input inside given openCalendarOnFocus = true', async () => {
+      const { container } = await render(<DateRangePicker openCalendarOnFocus />);
 
       const calendar = container.querySelector('.react-calendar');
       const input = container.querySelector('input[name="day"]') as HTMLInputElement;
 
       expect(calendar).toBeFalsy();
 
-      fireEvent.focus(input);
+      act(() => {
+        triggerFocusEvent(input);
+      });
 
       const calendar2 = container.querySelector('.react-calendar');
 
       expect(calendar2).toBeInTheDocument();
     });
 
-    it('does not open Calendar component when focusing on an input inside given openCalendarOnFocus = false', () => {
-      const { container } = render(<DateRangePicker openCalendarOnFocus={false} />);
+    it('does not open Calendar component when focusing on an input inside given openCalendarOnFocus = false', async () => {
+      const { container } = await render(<DateRangePicker openCalendarOnFocus={false} />);
 
       const calendar = container.querySelector('.react-calendar');
       const input = container.querySelector('input[name="day"]') as HTMLInputElement;
 
       expect(calendar).toBeFalsy();
 
-      fireEvent.focus(input);
+      act(() => {
+        triggerFocusEvent(input);
+      });
 
       const calendar2 = container.querySelector('.react-calendar');
 
       expect(calendar2).toBeFalsy();
     });
 
-    it('does not open Calendar when focusing on an input inside given shouldOpenCalendar function returning false', () => {
+    it('does not open Calendar when focusing on an input inside given shouldOpenCalendar function returning false', async () => {
       const shouldOpenCalendar = () => false;
 
-      const { container } = render(<DateRangePicker shouldOpenCalendar={shouldOpenCalendar} />);
+      const { container } = await render(
+        <DateRangePicker shouldOpenCalendar={shouldOpenCalendar} />,
+      );
 
       const calendar = container.querySelector('.react-calendar');
       const input = container.querySelector('input[name="day"]') as HTMLInputElement;
 
       expect(calendar).toBeFalsy();
 
-      fireEvent.focus(input);
+      triggerFocusEvent(input);
 
       const calendar2 = container.querySelector('.react-calendar');
 
       expect(calendar2).toBeFalsy();
     });
 
-    it('does not open Calendar component when focusing on a select element', () => {
-      const { container } = render(<DateRangePicker format="dd.MMMM.yyyy" />);
+    it('does not open Calendar component when focusing on a select element', async () => {
+      const { container } = await render(<DateRangePicker format="dd.MMMM.yyyy" />);
 
       const calendar = container.querySelector('.react-calendar');
       const select = container.querySelector('select[name="month"]') as HTMLSelectElement;
 
       expect(calendar).toBeFalsy();
 
-      fireEvent.focus(select);
+      triggerFocusEvent(select);
 
       const calendar2 = container.querySelector('.react-calendar');
 
@@ -470,7 +489,7 @@ describe('DateRangePicker', () => {
   });
 
   it('closes Calendar component when clicked outside', async () => {
-    const { container } = render(<DateRangePicker isOpen />);
+    const { container } = await render(<DateRangePicker isOpen />);
 
     await userEvent.click(document.body);
 
@@ -480,34 +499,52 @@ describe('DateRangePicker', () => {
   });
 
   it('closes Calendar component when focused outside', async () => {
-    const { container } = render(<DateRangePicker isOpen />);
+    const { container } = await render(<DateRangePicker isOpen />);
 
-    fireEvent.focusIn(document.body);
+    triggerFocusInEvent(document.body);
 
     await waitForElementToBeRemovedOrHidden(() =>
       container.querySelector('.react-daterange-picker__calendar'),
     );
   });
+
+  function triggerTouchStart(element: HTMLElement) {
+    element.dispatchEvent(new TouchEvent('touchstart', { bubbles: true, cancelable: true }));
+  }
 
   it('closes Calendar component when tapped outside', async () => {
-    const { container } = render(<DateRangePicker isOpen />);
+    const { container } = await render(<DateRangePicker isOpen />);
 
-    fireEvent.touchStart(document.body);
+    triggerTouchStart(document.body);
 
     await waitForElementToBeRemovedOrHidden(() =>
       container.querySelector('.react-daterange-picker__calendar'),
     );
   });
 
-  it('does not close Calendar component when focused inside', () => {
-    const { container } = render(<DateRangePicker isOpen />);
+  function triggerFocusOutEvent(element: HTMLElement) {
+    element.dispatchEvent(
+      new FocusEvent('focusout', { bubbles: true, cancelable: false, composed: true }),
+    );
+  }
+
+  function triggerBlurEvent(element: HTMLElement) {
+    triggerFocusOutEvent(element);
+
+    element.dispatchEvent(
+      new FocusEvent('blur', { bubbles: false, cancelable: false, composed: true }),
+    );
+  }
+
+  it('does not close Calendar component when focused inside', async () => {
+    const { container } = await render(<DateRangePicker isOpen />);
 
     const customInputs = container.querySelectorAll('input[data-input]');
     const monthInput = customInputs[0] as HTMLInputElement;
     const dayInput = customInputs[1] as HTMLInputElement;
 
-    fireEvent.blur(monthInput);
-    fireEvent.focus(dayInput);
+    triggerBlurEvent(monthInput);
+    triggerFocusEvent(dayInput);
 
     const calendar = container.querySelector('.react-calendar');
 
@@ -515,18 +552,18 @@ describe('DateRangePicker', () => {
   });
 
   it('closes Calendar when changing value by default', async () => {
-    const { container } = render(<DateRangePicker isOpen />);
+    const { container } = await render(<DateRangePicker isOpen />);
 
     const [firstTile, secondTile] = container.querySelectorAll(
       '.react-calendar__tile',
     ) as unknown as [HTMLButtonElement, HTMLButtonElement];
 
-    act(() => {
-      fireEvent.click(firstTile);
+    await act(async () => {
+      await userEvent.click(firstTile);
     });
 
-    act(() => {
-      fireEvent.click(secondTile);
+    await act(async () => {
+      await userEvent.click(secondTile);
     });
 
     await waitForElementToBeRemovedOrHidden(() =>
@@ -535,18 +572,18 @@ describe('DateRangePicker', () => {
   });
 
   it('closes Calendar when changing value with prop closeCalendar = true', async () => {
-    const { container } = render(<DateRangePicker closeCalendar isOpen />);
+    const { container } = await render(<DateRangePicker closeCalendar isOpen />);
 
     const [firstTile, secondTile] = container.querySelectorAll(
       '.react-calendar__tile',
     ) as unknown as [HTMLButtonElement, HTMLButtonElement];
 
-    act(() => {
-      fireEvent.click(firstTile);
+    await act(async () => {
+      await userEvent.click(firstTile);
     });
 
-    act(() => {
-      fireEvent.click(secondTile);
+    await act(async () => {
+      await userEvent.click(secondTile);
     });
 
     await waitForElementToBeRemovedOrHidden(() =>
@@ -554,19 +591,19 @@ describe('DateRangePicker', () => {
     );
   });
 
-  it('does not close Calendar when changing value with prop closeCalendar = false', () => {
-    const { container } = render(<DateRangePicker closeCalendar={false} isOpen />);
+  it('does not close Calendar when changing value with prop closeCalendar = false', async () => {
+    const { container } = await render(<DateRangePicker closeCalendar={false} isOpen />);
 
     const [firstTile, secondTile] = container.querySelectorAll(
       '.react-calendar__tile',
     ) as unknown as [HTMLButtonElement, HTMLButtonElement];
 
-    act(() => {
-      fireEvent.click(firstTile);
+    await act(async () => {
+      await userEvent.click(firstTile);
     });
 
-    act(() => {
-      fireEvent.click(secondTile);
+    await act(async () => {
+      await userEvent.click(secondTile);
     });
 
     const calendar = container.querySelector('.react-calendar');
@@ -574,17 +611,17 @@ describe('DateRangePicker', () => {
     expect(calendar).toBeInTheDocument();
   });
 
-  it('does not close Calendar when changing value with shouldCloseCalendar function returning false', () => {
+  it('does not close Calendar when changing value with shouldCloseCalendar function returning false', async () => {
     const shouldCloseCalendar = () => false;
 
-    const { container } = render(
+    const { container } = await render(
       <DateRangePicker isOpen shouldCloseCalendar={shouldCloseCalendar} />,
     );
 
     const firstTile = container.querySelector('.react-calendar__tile') as HTMLButtonElement;
 
-    act(() => {
-      fireEvent.click(firstTile);
+    await act(async () => {
+      await userEvent.click(firstTile);
     });
 
     const calendar = container.querySelector('.react-calendar');
@@ -592,13 +629,13 @@ describe('DateRangePicker', () => {
     expect(calendar).toBeInTheDocument();
   });
 
-  it('does not close Calendar when changing value using inputs', () => {
-    const { container } = render(<DateRangePicker isOpen />);
+  it('does not close Calendar when changing value using inputs', async () => {
+    const { container } = await render(<DateRangePicker isOpen />);
 
     const dayInput = container.querySelector('input[name="day"]') as HTMLInputElement;
 
-    act(() => {
-      fireEvent.change(dayInput, { target: { value: '1' } });
+    await act(async () => {
+      await userEvent.fill(dayInput, '1');
     });
 
     const calendar = container.querySelector('.react-calendar');
@@ -606,42 +643,42 @@ describe('DateRangePicker', () => {
     expect(calendar).toBeInTheDocument();
   });
 
-  it('calls onChange callback when changing value', () => {
+  it('calls onChange callback when changing value', async () => {
     const value = new Date(2023, 0, 31);
     const onChange = vi.fn();
 
-    const { container } = render(<DateRangePicker onChange={onChange} value={value} />);
+    const { container } = await render(<DateRangePicker onChange={onChange} value={value} />);
 
     const dayInput = container.querySelector('input[name="day"]') as HTMLInputElement;
 
-    act(() => {
-      fireEvent.change(dayInput, { target: { value: '1' } });
+    await act(async () => {
+      await userEvent.fill(dayInput, '1');
     });
 
     expect(onChange).toHaveBeenCalledWith([new Date(2023, 0, 1), null]);
   });
 
-  it('calls onInvalidChange callback when changing value to an invalid one', () => {
+  it('calls onInvalidChange callback when changing value to an invalid one', async () => {
     const value = new Date(2023, 0, 31);
     const onInvalidChange = vi.fn();
 
-    const { container } = render(
+    const { container } = await render(
       <DateRangePicker onInvalidChange={onInvalidChange} value={value} />,
     );
 
     const dayInput = container.querySelector('input[name="day"]') as HTMLInputElement;
 
-    act(() => {
-      fireEvent.change(dayInput, { target: { value: '32' } });
+    await act(async () => {
+      await userEvent.fill(dayInput, '32');
     });
 
     expect(onInvalidChange).toHaveBeenCalled();
   });
 
-  it('clears the value when clicking on a button', () => {
+  it('clears the value when clicking on a button', async () => {
     const onChange = vi.fn();
 
-    const { container } = render(<DateRangePicker onChange={onChange} />);
+    const { container } = await render(<DateRangePicker onChange={onChange} />);
 
     const calendar = container.querySelector('.react-calendar');
     const button = container.querySelector(
@@ -650,16 +687,16 @@ describe('DateRangePicker', () => {
 
     expect(calendar).toBeFalsy();
 
-    fireEvent.click(button);
+    await userEvent.click(button);
 
     expect(onChange).toHaveBeenCalledWith(null);
   });
 
   describe('onChangeFrom', () => {
-    it('calls onChange properly given no initial value', () => {
+    it('calls onChange properly given no initial value', async () => {
       const onChange = vi.fn();
 
-      const { container } = render(<DateRangePicker onChange={onChange} />);
+      const { container } = await render(<DateRangePicker onChange={onChange} />);
 
       const nextValueFrom = new Date(2018, 1, 15);
 
@@ -668,27 +705,21 @@ describe('DateRangePicker', () => {
       const dayInput = customInputs[1] as HTMLInputElement;
       const yearInput = customInputs[2] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(monthInput, { target: { value: '2' } });
-      });
-
-      act(() => {
-        fireEvent.change(dayInput, { target: { value: '15' } });
-      });
-
-      act(() => {
-        fireEvent.change(yearInput, { target: { value: '2018' } });
+      await act(async () => {
+        await userEvent.fill(monthInput, '2');
+        await userEvent.fill(dayInput, '15');
+        await userEvent.fill(yearInput, '2018');
       });
 
       expect(onChange).toHaveBeenCalled();
       expect(onChange).toHaveBeenCalledWith([nextValueFrom, null]);
     });
 
-    it('calls onChange properly given single initial value', () => {
+    it('calls onChange properly given single initial value', async () => {
       const onChange = vi.fn();
       const value = new Date(2018, 0, 1);
 
-      const { container } = render(<DateRangePicker onChange={onChange} value={value} />);
+      const { container } = await render(<DateRangePicker onChange={onChange} value={value} />);
 
       const nextValueFrom = new Date(2018, 1, 15);
 
@@ -697,29 +728,25 @@ describe('DateRangePicker', () => {
       const dayInput = customInputs[1] as HTMLInputElement;
       const yearInput = customInputs[2] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(monthInput, { target: { value: '2' } });
-      });
+      await act(async () => {
+        await userEvent.fill(monthInput, '2');
 
-      act(() => {
-        fireEvent.change(dayInput, { target: { value: '15' } });
-      });
+        await userEvent.fill(dayInput, '15');
 
-      act(() => {
-        fireEvent.change(yearInput, { target: { value: '2018' } });
+        await userEvent.fill(yearInput, '2018');
       });
 
       expect(onChange).toHaveBeenCalled();
       expect(onChange).toHaveBeenCalledWith([nextValueFrom, null]);
     });
 
-    it('calls onChange properly given initial value as an array', () => {
+    it('calls onChange properly given initial value as an array', async () => {
       const onChange = vi.fn();
       const valueFrom = new Date(2018, 0, 1);
       const valueTo = new Date(2018, 6, 1);
       const value = [valueFrom, valueTo] as [Date, Date];
 
-      const { container } = render(<DateRangePicker onChange={onChange} value={value} />);
+      const { container } = await render(<DateRangePicker onChange={onChange} value={value} />);
 
       const nextValueFrom = new Date(2018, 1, 15);
 
@@ -728,16 +755,12 @@ describe('DateRangePicker', () => {
       const dayInput = customInputs[1] as HTMLInputElement;
       const yearInput = customInputs[2] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(monthInput, { target: { value: '2' } });
-      });
+      await act(async () => {
+        await userEvent.fill(monthInput, '2');
 
-      act(() => {
-        fireEvent.change(dayInput, { target: { value: '15' } });
-      });
+        await userEvent.fill(dayInput, '15');
 
-      act(() => {
-        fireEvent.change(yearInput, { target: { value: '2018' } });
+        await userEvent.fill(yearInput, '2018');
       });
 
       expect(onChange).toHaveBeenCalled();
@@ -746,10 +769,10 @@ describe('DateRangePicker', () => {
   });
 
   describe('onChangeTo', () => {
-    it('calls onChange properly given no initial value', () => {
+    it('calls onChange properly given no initial value', async () => {
       const onChange = vi.fn();
 
-      const { container } = render(<DateRangePicker onChange={onChange} />);
+      const { container } = await render(<DateRangePicker onChange={onChange} />);
 
       const nextValueTo = new Date(2018, 1, 15);
       nextValueTo.setDate(nextValueTo.getDate() + 1);
@@ -760,27 +783,23 @@ describe('DateRangePicker', () => {
       const dayInput = customInputs[4] as HTMLInputElement;
       const yearInput = customInputs[5] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(dayInput, { target: { value: '15' } });
-      });
+      await act(async () => {
+        await userEvent.fill(dayInput, '15');
 
-      act(() => {
-        fireEvent.change(monthInput, { target: { value: '2' } });
-      });
+        await userEvent.fill(monthInput, '2');
 
-      act(() => {
-        fireEvent.change(yearInput, { target: { value: '2018' } });
+        await userEvent.fill(yearInput, '2018');
       });
 
       expect(onChange).toHaveBeenCalled();
       expect(onChange).toHaveBeenCalledWith([null, nextValueTo]);
     });
 
-    it('calls onChange properly given single initial value', () => {
+    it('calls onChange properly given single initial value', async () => {
       const onChange = vi.fn();
       const value = new Date(2018, 0, 1);
 
-      const { container } = render(<DateRangePicker onChange={onChange} value={value} />);
+      const { container } = await render(<DateRangePicker onChange={onChange} value={value} />);
 
       const nextValueTo = new Date(2018, 1, 15);
       nextValueTo.setDate(nextValueTo.getDate() + 1);
@@ -791,29 +810,25 @@ describe('DateRangePicker', () => {
       const dayInput = customInputs[4] as HTMLInputElement;
       const yearInput = customInputs[5] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(dayInput, { target: { value: '15' } });
-      });
+      await act(async () => {
+        await userEvent.fill(dayInput, '15');
 
-      act(() => {
-        fireEvent.change(monthInput, { target: { value: '2' } });
-      });
+        await userEvent.fill(monthInput, '2');
 
-      act(() => {
-        fireEvent.change(yearInput, { target: { value: '2018' } });
+        await userEvent.fill(yearInput, '2018');
       });
 
       expect(onChange).toHaveBeenCalled();
       expect(onChange).toHaveBeenCalledWith([value, nextValueTo]);
     });
 
-    it('calls onChange properly given initial value as an array', () => {
+    it('calls onChange properly given initial value as an array', async () => {
       const onChange = vi.fn();
       const valueFrom = new Date(2018, 0, 1);
       const valueTo = new Date(2018, 6, 1);
       const value = [valueFrom, valueTo] as [Date, Date];
 
-      const { container } = render(<DateRangePicker onChange={onChange} value={value} />);
+      const { container } = await render(<DateRangePicker onChange={onChange} value={value} />);
 
       const nextValueTo = new Date(2018, 1, 15);
       nextValueTo.setDate(nextValueTo.getDate() + 1);
@@ -824,16 +839,12 @@ describe('DateRangePicker', () => {
       const dayInput = customInputs[4] as HTMLInputElement;
       const yearInput = customInputs[5] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(dayInput, { target: { value: '15' } });
-      });
+      await act(async () => {
+        await userEvent.fill(dayInput, '15');
 
-      act(() => {
-        fireEvent.change(monthInput, { target: { value: '2' } });
-      });
+        await userEvent.fill(monthInput, '2');
 
-      act(() => {
-        fireEvent.change(yearInput, { target: { value: '2018' } });
+        await userEvent.fill(yearInput, '2018');
       });
 
       expect(onChange).toHaveBeenCalled();
@@ -841,24 +852,25 @@ describe('DateRangePicker', () => {
     });
   });
 
-  it('calls onClick callback when clicked a page (sample of mouse events family)', () => {
+  it('calls onClick callback when clicked a page (sample of mouse events family)', async () => {
     const onClick = vi.fn();
 
-    const { container } = render(<DateRangePicker onClick={onClick} />);
+    const { container } = await render(<DateRangePicker onClick={onClick} />);
 
     const wrapper = container.firstElementChild as HTMLDivElement;
-    fireEvent.click(wrapper);
+    await userEvent.click(wrapper);
 
     expect(onClick).toHaveBeenCalled();
   });
 
-  it('calls onTouchStart callback when touched a page (sample of touch events family)', () => {
+  it('calls onTouchStart callback when touched a page (sample of touch events family)', async () => {
     const onTouchStart = vi.fn();
 
-    const { container } = render(<DateRangePicker onTouchStart={onTouchStart} />);
+    const { container } = await render(<DateRangePicker onTouchStart={onTouchStart} />);
 
     const wrapper = container.firstElementChild as HTMLDivElement;
-    fireEvent.touchStart(wrapper);
+
+    triggerTouchStart(wrapper);
 
     expect(onTouchStart).toHaveBeenCalled();
   });
