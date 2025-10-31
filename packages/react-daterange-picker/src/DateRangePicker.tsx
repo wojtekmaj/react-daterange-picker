@@ -569,7 +569,9 @@ export default function DateRangePicker(props: DateRangePickerProps): React.Reac
           returnValue="start"
           value={valueFrom}
         />
-        <span className={`${baseClassName}__range-divider`}>{rangeDivider}</span>
+        <span className={`${baseClassName}__range-divider`} data-testid="range-divider">
+          {rangeDivider}
+        </span>
         <DateInput
           {...commonProps}
           name={`${name}_to`}
@@ -581,6 +583,7 @@ export default function DateRangePicker(props: DateRangePickerProps): React.Reac
           <button
             aria-label={clearAriaLabel}
             className={`${baseClassName}__clear-button ${baseClassName}__button`}
+            data-testid="clear-button"
             disabled={disabled}
             onClick={clear}
             onFocus={stopPropagation}
@@ -594,6 +597,7 @@ export default function DateRangePicker(props: DateRangePickerProps): React.Reac
             aria-expanded={isOpen || false}
             aria-label={calendarAriaLabel}
             className={`${baseClassName}__calendar-button ${baseClassName}__button`}
+            data-testid="calendar-button"
             disabled={disabled}
             onClick={toggleCalendar}
             onFocus={stopPropagation}
