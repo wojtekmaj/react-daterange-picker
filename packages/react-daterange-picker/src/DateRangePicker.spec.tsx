@@ -383,7 +383,7 @@ describe('DateRangePicker', () => {
       'button.react-daterange-picker__calendar-button',
     ) as HTMLButtonElement;
 
-    fireEvent.click(button);
+    await userEvent.click(button);
 
     const calendar2 = container.querySelector('.react-calendar');
 
@@ -524,12 +524,12 @@ describe('DateRangePicker', () => {
       '.react-calendar__tile',
     ) as unknown as [HTMLButtonElement, HTMLButtonElement];
 
-    act(() => {
-      fireEvent.click(firstTile);
+    await act(async () => {
+      await userEvent.click(firstTile);
     });
 
-    act(() => {
-      fireEvent.click(secondTile);
+    await act(async () => {
+      await userEvent.click(secondTile);
     });
 
     await waitForElementToBeRemovedOrHidden(() =>
@@ -544,12 +544,12 @@ describe('DateRangePicker', () => {
       '.react-calendar__tile',
     ) as unknown as [HTMLButtonElement, HTMLButtonElement];
 
-    act(() => {
-      fireEvent.click(firstTile);
+    await act(async () => {
+      await userEvent.click(firstTile);
     });
 
-    act(() => {
-      fireEvent.click(secondTile);
+    await act(async () => {
+      await userEvent.click(secondTile);
     });
 
     await waitForElementToBeRemovedOrHidden(() =>
@@ -564,12 +564,12 @@ describe('DateRangePicker', () => {
       '.react-calendar__tile',
     ) as unknown as [HTMLButtonElement, HTMLButtonElement];
 
-    act(() => {
-      fireEvent.click(firstTile);
+    await act(async () => {
+      await userEvent.click(firstTile);
     });
 
-    act(() => {
-      fireEvent.click(secondTile);
+    await act(async () => {
+      await userEvent.click(secondTile);
     });
 
     const calendar = container.querySelector('.react-calendar');
@@ -586,8 +586,8 @@ describe('DateRangePicker', () => {
 
     const firstTile = container.querySelector('.react-calendar__tile') as HTMLButtonElement;
 
-    act(() => {
-      fireEvent.click(firstTile);
+    await act(async () => {
+      await userEvent.click(firstTile);
     });
 
     const calendar = container.querySelector('.react-calendar');
@@ -653,7 +653,7 @@ describe('DateRangePicker', () => {
 
     expect(calendar).toBeFalsy();
 
-    fireEvent.click(button);
+    await userEvent.click(button);
 
     expect(onChange).toHaveBeenCalledWith(null);
   });
@@ -850,7 +850,7 @@ describe('DateRangePicker', () => {
     const { container } = await render(<DateRangePicker onClick={onClick} />);
 
     const wrapper = container.firstElementChild as HTMLDivElement;
-    fireEvent.click(wrapper);
+    await userEvent.click(wrapper);
 
     expect(onClick).toHaveBeenCalled();
   });
