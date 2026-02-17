@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { page, userEvent } from 'vitest/browser';
 import { render } from 'vitest-browser-react';
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
 
 import DateRangePicker from './DateRangePicker.js';
 
@@ -703,7 +703,9 @@ describe('DateRangePicker', () => {
     it('calls onChange properly given no initial value', async () => {
       const onChange = vi.fn();
 
-      await render(<DateRangePicker {...defaultProps} onChange={onChange} />);
+      await render(
+        <DateRangePicker {...defaultProps} onChange={onChange} openCalendarOnFocus={false} />,
+      );
 
       const nextValueFrom = new Date(2018, 1, 15);
 
@@ -719,8 +721,7 @@ describe('DateRangePicker', () => {
         await userEvent.fill(yearInput, '2018');
       });
 
-      expect(onChange).toHaveBeenCalled();
-      expect(onChange).toHaveBeenCalledWith([nextValueFrom, null]);
+      await vi.waitFor(() => expect(onChange).toHaveBeenCalledWith([nextValueFrom, null]));
     });
 
     it('calls onChange properly given single initial value', async () => {
@@ -778,7 +779,9 @@ describe('DateRangePicker', () => {
     it('calls onChange properly given no initial value', async () => {
       const onChange = vi.fn();
 
-      await render(<DateRangePicker {...defaultProps} onChange={onChange} />);
+      await render(
+        <DateRangePicker {...defaultProps} onChange={onChange} openCalendarOnFocus={false} />,
+      );
 
       const nextValueTo = new Date(2018, 1, 15);
       nextValueTo.setDate(nextValueTo.getDate() + 1);
@@ -796,15 +799,21 @@ describe('DateRangePicker', () => {
         await userEvent.fill(yearInput, '2018');
       });
 
-      expect(onChange).toHaveBeenCalled();
-      expect(onChange).toHaveBeenCalledWith([null, nextValueTo]);
+      await vi.waitFor(() => expect(onChange).toHaveBeenCalledWith([null, nextValueTo]));
     });
 
     it('calls onChange properly given single initial value', async () => {
       const onChange = vi.fn();
       const value = new Date(2018, 0, 1);
 
-      await render(<DateRangePicker {...defaultProps} onChange={onChange} value={value} />);
+      await render(
+        <DateRangePicker
+          {...defaultProps}
+          onChange={onChange}
+          openCalendarOnFocus={false}
+          value={value}
+        />,
+      );
 
       const nextValueTo = new Date(2018, 1, 15);
       nextValueTo.setDate(nextValueTo.getDate() + 1);
@@ -822,8 +831,7 @@ describe('DateRangePicker', () => {
         await userEvent.fill(yearInput, '2018');
       });
 
-      expect(onChange).toHaveBeenCalled();
-      expect(onChange).toHaveBeenCalledWith([value, nextValueTo]);
+      await vi.waitFor(() => expect(onChange).toHaveBeenCalledWith([value, nextValueTo]));
     });
 
     it('calls onChange properly given initial value as an array', async () => {
