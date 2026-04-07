@@ -359,7 +359,7 @@ describe('DateRangePicker', () => {
 
     expect(calendar).not.toBeInTheDocument();
 
-    rerender(<DateRangePicker {...defaultProps} isOpen />);
+    await rerender(<DateRangePicker {...defaultProps} isOpen />);
 
     const calendar2 = container.querySelector('.react-calendar');
 
