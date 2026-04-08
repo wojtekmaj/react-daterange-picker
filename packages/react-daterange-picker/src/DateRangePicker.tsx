@@ -491,7 +491,7 @@ export default function DateRangePicker(props: DateRangePickerProps): React.Reac
         target &&
         wrapperEl &&
         !wrapperEl.contains(target) &&
-        (!calendarWrapperEl || !calendarWrapperEl.contains(target))
+        !calendarWrapperEl?.contains(target)
       ) {
         closeCalendar({ reason: 'outsideAction' });
       }
