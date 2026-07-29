@@ -728,7 +728,14 @@ describe('DateRangePicker', () => {
       const onChange = vi.fn();
       const value = new Date(2018, 0, 1);
 
-      await render(<DateRangePicker {...defaultProps} onChange={onChange} value={value} />);
+      await render(
+        <DateRangePicker
+          {...defaultProps}
+          onChange={onChange}
+          openCalendarOnFocus={false}
+          value={value}
+        />,
+      );
 
       const nextValueFrom = new Date(2018, 1, 15);
 
@@ -754,7 +761,14 @@ describe('DateRangePicker', () => {
       const valueTo = new Date(2018, 6, 1);
       const value = [valueFrom, valueTo] as [Date, Date];
 
-      await render(<DateRangePicker {...defaultProps} onChange={onChange} value={value} />);
+      await render(
+        <DateRangePicker
+          {...defaultProps}
+          onChange={onChange}
+          openCalendarOnFocus={false}
+          value={value}
+        />,
+      );
 
       const nextValueFrom = new Date(2018, 1, 15);
 
@@ -840,7 +854,14 @@ describe('DateRangePicker', () => {
       const valueTo = new Date(2018, 6, 1);
       const value = [valueFrom, valueTo] as [Date, Date];
 
-      await render(<DateRangePicker {...defaultProps} onChange={onChange} value={value} />);
+      await render(
+        <DateRangePicker
+          {...defaultProps}
+          onChange={onChange}
+          openCalendarOnFocus={false}
+          value={value}
+        />,
+      );
 
       const nextValueTo = new Date(2018, 1, 15);
       nextValueTo.setDate(nextValueTo.getDate() + 1);
