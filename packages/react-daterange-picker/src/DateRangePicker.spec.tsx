@@ -44,6 +44,34 @@ describe('DateRangePicker', () => {
     expect(nativeInputs[1]).toHaveAttribute('name', `${name}_to`);
   });
 
+  it('passes customInputsForm to custom inputs only', async () => {
+    const { container } = await render(
+      <form>
+        <DateRangePicker
+          {...defaultProps}
+          customInputsForm=""
+          format="MMMM d, y"
+          name="trip"
+          value={[new Date(2020, 10, 11), new Date(2020, 10, 12)]}
+        />
+      </form>,
+    );
+
+    const form = container.querySelector('form') as HTMLFormElement;
+    const customInputs = container.querySelectorAll('[data-input="true"]');
+
+    expect(customInputs).toHaveLength(6);
+
+    for (const customInput of customInputs) {
+      expect(customInput).toHaveAttribute('form', '');
+    }
+
+    expect(Array.from(new FormData(form).entries())).toEqual([
+      ['trip_from', '2020-11-11'],
+      ['trip_to', '2020-11-12'],
+    ]);
+  });
+
   it('passes autoFocus flag to first DateInput component', async () => {
     await render(<DateRangePicker {...defaultProps} autoFocus />);
 

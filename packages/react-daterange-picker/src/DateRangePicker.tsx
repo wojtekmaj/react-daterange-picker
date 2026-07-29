@@ -121,6 +121,12 @@ export type DateRangePickerProps = {
    */
   closeCalendar?: boolean;
   /**
+   * `form` attribute for the custom day, month, and year inputs.
+   *
+   * @example 'my-form'
+   */
+  customInputsForm?: string;
+  /**
    * `data-testid` attribute for the main React-DateRange-Picker `<div>` element.
    *
    * @example 'daterange-picker'
@@ -334,6 +340,7 @@ export default function DateRangePicker(props: DateRangePickerProps): React.Reac
     clearAriaLabel,
     clearIcon = ClearIcon,
     closeCalendar: shouldCloseCalendarOnSelect = true,
+    customInputsForm,
     'data-testid': dataTestid,
     dayAriaLabel,
     dayPlaceholder,
@@ -547,6 +554,7 @@ export default function DateRangePicker(props: DateRangePickerProps): React.Reac
       ...ariaLabelProps,
       ...placeholderProps,
       className: `${baseClassName}__inputGroup`,
+      customInputsForm,
       disabled,
       format,
       isCalendarOpen: isOpen,
