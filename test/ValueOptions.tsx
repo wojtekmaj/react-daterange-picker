@@ -1,5 +1,5 @@
 import { useId } from 'react';
-import { getDayStart, getDayEnd, getISOLocalDate } from '@wojtekmaj/date-utils';
+import { getDayEnd, getDayStart, getISOLocalDate } from '@wojtekmaj/date-utils';
 
 import type { LooseValue } from './shared/types.js';
 
