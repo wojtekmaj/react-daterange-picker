@@ -370,6 +370,30 @@ describe('DateRangePicker', () => {
     expect(calendar).toBeInTheDocument();
   });
 
+  it('does not allow selecting a range when disabled with the calendar open', async () => {
+    const onChange = vi.fn();
+    const props = { ...defaultProps, isOpen: true, onChange };
+    const { container, rerender } = await render(<DateRangePicker {...props} />);
+    const calendarButton = page.getByTestId('calendar-button');
+
+    expect(container.querySelector('.react-calendar')).toBeInTheDocument();
+
+    await rerender(<DateRangePicker {...props} disabled />);
+    expect(container.querySelector('.react-calendar')).not.toBeInTheDocument();
+    expect(calendarButton).toHaveAttribute('aria-expanded', 'false');
+    expect(onChange).not.toHaveBeenCalled();
+
+    await rerender(<DateRangePicker {...props} />);
+    const days = container.querySelectorAll<HTMLButtonElement>('.react-calendar__month-view__days__day');
+    await act(async () => {
+      days[10]?.click();
+    });
+    await act(async () => {
+      days[11]?.click();
+    });
+    expect(onChange).toHaveBeenCalledOnce();
+  });
+
   it('does not render Calendar component when given disableCalendar & isOpen flags', async () => {
     const { container } = await render(
       <DateRangePicker {...defaultProps} disableCalendar isOpen />,
