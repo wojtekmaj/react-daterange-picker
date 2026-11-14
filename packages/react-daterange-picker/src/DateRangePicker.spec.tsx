@@ -380,6 +380,40 @@ describe('DateRangePicker', () => {
     expect(calendar).not.toBeInTheDocument();
   });
 
+  it.each`
+    renderInPortal
+    ${false}
+    ${true}
+  `(
+    'does not render Calendar component when given disabled & isOpen flags (portal: $renderInPortal)',
+    async ({ renderInPortal }) => {
+      const portalContainer = renderInPortal ? document.body : undefined;
+      const props = { ...defaultProps, isOpen: true, portalContainer };
+
+      const { container, rerender } = await render(<DateRangePicker {...props} disabled />);
+
+      const widgetContainer = portalContainer || container;
+
+      expect(widgetContainer.querySelector('.react-calendar')).not.toBeInTheDocument();
+      expect(page.getByTestId('calendar-button')).toHaveAttribute('aria-expanded', 'false');
+
+      await rerender(<DateRangePicker {...props} />);
+
+      expect(widgetContainer.querySelector('.react-calendar')).toBeInTheDocument();
+      expect(page.getByTestId('calendar-button')).toHaveAttribute('aria-expanded', 'true');
+
+      await rerender(<DateRangePicker {...props} disabled />);
+
+      expect(widgetContainer.querySelector('.react-calendar')).not.toBeInTheDocument();
+      expect(page.getByTestId('calendar-button')).toHaveAttribute('aria-expanded', 'false');
+
+      await rerender(<DateRangePicker {...props} />);
+
+      expect(widgetContainer.querySelector('.react-calendar')).toBeInTheDocument();
+      expect(page.getByTestId('calendar-button')).toHaveAttribute('aria-expanded', 'true');
+    },
+  );
+
   it('opens Calendar component when given isOpen flag by changing props', async () => {
     const { container, rerender } = await render(<DateRangePicker {...defaultProps} />);
 

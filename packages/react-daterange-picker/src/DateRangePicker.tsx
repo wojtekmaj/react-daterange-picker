@@ -374,7 +374,8 @@ export default function DateRangePicker(props: DateRangePickerProps): React.Reac
     ...otherProps
   } = props;
 
-  const [isOpen, setIsOpen] = useState(isOpenProps);
+  const [isOpenState, setIsOpen] = useState(isOpenProps);
+  const isOpen = disabled ? null : isOpenState;
   const wrapper = useRef<HTMLDivElement>(null);
   const calendarWrapper = useRef<HTMLDivElement>(null);
 
