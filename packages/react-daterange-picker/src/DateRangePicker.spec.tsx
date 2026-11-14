@@ -588,6 +588,21 @@ describe('DateRangePicker', () => {
     );
   });
 
+  it('closes Calendar component when Escape key is pressed', async () => {
+    const { container } = await render(<DateRangePicker {...defaultProps} isOpen />);
+
+    const event = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true });
+
+    document.body.dispatchEvent(event);
+
+    await waitForElementToBeRemovedOrHidden(() =>
+      container.querySelector('.react-daterange-picker__calendar'),
+    );
+
+    // Mark Escape as handled so surrounding dialogs can stay open
+    expect(event.defaultPrevented).toBe(true);
+  });
+
   function triggerFocusOutEvent(locator: Locator) {
     const element = locator.element();
 
