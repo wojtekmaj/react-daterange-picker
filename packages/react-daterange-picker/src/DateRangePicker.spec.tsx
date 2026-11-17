@@ -7,14 +7,8 @@ import DateRangePicker from './DateRangePicker.js';
 
 import type { Locator } from 'vitest/browser';
 
-async function waitForElementToBeRemovedOrHidden(callback: () => HTMLElement | null) {
-  const element = callback();
-
-  if (element) {
-    await vi.waitFor(() =>
-      expect(element).toHaveAttribute('class', expect.stringContaining('--closed')),
-    );
-  }
+async function waitForElementToBeRemoved(callback: () => HTMLElement | null) {
+  await vi.waitFor(() => expect(callback()).not.toBeInTheDocument());
 }
 
 describe('DateRangePicker', () => {
@@ -559,7 +553,7 @@ describe('DateRangePicker', () => {
 
     await userEvent.click(document.body);
 
-    await waitForElementToBeRemovedOrHidden(() =>
+    await waitForElementToBeRemoved(() =>
       container.querySelector('.react-daterange-picker__calendar'),
     );
   });
@@ -569,7 +563,7 @@ describe('DateRangePicker', () => {
 
     triggerFocusInEvent(page.elementLocator(document.body));
 
-    await waitForElementToBeRemovedOrHidden(() =>
+    await waitForElementToBeRemoved(() =>
       container.querySelector('.react-daterange-picker__calendar'),
     );
   });
@@ -583,7 +577,7 @@ describe('DateRangePicker', () => {
 
     triggerTouchStart(document.body);
 
-    await waitForElementToBeRemovedOrHidden(() =>
+    await waitForElementToBeRemoved(() =>
       container.querySelector('.react-daterange-picker__calendar'),
     );
   });
@@ -595,7 +589,7 @@ describe('DateRangePicker', () => {
 
     document.body.dispatchEvent(event);
 
-    await waitForElementToBeRemovedOrHidden(() =>
+    await waitForElementToBeRemoved(() =>
       container.querySelector('.react-daterange-picker__calendar'),
     );
 
@@ -650,7 +644,7 @@ describe('DateRangePicker', () => {
       await userEvent.click(secondTile);
     });
 
-    await waitForElementToBeRemovedOrHidden(() =>
+    await waitForElementToBeRemoved(() =>
       container.querySelector('.react-daterange-picker__calendar'),
     );
   });
@@ -670,7 +664,7 @@ describe('DateRangePicker', () => {
       await userEvent.click(secondTile);
     });
 
-    await waitForElementToBeRemovedOrHidden(() =>
+    await waitForElementToBeRemoved(() =>
       container.querySelector('.react-daterange-picker__calendar'),
     );
   });
